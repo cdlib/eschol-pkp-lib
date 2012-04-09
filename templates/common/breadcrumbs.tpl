@@ -8,7 +8,8 @@
  *
  *}
 <div id="breadcrumb">
-	<a href="{url context=$homeContext page="index"}">{translate key="navigation.home"}</a> &gt;
+	{* 20110824 BLH Removed 'Home' breadcrumb b/c we are only using admin features of OJS *} 
+	{* <a href="{url context=$homeContext page="index"}">{translate key="navigation.home"}</a> &gt; *}
 	{foreach from=$pageHierarchy item=hierarchyLink}
 		<a href="{$hierarchyLink[0]|escape}" class="hierarchyLink">{if not $hierarchyLink[2]}{translate key=$hierarchyLink[1]}{else}{$hierarchyLink[1]|escape}{/if}</a> &gt;
 	{/foreach}

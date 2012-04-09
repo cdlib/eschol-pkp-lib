@@ -120,7 +120,8 @@
 	<message key="metadata.property.validationMessage.name-type">Please make sure that you set a valid name type. Supported values are 'personal', 'corporate' and 'conference'.</message>
 	<!-- FIXME: end -->
 	
-	<message key="submission.agencies">Agencies</message>
+	{*<message key="submission.agencies">Agencies</message>*}
+	<message key="submission.agencies">Acknowledgements</message>{* 20120307 BLH Changed wording to reflect eSchol use *}
 	<message key="submission.abstractViews">Abstract Views</message>
 	<message key="submission.accepted">Accepted</message>
 	<message key="submission.acknowledge">Acknowledge</message>
@@ -368,7 +369,8 @@
 	<message key="submission.submitter">Submitter</message>
 	<message key="submission.summary">Summary</message>
 	<message key="submission.supplementaryFiles">Supplementary Files</message>
-	<message key="submission.supportingAgencies">Supporting Agencies</message>
+	{*<message key="submission.supportingAgencies">Supporting Agencies</message>*}{*20120308 BLH Changed to reflect eschol use *}
+	<message key="submission.supportingAgencies">Acknowledgements</message>
 	<message key="submission.currentAgencies">Current Agencies</message>
 	<message key="submission.indexingInformation">Indexing Information</message>
 	<message key="submission.titleAndAbstract">Title and Abstract</message>

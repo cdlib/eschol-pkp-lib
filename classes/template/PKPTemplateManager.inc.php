@@ -97,7 +97,7 @@ class PKPTemplateManager extends Smarty {
 		$this->assign('currentUrl', $request->getCompleteUrl());
 		$this->assign('dateFormatTrunc', Config::getVar('general', 'date_format_trunc'));
 		$this->assign('dateFormatShort', Config::getVar('general', 'date_format_short'));
-		$this->assign('dateFormatLong', Config::getVar('general', 'date_format_long'));
+		$this->assign('dateFormatLong', Config::getVar('general', 'date_format_long'));			
 		$this->assign('datetimeFormatShort', Config::getVar('general', 'datetime_format_short'));
 		$this->assign('datetimeFormatLong', Config::getVar('general', 'datetime_format_long'));
 		$this->assign('timeFormat', Config::getVar('general', 'time_format'));

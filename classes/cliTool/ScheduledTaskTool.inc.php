@@ -82,7 +82,9 @@ class ScheduledTaskTool extends CommandLineTool {
 
 		foreach ($tree->getChildren() as $task) {
 			$className = $task->getAttribute('class');
-
+			
+			$canExecute = true;
+			/***
 			$frequency = $task->getChildByName('frequency');
 			if (isset($frequency)) {
 				$canExecute = $this->checkFrequency($className, $frequency);
@@ -90,7 +92,8 @@ class ScheduledTaskTool extends CommandLineTool {
 				// Always execute if no frequency is specified
 				$canExecute = true;
 			}
-
+			***/
+			
 			if ($canExecute) {
 				$this->executeTask($className, $this->getTaskArgs($task));
 			}

@@ -30,7 +30,7 @@
 	<link rel="stylesheet" href="{$baseUrl}/styles/common.css" type="text/css" />
 
 	<!-- Base Jquery -->
-	{if $allowCDN}<script type="text/javascript" src="http://www.google.com/jsapi"></script>
+	{if $allowCDN}<script type="text/javascript" src="https://www.google.com/jsapi"></script>
 	<script type="text/javascript">{literal}
 		// Provide a local fallback if the CDN cannot be reached
 		if (typeof google == 'undefined') {
@@ -94,7 +94,9 @@
 <div id="container">
 
 <div id="header">
+{* <p style="text-align:left;color: red; margin-left: 10px;">eScholarship's submission system will undergo maintenance on Saturday, March 3, 2012 from 5-8am PT and will be unavailable during that time.  All published content will continue to be accessible at http://www.escholarship.org.  We apologize in advance for any inconvenience.</p> *}
 <div id="headerTitle">
+
 <h1>
 {if $displayPageHeaderLogo && is_array($displayPageHeaderLogo)}
 	<img src="{$publicFilesDir}/{$displayPageHeaderLogo.uploadName|escape:"url"}" width="{$displayPageHeaderLogo.width|escape}" height="{$displayPageHeaderLogo.height|escape}" {if $displayPageHeaderLogoAltText != ''}alt="{$displayPageHeaderLogoAltText|escape}"{else}alt="{translate key="common.pageHeaderLogo.altText"}"{/if} />
@@ -111,7 +113,9 @@
 	{$applicationName}
 {/if}
 </h1>
+
 </div>
+
 </div>
 
 <div id="body">

@@ -10,6 +10,9 @@
   * Localization strings for the en_US (English) locale.
   *
   * $Id$
+  * 
+  *	CHANGELOG
+  *		20110817	BLH	Change value of manager.people.createUser from 'Create New User' to 'Enroll a New User'
   -->
 
 <locale name="en_US" full_name = "English">
@@ -95,7 +98,7 @@
 	<message key="manager.payment.timestamp">Timestamp</message>
 	<message key="manager.people.authSource">Authentication source</message>
 	<message key="manager.people.confirmUnenroll">Unenroll this user?</message>
-	<message key="manager.people.createUser">Create New User</message>
+	<message key="manager.people.createUser">Enroll a New User</message>
 	<message key="manager.people.createUserGeneratePassword">Generate a random password.</message>
 	<message key="manager.people.createUserSendNotify">Send the user a welcome email containing their username and password.</message>
 	<message key="manager.people.disable">Disable</message>
@@ -113,7 +116,7 @@
 	<message key="manager.people.enrollSelected">Enroll Selected Users</message>
 	<message key="manager.people.enrollSyncRole">Synchronize role</message>
 	<message key="manager.people.enrollSync">Sync Enrollment</message>
-	<message key="manager.people.enrollUserAsDescription">Users can be assigned to, or removed from, a role at any point.</message>
+	<message key="manager.people.enrollUserAsDescription">Users can be assigned to or removed from a role at any point.</message>
 	<message key="manager.people.enrollUserAs">Enroll user as</message>
 	<message key="manager.people.invalidUser">Sorry, the requested user does not exist.</message>
 	<message key="manager.people.mergeUser">Merge User</message>

@@ -15,6 +15,9 @@
  * @brief Core system initialization code.
  * This file is loaded before any others.
  * Any system-wide imports or initialization code should be placed here.
+ *
+ * CHANGELOG
+ *	20110811	BLH	Added path for Zend.
  */
 
 
@@ -44,6 +47,7 @@ ini_set('include_path', '.'
 	. ENV_SEPARATOR . BASE_SYS_DIR . '/lib/pkp/lib/phputf8'
 	. ENV_SEPARATOR . BASE_SYS_DIR . '/lib/pkp/lib/pqp/classes'
 	. ENV_SEPARATOR . BASE_SYS_DIR . '/lib/pkp/lib/smarty'
+	. ENV_SEPARATOR . BASE_SYS_DIR . '/lib/pkp/lib/ZendFramework/library'
 	. ENV_SEPARATOR . ini_get('include_path')
 );
 

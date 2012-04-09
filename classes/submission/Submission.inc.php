@@ -298,6 +298,97 @@ class Submission extends DataObject {
 		return $this->setData('abstract', $abstract, $locale);
 	}
 
+        // EXPERIMENTAL EXPORT CODE
+
+	function getEscholAcknowledgements($locale) {
+		return $this->getData('eschol_acknowledgements', $locale);
+	}
+
+	function getEscholBpid($locale) {
+		return $this->getData('eschol_bpid', $locale);
+	}
+
+	function getEscholBuylink($locale) {
+		return $this->getData('eschol_buyLink', $locale);
+	}
+
+	function getEscholComments($locale) {
+		return $this->getData('eschol_comments', $locale);
+	}
+
+	function getEscholCustomcitation($locale) {
+		return $this->getData('eschol_customCitation', $locale);
+	}
+
+	function getEscholSource($locale) {
+		return $this->getData('eschol_source', $locale);
+	}
+
+	function getEscholDatesubmitted($locale) {
+		return $this->getData('eschol_dateSubmitted', $locale);
+	}
+
+	function getEscholFpage($locale) {
+		return $this->getData('eschol_fpage', $locale);
+	}
+
+	function getEscholLpage($locale) {
+		return $this->getData('eschol_lpage', $locale);
+	}
+
+	function getEscholARK($locale) {
+		return $this->getData('eschol_ark', $locale);
+	}
+
+	function getEscholArticleId($locale) {
+		return $this->getData('eschol_articleid', $locale);
+	}
+
+	function getEscholSubmissionPath($locale) {
+		return $this->getData('eschol_submission_path', $locale);
+	}
+
+        // EXPERIMENTAL IMPORT CODE
+    
+	function setEscholAcknowledgements($acknowledgements, $locale) {
+		return $this->setData('eschol_acknowledgements', $acknowledgements, $locale);
+	}
+	function setEscholBpid($bpid, $locale) {
+		return $this->setData('eschol_bpid', $bpid, $locale);
+	}
+	function setEscholBuylink($buyLink, $locale) {
+		return $this->setData('eschol_buyLink', $buyLink, $locale);
+	}
+	function setEscholComments($comments, $locale) {
+		return $this->setData('eschol_comments', $comments, $locale);
+	}
+	function setEscholCustomcitation($customCitation, $locale) {
+		return $this->setData('eschol_customCitation', $customCitation, $locale);
+	}
+	function setEscholSource($source, $locale) {
+		return $this->setData('eschol_source', $source, $locale);
+	}
+	function setEscholDatesubmitted($dateSubmitted, $locale) {
+		return $this->setData('eschol_dateSubmitted', $dateSubmitted, $locale);
+	}
+	function setEscholFpage($fpage, $locale) {
+		return $this->setData('eschol_fpage', $fpage, $locale);
+	}
+	function setEscholLpage($lpage, $locale) {
+		return $this->setData('eschol_lpage', $lpage, $locale);
+	}
+	function setEscholARK($ark, $locale) {
+		return $this->setData('eschol_ark', $ark, $locale);
+	}
+	function setEscholArticleId($articleid, $locale) {
+		return $this->setData('eschol_articleid', $articleid, $locale);
+	}
+	function setEscholSubmissionPath($submission_path, $locale) {
+		return $this->setData('eschol_submission_path', $submission_path, $locale);
+	}
+	
+	// END EXPERIMENTAL IMPORT CODE
+
 	/**
 	 * Return the localized discipline
 	 * @return string

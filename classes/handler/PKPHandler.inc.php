@@ -291,6 +291,7 @@ class PKPHandler {
 		}
 
 		foreach ($this->_checks as $check) {
+
 			// Using authorization checks in the validate() method is deprecated
 			// FIXME: Trigger a deprecation warning.
 
@@ -304,6 +305,33 @@ class PKPHandler {
 			// check should redirect on fail and continue on pass
 			// default action is to redirect to the index page on fail
 			if ( !$check->isValid() ) {
+
+				// Kludge alert! Martin Haye, 2012-01-18:
+				//
+				// This is a hack. When a user tries to access page for a role they
+				// don't have, the default behavior was to kick them out to a login
+				// screen, which they (rightly) find confusing.
+				//
+				// Instead, let's bump them to an access denied screen, which is
+				// apparently what RoleBasedHandlerOperationPolicy will eventually
+				// do once the PKP folks are finished with "request/router refactoring".
+				//
+				if ( $check instanceof HandlerValidatorRoles ) {
+					$request->redirect(null, 'user', 'authorizationDenied', null,
+						array('message' => "user.authorization.roleValidatorFailure",
+                                                      'source' => $request->getRequestPath()));
+				}
+
+				// Similarly, if trying to access a non-existent journal, give a message
+				// that is slightly comprehensible.
+				//
+				else if ( $check instanceof HandlerValidatorJournal ) {
+					$request->redirect(null, 'user', 'authorizationDenied', null,
+						array('message' => "user.authorization.journalValidatorFailure"));
+				}
+
+				// If neither of those is the cause, then fall back to the old way...
+				else
 				if ( $check->redirectToLogin ) {
 					Validation::redirectLogin();
 				} else {

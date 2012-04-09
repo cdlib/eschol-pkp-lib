@@ -119,6 +119,7 @@ class PKPAuthorDAO extends DAO {
 		$author->setFirstName($row['first_name']);
 		$author->setMiddleName($row['middle_name']);
 		$author->setLastName($row['last_name']);
+		
 		$author->setCountry($row['country']);
 		$author->setEmail($row['email']);
 		$author->setUrl($row['url']);
@@ -129,6 +130,9 @@ class PKPAuthorDAO extends DAO {
 		$author->setAffiliation($row['affiliation_l'], $row['locale']);
 		$author->setAffiliation($row['affiliation_pl'], $row['primary_locale']);
 
+		$author->setEscholSuffix($row['eschol_suffix']);
+		$author->setEscholCorporateName($row['eschol_corporate_name']);
+		
 		HookRegistry::call('AuthorDAO::_returnSimpleAuthorFromRow', array(&$author, &$row));
 		return $author;
 	}
@@ -146,7 +150,7 @@ class PKPAuthorDAO extends DAO {
 	 * @return array
 	 */
 	function getLocaleFieldNames() {
-		return array('biography', 'competingInterests', 'affiliation');
+		return array('biography', 'competingInterests', 'affiliation','eschol_suffix','eschol_corporate_name','eschol_organization');
 	}
 
 	/**

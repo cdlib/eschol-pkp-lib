@@ -195,6 +195,39 @@ class PKPAuthor extends DataObject {
 		return $this->getLocalizedData('affiliation');
 	}
 
+	function getEscholSuffix($locale) {
+			return $this->getData('eschol_suffix');
+	}
+	
+	/**
+	 * Set eschol_suffix
+	 * @param $escholSuffix string
+	 */
+	function setEscholSuffix($escholSuffix) {
+		return $this->setData('eschol_suffix', $escholSuffix);
+	}
+
+	function getEscholOrganization($locale) {
+			return $this->getData('eschol_organization');
+	}
+
+	/**
+	 * Get eschol_corporate_name (alternative to individual author name)
+	 * @param $locale string
+	 * @return string
+	 */	
+	function getEscholCorporateName($locale) {
+			return $this->getData('eschol_corporate_name');
+	}
+
+	/**
+	 * Set eschol_corporate_name
+	 * @param $escholCorporateName string
+	 */
+	function setEscholCorporateName($escholCorporateName) {
+		return $this->setData('eschol_corporate_name', $escholCorporateName);
+	}
+	
 	/**
 	 * Get country code
 	 * @return string

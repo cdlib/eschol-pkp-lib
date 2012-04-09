@@ -162,6 +162,7 @@
 	<message key="common.requiredField">* Denotes required field</message>
 	<message key="common.required">Required</message>
 	<message key="common.saveAndContinue">Save and continue</message>
+	<message key="common.skipAndContinue">Skip and continue</message>
 	<message key="common.saveAndEmail">Save and email</message>
 	<message key="common.save">Save</message>
 	<message key="common.search">Search</message>
@@ -279,7 +280,10 @@
 	<message key="navigation.search">Search</message>
 	<message key="navigation.stepNumber">Step {$step}</message>
 	<message key="navigation.userHome">User Home</message>
-	<message key="navigation.user">User</message>
+	<message key="navigation.myJournals">My Journals</message>
+	<message key="navigation.journalHome">{$currentJournalPath} Home</message>
+	<!-- setting below breadcrumb value properly to include journalPath will take some time, so doing a quick job for now -->
+	<message key="navigation.user">Journal Home</message>
 	<message key="notification.allow">Allow these types of notifications to appear in my notification feed.</message>
 	<message key="notification.confirmError">There was an error confirming your subscription.</message>
 	<message key="notification.confirmSuccess">You have been successfully subscribed.</message>
