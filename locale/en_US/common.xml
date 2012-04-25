@@ -283,6 +283,8 @@
 	<message key="navigation.myJournals">My Journals</message>
 	<message key="navigation.journalHome">{$currentJournalPath} Home</message>
 	<!-- setting below breadcrumb value properly to include journalPath will take some time, so doing a quick job for now -->
+    <!-- setting new key to use in breadcrumb and menu to display Initials as opposed to IDS-->
+	<message key="navigation.journalInitials">{$currentJournalInitials} Home</message>
 	<message key="navigation.user">Journal Home</message>
 	<message key="notification.allow">Allow these types of notifications to appear in my notification feed.</message>
 	<message key="notification.confirmError">There was an error confirming your subscription.</message>
