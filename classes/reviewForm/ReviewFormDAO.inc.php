@@ -111,6 +111,8 @@ class ReviewFormDAO extends DAO {
 		$reviewForm->setAssocId($row['assoc_id']);
 		$reviewForm->setSequence($row['seq']);
 		$reviewForm->setActive($row['is_active']);
+                $reviewForm->setCompleteCount($row['complete_count']);
+                $reviewForm->setIncompleteCount($row['incomplete_count']);
 
 		$this->getDataObjectSettings('review_form_settings', 'review_form_id', $row['review_form_id'], $reviewForm);
 
@@ -247,15 +249,32 @@ class ReviewFormDAO extends DAO {
 	 * @return DAOResultFactory containing matching ReviewForms
 	 */
 	function getByAssocId($assocType, $assocId, $rangeInfo = null) {
-		$result = $this->retrieveRange(
-			'SELECT	*
-			FROM	review_forms
-			WHERE	assoc_type = ? AND assoc_id = ?
-			ORDER BY seq',
-			array((int) $assocType, (int) $assocId), $rangeInfo
-		);
+                $result =& $this->retrieveRange(
+                        'SELECT rf.review_form_id,
+                                rf.assoc_type,
+                                rf.assoc_id,
+                                rf.seq,
+                                rf.is_active,
+                                COUNT(rac.review_id) AS complete_count,
+                                COUNT(rai.review_id) AS incomplete_count
+                        FROM    review_forms rf
+                                LEFT JOIN review_assignments rac ON (
+                                        rac.review_form_id = rf.review_form_id AND
+                                        rac.date_confirmed IS NOT NULL
+                                )
+                                LEFT JOIN review_assignments rai ON (
+                                        rai.review_form_id = rf.review_form_id AND
+                                        rai.date_notified IS NOT NULL AND
+                                        rai.date_confirmed IS NULL
+                                )
+                        WHERE   rf.assoc_type = ? AND rf.assoc_id = ?
+                        GROUP BY rf.assoc_type, rf.assoc_id, rf.review_form_id, rf.seq, rf.is_active
+                        ORDER BY rf.seq',
+                        array($assocType, $assocId), $rangeInfo
+                );
 
-		return new DAOResultFactory($result, $this, '_returnReviewFormFromRow');
+                $returner = new DAOResultFactory($result, $this, '_returnReviewFormFromRow');
+                return $returner;
 	}
 
 	/**
