@@ -22,7 +22,7 @@ class PKPReviewFormGridHandler extends GridHandler {
 	function PKPReviewFormGridHandler() {
 		parent::GridHandler();
 		$this->addRoleAssignment(array(
-			ROLE_ID_SITE_ADMIN),
+			ROLE_ID_MANAGER),
 			array('fetchGrid', 'fetchRow', 'createReviewForm', 'editReviewForm', 'updateReviewForm',
 				'reviewFormBasics', 'reviewFormElements', 'copyReviewForm', 'previewReviewForm', 
 				'reviewFormPreview', 'activateReviewForm', 'deactivateReviewForm', 'deleteReviewForm', 

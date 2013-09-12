@@ -1,15 +1,15 @@
 <?php
 #FIXME file info
 /**
- * @file controllers/listbuilder/content/navigation/FooterLinkListbuilderHandler.inc.php
+ * @file controllers/listbuilder/settings/SetupListbuilderHandler.inc.php
  *
  * Copyright (c) 2000-2013 John Willinsky
  * Distributed under the GNU GPL v2. For full terms see the file docs/COPYING.
  *
- * @class FooterLinkListbuilderHandler
- * @ingroup controllers_listbuilder_content_navigation
+ * @class SetupListbuilderHandler
+ * @ingroup controllers_listbuilder_settings
  *
- * @brief Class for managing footer links.
+ * @brief Class for handling Review Form form element response item list builder UI.
  */
 
 import('lib.pkp.controllers.listbuilder.settings.SetupListbuilderHandler');
@@ -47,7 +47,7 @@ class ReviewFormElementResponseItemListbuilderHandler extends SetupListbuilderHa
 		$this->setTitle($request->getUserVar('title'));
 		$this->setSourceType(LISTBUILDER_SOURCE_TYPE_TEXT);
 		$this->setSaveType(LISTBUILDER_SAVE_TYPE_EXTERNAL);
-		$this->setSaveFieldName('order');
+		$this->setSaveFieldName('order'); # FIXME should this be 'options' or 'responses'?
 
 		// Possible response column
 		$responseColumn = new MultilingualListbuilderGridColumn($this, 'possibleResponse', 'manager.reviewFormElements.possibleResponse', null, null, null, null, array('tabIndex' => 1));
@@ -65,9 +65,10 @@ class ReviewFormElementResponseItemListbuilderHandler extends SetupListbuilderHa
 		$reviewFormElement = $reviewFormElementDao->getReviewFormElement($this->_reviewFormElementId);
 		#$locales = AppLocale::getSupportedFormLocales();
 		$locale = "en_US"; // how do we know which locale we are using? what if there are multiple?
-		$possibleResponses = $reviewFormElement->getPossibleResponses($locale);
-
-		return $possibleResponses;
+		if($reviewFormElement) {
+			$possibleResponses = $reviewFormElement->getPossibleResponses($locale);
+			return $possibleResponses;
+		}
 	}
 
 	/**
@@ -86,8 +87,9 @@ class ReviewFormElementResponseItemListbuilderHandler extends SetupListbuilderHa
 		// FIXME need to figure out exactly what to return here. We want an array containing the new response, the equivalent of getRowDataElement, or one row worth of data. 
 		// need to write a function that returns $rowData given either an empty row or a not-yet-persisted row
 		$rowData = array('order' => '', 'content' => '');
-		error_log("rowData:\n" . print_r($rowData, 1));
-		return $rowData;
+		//return $rowData;
+		// wrapping the data in another array to try to fix the truncation problem, but doesn't seem to help.
+		return array(array('order' =>  '', 'content' =>  $rowData['possibleResponse']));
 	}
 
 	/**
