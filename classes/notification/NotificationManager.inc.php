@@ -105,10 +105,13 @@ class NotificationManager {
 
 			import('classes.mail.MailTemplate');
 			$context =& Request::getContext();
+			$journal =& Request::getJournal();
 			$site =& Request::getSite();
 
 			$mail = new MailTemplate('NOTIFICATION_MAILLIST');
-			$mail->setFrom($site->getLocalizedContactEmail(), $site->getLocalizedContactName());
+			// 20130923 Modified so that notifications come from journal contact rather than site contact
+			$mail->setFrom($journal->getSetting('contactEmail'), $journal->getSetting('contactName'));
+			#$mail->setFrom($site->getLocalizedContactEmail(), $site->getLocalizedContactName());
 			$mail->assignParams(array(
 				'notificationContents' => $notificationContents,
 				'url' => $notification->getLocation(),

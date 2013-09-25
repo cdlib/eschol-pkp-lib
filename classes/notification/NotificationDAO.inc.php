@@ -287,8 +287,11 @@ class NotificationDAO extends DAO {
 
 		import('classes.mail.MailTemplate');
 		$site =& Request::getSite();
+		$journal =& Request::getJournal();
 		$mail = new MailTemplate('NOTIFICATION');
-		$mail->setFrom($site->getLocalizedContactEmail(), $site->getLocalizedContactName());
+		$mail->setFrom($journal->getSetting('contactEmail'), $journal->getSetting('contact
+Name'));
+		#$mail->setFrom($site->getLocalizedContactEmail(), $site->getLocalizedContactName());
 		$mail->assignParams(array(
 			'notificationTitle' => $notificationTitle,
 			'notificationContents' => $notificationContents,
