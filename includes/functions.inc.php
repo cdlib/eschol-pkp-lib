@@ -24,7 +24,8 @@ if (!function_exists('import')) {
 
 		// Try to bypass include path for best performance
 		$filePath = str_replace('.', '/', $class) . '.inc.php';
-		if((@include_once BASE_SYS_DIR.'/'.$filePath) === false) {
+		// Removed @ sign from in front of @include_once because we want syntax errors. MH & BLH.
+		if((include_once BASE_SYS_DIR.'/'.$filePath) === false) {
 			// Oups, we found a legacy include statement,
 			// let's try the include path then.
 			require_once($filePath);
