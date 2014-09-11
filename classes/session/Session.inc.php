@@ -61,9 +61,12 @@ class Session extends DataObject {
 			unset($_SESSION[$key]);
 		}
 
-		if (session_is_registered($key)) {
-			session_unregister($key);
-		}
+		// PHP 5.4 no longer has the "session_is_registered" function, but PKP says it isn't
+		// really needed anyway; see:
+		// https://github.com/pkp/pkp-lib/commit/2c2a380d9babb84ef00f837dd09636b2b47fb06f
+		//if (session_is_registered($key)) {
+		//	session_unregister($key);
+		//}
 	}
 
 	//
