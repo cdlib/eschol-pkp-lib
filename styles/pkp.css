@@ -8,7 +8,7 @@
  */
 
 /* jQuery UI - http://jqueryui.com/ */
-@import url("http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/themes/smoothness/jquery-ui.css");
+@import url("//ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/themes/smoothness/jquery-ui.css");
 
 /* Pines Notify - http://pines.sourceforge.net/pnotify/ */
 @import url("jquery.pnotify.default.css");
