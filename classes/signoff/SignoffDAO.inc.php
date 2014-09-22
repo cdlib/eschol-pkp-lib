@@ -337,6 +337,26 @@ class SignoffDAO extends DAO {
 		return $returner;
 	}
 
+
+	/**
+	 * Transfer all existing signoffs to another user.
+	 * @param $oldUserId int
+	 * @param $newUserId int
+	 */
+	function transferSignoffs($oldUserId, $newUserId) {
+		return $this->update(
+			'UPDATE	signoffs
+			SET	user_id = ?
+			WHERE	user_id = ?',
+			array(
+				(int) $newUserId,
+				(int) $oldUserId
+			)
+		);
+	}
+
+
+
 	/**
 	 * Get the ID of the last inserted signoff.
 	 * @return int
