@@ -30,21 +30,8 @@
 	<link rel="stylesheet" href="{$baseUrl}/styles/common.css" type="text/css" />
 
 	<!-- Base Jquery -->
-	{if $allowCDN}<script type="text/javascript" src="https://www.google.com/jsapi"></script>
-	<script type="text/javascript">{literal}
-		// Provide a local fallback if the CDN cannot be reached
-		if (typeof google == 'undefined') {
-			document.write(unescape("%3Cscript src='{/literal}{$baseUrl}{literal}/lib/pkp/js/lib/jquery/jquery.min.js' type='text/javascript'%3E%3C/script%3E"));
-			document.write(unescape("%3Cscript src='{/literal}{$baseUrl}{literal}/lib/pkp/js/lib/jquery/plugins/jqueryUi.min.js' type='text/javascript'%3E%3C/script%3E"));
-		} else {
-			google.load("jquery", "{/literal}{$smarty.const.CDN_JQUERY_VERSION}{literal}");
-			google.load("jqueryui", "{/literal}{$smarty.const.CDN_JQUERY_UI_VERSION}{literal}");
-		}
-	{/literal}</script>
-	{else}
-	<script type="text/javascript" src="{$baseUrl}/lib/pkp/js/lib/jquery/jquery.min.js"></script>
-	<script type="text/javascript" src="{$baseUrl}/lib/pkp/js/lib/jquery/plugins/jqueryUi.min.js"></script>
-	{/if}
+	<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/{$smarty.const.CDN_JQUERY_VERSION}/jquery.min.js"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/jqueryui/{$smarty.const.CDN_JQUERY_UI_VERSION}/jquery-ui.min.js"></script>
 
 	{call_hook|assign:"leftSidebarCode" name="Templates::Common::LeftSidebar"}
 	{call_hook|assign:"rightSidebarCode" name="Templates::Common::RightSidebar"}
@@ -65,6 +52,9 @@
 	<script type="text/javascript">{literal}
 		$(function(){
 			fontSize("#sizer", "body", 9, 16, 32, "{/literal}{$basePath|escape:"javascript"}{literal}"); // Initialize the font sizer
+		});
+		$(function(){
+			$('.button').button(); // change all buttons to jQuery-ui buttons
 		});
 	{/literal}</script>
 
