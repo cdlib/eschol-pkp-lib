@@ -22,17 +22,18 @@
 
 function fontSize(container, target, minSize, defSize, maxSize, baseUrl) {
 	/*Editable settings*/
-	var minCaption = "Make font size smaller"; //title for smallFont button
-	var defCaption = "Make font size default"; //title for defaultFont button
-	var maxCaption = "Make font size larger"; //title for largefont button
+	var minCaption = "Smaller"; //title for smallFont button
+	var defCaption = "Default"; //title for defaultFont button
+	var maxCaption = "Larger"; //title for largefont button
+
 	
 	var cookie = 'font-size';
 	
 	//Now we'll add the font size changer interface in container
-	smallFontHtml = "<a href='javascript:void(0);' class='smallFont' title='" + minCaption +"'>" + minCaption + "</a> ";
+	smallFontHtml = "<a href='javascript:void(0);' class='smallFont' title='" + minCaption +"'>" + minCaption + "</a> " + "<br>";
 	defFontHtml = "<a href='javascript:void(0);' class='defaultFont' title='" + defCaption +"'>" + defCaption + "</a> ";
 	largeFontHtml = "<a href='javascript:void(0);' class='largeFont' title='" + maxCaption +"'>" + maxCaption + "</a> ";
-	$(container).html(smallFontHtml + defFontHtml + largeFontHtml);
+	$(container).html("<ul><li>" + smallFontHtml + "</li><li>" + defFontHtml + "</li><li>" + largeFontHtml + "</li></ul>");
 	
 	//Read cookie & sets the fontsize
 	if ($.cookie != undefined) {
