@@ -41,15 +41,20 @@ class ReviewFormDAO extends DAO {
 			$assocType = $assocId = null;
 		}
 
-		/* MHaye: Hacked inefficient and incorrect double join to just return 1. */
+		/* MHaye: Tried to make complete_count and incomplete_count more correct, and much more efficient */
 		$result =& $this->retrieve (
 			'SELECT	rf.review_form_id,
 				rf.assoc_type,
 				rf.assoc_id,
 				rf.seq,
 				rf.is_active,
-				1 AS complete_count,
-				1 AS incomplete_count
+				(SELECT COUNT(*) FROM review_assignments rac WHERE
+					rac.review_form_id = rf.review_form_id AND
+					rac.date_confirmed IS NOT NULL) AS complete_count,
+				(SELECT COUNT(*) FROM review_assignments rai WHERE
+					rai.review_form_id = rf.review_form_id AND
+					rai.date_notified IS NOT NULL AND
+					rai.date_confirmed IS NULL) AS incomplete_count
 			FROM	review_forms rf
 			WHERE	rf.review_form_id = ? ' . (($assocType !== null) ? 'AND rf.assoc_type = ? AND rf.assoc_id = ?' : '') . '
 			GROUP BY rf.assoc_type, rf.assoc_id, rf.review_form_id, rf.seq, rf.is_active',
@@ -228,15 +233,20 @@ class ReviewFormDAO extends DAO {
 	 * @return DAOResultFactory containing matching ReviewForms
 	 */
 	function &getByAssocId($assocType, $assocId, $rangeInfo = null) {
-		/* MHaye: Hacked inefficient and incorrect double join to just return 1. */
+		/* MHaye: Tried to make complete_count and incomplete_count more correct, and much more efficient */
 		$result =& $this->retrieveRange(
 			'SELECT	rf.review_form_id,
 				rf.assoc_type,
 				rf.assoc_id,
 				rf.seq,
 				rf.is_active,
-				1 AS complete_count,
-				1 AS incomplete_count
+				(SELECT COUNT(*) FROM review_assignments rac WHERE
+					rac.review_form_id = rf.review_form_id AND
+					rac.date_confirmed IS NOT NULL) AS complete_count,
+				(SELECT COUNT(*) FROM review_assignments rai WHERE
+					rai.review_form_id = rf.review_form_id AND
+					rai.date_notified IS NOT NULL AND
+					rai.date_confirmed IS NULL) AS incomplete_count
 			FROM	review_forms rf
 			WHERE	rf.assoc_type = ? AND rf.assoc_id = ?
 			GROUP BY rf.assoc_type, rf.assoc_id, rf.review_form_id, rf.seq, rf.is_active
@@ -256,15 +266,20 @@ class ReviewFormDAO extends DAO {
 	 * @return DAOResultFactory containing matching ReviewForms
 	 */
 	function &getActiveByAssocId($assocType, $assocId, $rangeInfo = null) {
-		/* MHaye: Hacked inefficient and incorrect double join to just return 1. */
+		/* MHaye: Tried to make complete_count and incomplete_count more correct, and much more efficient */
 		$result =& $this->retrieveRange(
 			'SELECT	rf.review_form_id,
 				rf.assoc_type,
 				rf.assoc_id,
 				rf.seq,
 				rf.is_active,
-				1 AS complete_count,
-				1 AS incomplete_count
+				(SELECT COUNT(*) FROM review_assignments rac WHERE
+					rac.review_form_id = rf.review_form_id AND
+					rac.date_confirmed IS NOT NULL) AS complete_count,
+				(SELECT COUNT(*) FROM review_assignments rai WHERE
+					rai.review_form_id = rf.review_form_id AND
+					rai.date_notified IS NOT NULL AND
+					rai.date_confirmed IS NULL) AS incomplete_count
 			FROM	review_forms rf
 			WHERE	rf.assoc_type = ? AND assoc_id = ? AND rf.is_active = 1
 			GROUP BY rf.assoc_type, rf.assoc_id, rf.review_form_id, rf.seq, rf.is_active
@@ -284,27 +299,24 @@ class ReviewFormDAO extends DAO {
 	 * @return DAOResultFactory containing matching ReviewForms
 	 */
 	function &getUsedByAssocId($assocType, $assocId, $rangeInfo = null) {
+		/* MHaye: Tried to make complete_count and incomplete_count more correct, and much more efficient */
 		$result =& $this->retrieveRange(
 			'SELECT	rf.review_form_id,
 				rf.assoc_type,
 				rf.assoc_id,
 				rf.seq,
 				rf.is_active,
-				COUNT(rac.review_id) AS complete_count,
-				COUNT(rai.review_id) AS incomplete_count
-			FROM	review_forms rf
-				LEFT JOIN review_assignments rac ON (
+				(SELECT COUNT(*) FROM review_assignments rac WHERE
 					rac.review_form_id = rf.review_form_id AND
-					rac.date_confirmed IS NOT NULL
-				)
-				LEFT JOIN review_assignments rai ON (
+					rac.date_confirmed IS NOT NULL) AS complete_count,
+				(SELECT COUNT(*) FROM review_assignments rai WHERE
 					rai.review_form_id = rf.review_form_id AND
 					rai.date_notified IS NOT NULL AND
-					rai.date_confirmed IS NULL
-				)
+					rai.date_confirmed IS NULL) AS incomplete_count
+			FROM	review_forms rf
 			WHERE	rf.assoc_type = ? AND rf.assoc_id = ? AND rf.is_active = 1
 			GROUP BY rf.assoc_type, rf.assoc_id, rf.review_form_id, rf.seq, rf.is_active
-			HAVING COUNT(rac.review_id) > 0 OR COUNT(rai.review_id) > 0
+			HAVING complete_count > 0 OR incomplete_count > 0
 			ORDER BY rf.seq',
 			array($assocType, $assocId), $rangeInfo
 		);
@@ -321,27 +333,24 @@ class ReviewFormDAO extends DAO {
 	 * @return DAOResultFactory containing matching ReviewForms
 	 */
 	function &getUnusedByAssocId($assocType, $assocId, $rangeInfo = null) {
+		/* MHaye: Tried to make complete_count and incomplete_count more correct, and much more efficient */
 		$result =& $this->retrieveRange(
 			'SELECT	rf.review_form_id,
 				rf.assoc_type,
 				rf.assoc_id,
 				rf.seq,
 				rf.is_active,
-				COUNT(rac.review_id) AS complete_count,
-				COUNT(rai.review_id) AS incomplete_count
-			FROM	review_forms rf
-				LEFT JOIN review_assignments rac ON (
+				(SELECT COUNT(*) FROM review_assignments rac WHERE
 					rac.review_form_id = rf.review_form_id AND
-					rac.date_confirmed IS NOT NULL
-				)
-				LEFT JOIN review_assignments rai ON (
+					rac.date_confirmed IS NOT NULL) AS complete_count,
+				(SELECT COUNT(*) FROM review_assignments rai WHERE
 					rai.review_form_id = rf.review_form_id AND
 					rai.date_notified IS NOT NULL AND
-					rai.date_confirmed IS NULL
-				)
+					rai.date_confirmed IS NULL) AS incomplete_count
+			FROM	review_forms rf
 			WHERE	rf.assoc_type = ? AND rf.assoc_id = ?
 			GROUP BY rf.assoc_type, rf.assoc_id, rf.review_form_id, rf.seq, rf.is_active
-			HAVING COUNT(rac.review_id) = 0 AND COUNT(rai.review_id) = 0
+			HAVING complete_count = 0 AND incomplete_count = 0
 			ORDER BY rf.seq',
 			array($assocType, $assocId), $rangeInfo
 		);
@@ -389,23 +398,20 @@ class ReviewFormDAO extends DAO {
 			$assocType = $assocId = null;
 		}
 
+		/* MHaye: Tried to make complete_count and incomplete_count more correct, and much more efficient */
 		$result =& $this->retrieve (
 			'SELECT	rf.review_form_id,
-				COUNT(rac.review_id) AS complete_count,
-				COUNT(rai.review_id) AS incomplete_count
-			FROM	review_forms rf
-				LEFT JOIN review_assignments rac ON (
+				(SELECT COUNT(*) FROM review_assignments rac WHERE
 					rac.review_form_id = rf.review_form_id AND
-					rac.date_confirmed IS NOT NULL
-				)
-				LEFT JOIN review_assignments rai ON (
+					rac.date_confirmed IS NOT NULL) AS complete_count,
+				(SELECT COUNT(*) FROM review_assignments rai WHERE
 					rai.review_form_id = rf.review_form_id AND
 					rai.date_notified IS NOT NULL AND
-					rai.date_confirmed IS NULL
-				)
+					rai.date_confirmed IS NULL) AS incomplete_count
+			FROM	review_forms rf
 			WHERE	rf.review_form_id = ?' . ($assocType !== null ? ' AND rf.assoc_type = ? AND rf.assoc_id = ?':'') . '
 			GROUP BY rf.review_form_id
-			HAVING COUNT(rac.review_id) = 0 AND COUNT(rai.review_id) = 0',
+			HAVING complete_count = 0 AND incomplete_count = 0',
 			$params
 		);
 
