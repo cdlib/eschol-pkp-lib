@@ -33,6 +33,8 @@
 	<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/{$smarty.const.CDN_JQUERY_VERSION}/jquery.min.js"></script>
 	<script src="//ajax.googleapis.com/ajax/libs/jqueryui/{$smarty.const.CDN_JQUERY_UI_VERSION}/jquery-ui.min.js"></script>
 
+        {literal}<script type="text/javascript">(function() {var walkme = document.createElement('script'); walkme.type = 'text/javascript'; walkme.async = true; walkme.src = 'https://cdn.walkme.com/users/1bbdd6923ab54dadb9653a284309ca43/test/walkme_1bbdd6923ab54dadb9653a284309ca43_https.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(walkme, s); window._walkmeConfig = {smartLoad:true}; })();</script>{/literal}
+
 	{call_hook|assign:"leftSidebarCode" name="Templates::Common::LeftSidebar"}
 	{call_hook|assign:"rightSidebarCode" name="Templates::Common::RightSidebar"}
 	{if $leftSidebarCode || $rightSidebarCode}<link rel="stylesheet" href="{$baseUrl}/styles/sidebar.css" type="text/css" />{/if}
@@ -56,6 +58,9 @@
 		$(function(){
 			$('.button').button(); // change all buttons to jQuery-ui buttons
 		});
+	{/literal}</script>
+	<script type="text/javascript">{literal}
+		window.walkmeRoles = "{/literal}{$walkmeRoles}{literal}";
 	{/literal}</script>
 
 	<script type="text/javascript">
