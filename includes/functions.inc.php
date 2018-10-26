@@ -219,7 +219,7 @@ function &instantiate($fullyQualifiedClassName, $expectedTypes = null, $expected
 	$errorFlag = false;
 
 	// Validate the class name
-	if (!String::regexp_match('/^[a-zA-Z0-9.]+$/', $fullyQualifiedClassName)) {
+	if (!OjsString::regexp_match('/^[a-zA-Z0-9.]+$/', $fullyQualifiedClassName)) {
 		return $errorFlag;
 	}
 

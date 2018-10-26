@@ -298,7 +298,7 @@ class PKPLocale {
 	 */
 	function getParameterNames($source) {
 		$matches = null;
-		String::regexp_match_all('/({\$[^}]+})/' /* '/{\$[^}]+})/' */, $source, $matches);
+		OjsString::regexp_match_all('/({\$[^}]+})/' /* '/{\$[^}]+})/' */, $source, $matches);
 		array_shift($matches); // Knock the top element off the array
 		return $matches;
 	}

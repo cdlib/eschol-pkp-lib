@@ -56,6 +56,7 @@ class PKPApplication {
 
 		import('lib.pkp.classes.core.Core');
 		import('lib.pkp.classes.core.String');
+                import('lib.pkp.lib.php7-mysql-shim.lib.mysql');
 		import('lib.pkp.classes.core.Registry');
 
 		import('lib.pkp.classes.config.Config');
@@ -94,7 +95,7 @@ class PKPApplication {
 
 		import('classes.i18n.Locale');
 
-		String::init();
+		OjsString::init();
 		set_error_handler(array($this, 'errorHandler'));
 
 		$microTime = Core::microtime();

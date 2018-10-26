@@ -18,15 +18,15 @@ import('lib.pkp.classes.core.String');
 
 class StringTest extends PKPTestCase {
 	/**
-	 * @covers String::titleCase
+	 * @covers OjsString::titleCase
 	 */
 	public function testTitleCase() {
 		$originalTitle = 'AND This IS A TEST title';
-		self::assertEquals('And This is a Test Title', String::titleCase($originalTitle));
+		self::assertEquals('And This is a Test Title', OjsString::titleCase($originalTitle));
 	}
 
 	/**
-	 * @covers String::trimPunctuation
+	 * @covers OjsString::trimPunctuation
 	 */
 	public function testTrimPunctuation() {
 		$trimmedChars = array(
@@ -36,12 +36,12 @@ class StringTest extends PKPTestCase {
 
 		foreach($trimmedChars as $trimmedChar) {
 			self::assertEquals('trim.med',
-					String::trimPunctuation($trimmedChar.'trim.med'.$trimmedChar));
+					OjsString::trimPunctuation($trimmedChar.'trim.med'.$trimmedChar));
 		}
 	}
 
 	/**
-	 * @covers String::diff
+	 * @covers OjsString::diff
 	 */
 	public function testDiff() {
 		// Test two strings that have common substrings.
@@ -54,7 +54,7 @@ class StringTest extends PKPTestCase {
 			array( -1 => ' string'),
 			array( 0 => '.')
 		);
-		$resultDiff = String::diff($originalString, $editedString);
+		$resultDiff = OjsString::diff($originalString, $editedString);
 		self::assertEquals($expectedDiff, $resultDiff);
 
 		// Test two completely different strings.
@@ -64,7 +64,7 @@ class StringTest extends PKPTestCase {
 			array( -1 => 'abc'),
 			array( 1 => 'def')
 		);
-		$resultDiff = String::diff($originalString, $editedString);
+		$resultDiff = OjsString::diff($originalString, $editedString);
 		self::assertEquals($expectedDiff, $resultDiff);
 
 		// A more realistic example from the citation editor use case
@@ -78,7 +78,7 @@ class StringTest extends PKPTestCase {
 			array( 1 => 's' ),
 			array( 0 => 's to research and scholarship. Cambridge, MA: MIT Press.' )
 		);
-		$resultDiff = String::diff($originalString, $editedString);
+		$resultDiff = OjsString::diff($originalString, $editedString);
 		self::assertEquals($expectedDiff, $resultDiff);
 	}
 }

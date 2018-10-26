@@ -408,7 +408,7 @@ html, body {
 			if ($size > 0) {
 				// get file extension and check for validity
 				$ext = pathinfo($_FILES['nfile']['name'][$key]);
-				$mimeType = String::mime_content_type($_FILES['nfile']['tmp_name'][0]);
+				$mimeType = OjsString::mime_content_type($_FILES['nfile']['tmp_name'][0]);
 				$ext = strtolower($ext['extension']);
 				if (!in_array($ext, $cfg['valid'])) { 						// invalid image (only checks extension)
 					echo $l->m('er_029');

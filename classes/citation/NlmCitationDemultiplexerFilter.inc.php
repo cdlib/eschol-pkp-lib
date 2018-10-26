@@ -236,7 +236,7 @@ class NlmCitationDemultiplexerFilter extends Filter {
 		$generatedCitation = trim(str_replace(GOOGLE_SCHOLAR_TAG, '', strip_tags($generatedCitation)));
 
 		// Compare the original to the generated citation.
-		$citationDiff = String::diff($originalCitation, $generatedCitation);
+		$citationDiff = OjsString::diff($originalCitation, $generatedCitation);
 
 		// Calculate similarity as the number of deleted characters in relation to the
 		// number of characters in the original citation. This intentionally excludes
@@ -245,10 +245,10 @@ class NlmCitationDemultiplexerFilter extends Filter {
 		foreach($citationDiff as $diffPart) {
 			// Identify deletions.
 			if (key($diffPart) == -1) {
-				$deletedCharacters += String::strlen(current($diffPart));
+				$deletedCharacters += OjsString::strlen(current($diffPart));
 			}
 		}
-		$originalCharacters = String::strlen($originalCitation);
+		$originalCharacters = OjsString::strlen($originalCitation);
 		$partOfCommonCharacters = ($originalCharacters-$deletedCharacters) / $originalCharacters;
 
 		$filterConfidenceScore = (integer)round(min($partOfCommonCharacters*100, 100));

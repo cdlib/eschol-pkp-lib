@@ -51,7 +51,7 @@ class CitationListTokenizerFilter extends Filter {
 		// The default implementation assumes that raw citations are
 		// separated with line endings.
 		// 1) Remove empty lines and normalize line endings.
-		$input = String::regexp_replace('/[\r\n]+/s', "\n", $input);
+		$input = OjsString::regexp_replace('/[\r\n]+/s', "\n", $input);
 		// 2) Remove trailing/leading line breaks.
 		$input = trim($input, "\n");
 		// 3) Break up at line endings.
@@ -62,7 +62,7 @@ class CitationListTokenizerFilter extends Filter {
 		}
 		// 4) Remove numbers from the beginning of each citation.
 		foreach($citations as $index => $citation) {
-			$citations[$index] = String::regexp_replace('/^\s*[\[#]?[0-9]+[.)\]]?\s*/', '', $citation);
+			$citations[$index] = OjsString::regexp_replace('/^\s*[\[#]?[0-9]+[.)\]]?\s*/', '', $citation);
 		}
 
 		return $citations;

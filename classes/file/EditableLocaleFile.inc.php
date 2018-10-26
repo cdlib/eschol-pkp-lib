@@ -40,7 +40,7 @@ class EditableLocaleFile extends LocaleFile {
 
 	function update($key, $value) {
 		$matches = null;
-		$quotedKey = String::regexp_quote($key);
+		$quotedKey = OjsString::regexp_quote($key);
 		preg_match(
 			"/<message[\W]+key=\"$quotedKey\">/",
 			$this->getContents(),
@@ -62,7 +62,7 @@ class EditableLocaleFile extends LocaleFile {
 
 	function delete($key) {
 		$matches = null;
-		$quotedKey = String::regexp_quote($key);
+		$quotedKey = OjsString::regexp_quote($key);
 		preg_match(
 			"/[ \t]*<message[\W]+key=\"$quotedKey\">/",
 			$this->getContents(),

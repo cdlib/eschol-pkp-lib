@@ -115,12 +115,12 @@ class PKPComponentRouter extends PKPRouter {
 			array_pop($rpcServiceEndpointParts);
 
 			// Construct the fully qualified component class name from the rest of it.
-			$handlerClassName = String::camelize(array_pop($rpcServiceEndpointParts), CAMEL_CASE_HEAD_UP).'Handler';
+			$handlerClassName = OjsString::camelize(array_pop($rpcServiceEndpointParts), CAMEL_CASE_HEAD_UP).'Handler';
 
 			// camelize remaining endpoint parts
 			$camelizedRpcServiceEndpointParts = array();
 			foreach ( $rpcServiceEndpointParts as $part) {
-				$camelizedRpcServiceEndpointParts[] = String::camelize($part, CAMEL_CASE_HEAD_DOWN);
+				$camelizedRpcServiceEndpointParts[] = OjsString::camelize($part, CAMEL_CASE_HEAD_DOWN);
 			}
 			$handlerPackage = implode('.', $camelizedRpcServiceEndpointParts);
 
@@ -151,7 +151,7 @@ class PKPComponentRouter extends PKPRouter {
 			}
 
 			// Pop off the operation part
-			$this->_op = String::camelize(array_pop($rpcServiceEndpointParts), CAMEL_CASE_HEAD_DOWN);
+			$this->_op = OjsString::camelize(array_pop($rpcServiceEndpointParts), CAMEL_CASE_HEAD_DOWN);
 		}
 
 		return $this->_op;
@@ -279,15 +279,15 @@ class PKPComponentRouter extends PKPRouter {
 		$componentParts = explode('.', $component);
 		$componentName = array_pop($componentParts);
 		assert(substr($componentName, -7) == 'Handler');
-		$componentName = String::uncamelize(substr($componentName, 0, -7));
+		$componentName = OjsString::uncamelize(substr($componentName, 0, -7));
 
 		// uncamelize the component parts
 		$uncamelizedComponentParts = array();
 		foreach ($componentParts as $part) {
-			$uncamelizedComponentParts[] = String::uncamelize($part);
+			$uncamelizedComponentParts[] = OjsString::uncamelize($part);
 		}
 		array_push($uncamelizedComponentParts, $componentName);
-		$opName = String::uncamelize($op);
+		$opName = OjsString::uncamelize($op);
 
 		//
 		// Additional query parameters
@@ -477,7 +477,7 @@ class PKPComponentRouter extends PKPRouter {
 			$rpcServiceEndpointParts[$key] = strtolower($rpcServiceEndpointPart);
 
 			// We only allow letters, numbers and the hyphen.
-			if (!String::regexp_match('/^[a-z0-9-]*$/', $rpcServiceEndpointPart)) return null;
+			if (!OjsString::regexp_match('/^[a-z0-9-]*$/', $rpcServiceEndpointPart)) return null;
 		}
 
 		return $rpcServiceEndpointParts;

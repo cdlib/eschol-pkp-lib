@@ -194,7 +194,7 @@ class MetadataProperty {
 			'-', '', '', '', '-'
 		);
 		$propertyId = trim(str_replace($from, $to, $this->getName()), '-');
-		$propertyId = String::camelize($propertyId);
+		$propertyId = OjsString::camelize($propertyId);
 		return $propertyId;
 	}
 

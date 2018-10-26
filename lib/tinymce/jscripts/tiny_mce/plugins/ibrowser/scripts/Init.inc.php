@@ -35,7 +35,7 @@ $init['publicDir'] = Config::getVar('files', 'public_files_dir');
 if (isset($user)) {
 	// User is logged in
 	$init['user'] = $user->getUsername();
-	$init['lang'] = String::substr(Locale::getLocale(), 0, 2);
+	$init['lang'] = OjsString::substr(Locale::getLocale(), 0, 2);
 	$init['baseUrl'] = Config::getVar('general', 'base_url');
 	$init['baseDir'] =  $baseDir;
 

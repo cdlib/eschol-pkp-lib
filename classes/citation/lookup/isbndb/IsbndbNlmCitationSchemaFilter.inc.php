@@ -58,7 +58,7 @@ class IsbndbNlmCitationSchemaFilter extends NlmCitationSchemaFilter {
 	 * @return boolean
 	 */
 	function isValidIsbn($isbn) {
-		return is_string($isbn) && is_numeric($isbn) && String::strlen($isbn) == 13;
+		return is_string($isbn) && is_numeric($isbn) && OjsString::strlen($isbn) == 13;
 	}
 }
 ?>

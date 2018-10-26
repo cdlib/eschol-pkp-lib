@@ -215,7 +215,7 @@ class DBDataXMLParser {
 	 */
 	function destroy() {
 		$this->parser->destroy();
-		unset($this);
+		//unset($this);
 	}
 
 

@@ -388,7 +388,7 @@ class Zend_Pdf_StringParser
             throw new Zend_Pdf_Exception(sprintf('PDF file syntax error. Unexpected end of file while string reading. Offset - 0x%X. \')\' expected.', $start));
         }
 
-        return new Zend_Pdf_Element_String(Zend_Pdf_Element_String::unescape( substr($this->data,
+        return new Zend_Pdf_Element_String(Zend_Pdf_Element_OjsString::unescape( substr($this->data,
                                                                                      $start,
                                                                                      $this->offset - $start - 1) ));
     }
