@@ -76,7 +76,7 @@ class UserGroupAssignmentDAO extends DAO {
 						FROM user_groups ug JOIN user_user_groups uug ON ug.user_group_id = uug.user_group_id
 						WHERE ug.press_id = ?', $pressId);
 
-		$assignments =& new DAOResultFactory($result, $this, '_returnFromRow');
+		$assignments = new DAOResultFactory($result, $this, '_returnFromRow');
 		while ( !$assignments->eof() ) {
 			$assignment =& $assignments->next();
 			$this->deleteByUserId($assignment->getUserId(), $assignment->getUserGroupId());

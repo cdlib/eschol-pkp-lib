@@ -37,7 +37,7 @@ class PKPInstallHandler extends Handler {
 		if (checkPhpVersion('5.0.0')) { // WARNING: This form needs $this in constructor
 			$installForm = new InstallForm();
 		} else {
-			$installForm =& new InstallForm();
+			$installForm = new InstallForm();
 		}
 		$installForm->initData();
 		$installForm->display();
@@ -62,7 +62,7 @@ class PKPInstallHandler extends Handler {
 		if (checkPhpVersion('5.0.0')) { // WARNING: This form needs $this in constructor
 			$installForm = new InstallForm();
 		} else {
-			$installForm =& new InstallForm();
+			$installForm = new InstallForm();
 		}
 		$installForm->readInputData();
 

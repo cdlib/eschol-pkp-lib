@@ -108,7 +108,7 @@ class PKPAnnouncementHandler extends ManagerHandler {
 			if (checkPhpVersion('5.0.0')) { // WARNING: This form needs $this in constructor
 				$announcementForm = new AnnouncementForm($announcementId);
 			} else {
-				$announcementForm =& new AnnouncementForm($announcementId);
+				$announcementForm = new AnnouncementForm($announcementId);
 			}
 			if ($announcementForm->isLocaleResubmit()) {
 				$announcementForm->readInputData();
@@ -148,7 +148,7 @@ class PKPAnnouncementHandler extends ManagerHandler {
 			if (checkPhpVersion('5.0.0')) { // WARNING: This form needs $this in constructor
 				$announcementForm = new AnnouncementForm($announcementId);
 			} else {
-				$announcementForm =& new AnnouncementForm($announcementId);
+				$announcementForm = new AnnouncementForm($announcementId);
 			}
 			$announcementForm->readInputData();
 
