@@ -262,11 +262,19 @@ class Smarty_Compiler extends Smarty {
         reset($this->_folded_blocks);
 
         /* replace special blocks by "{php}" */
-        $source_content = preg_replace($search.'e', "'"
+        // MH CDL: Applied PHP 7 fix from:
+        //   https://www.smarty.net/forums/viewtopic.php?t=24428&sid=2e1d39b27d40f1d5eb041546e9a69ce8
+        /*$source_content = preg_replace($search.'e', "'"
                                        . $this->_quote_replace($this->left_delimiter) . 'php'
                                        . "' . str_repeat(\"\n\", substr_count('\\0', \"\n\")) .'"
                                        . $this->_quote_replace($this->right_delimiter)
                                        . "'"
+                                       , $source_content);*/
+        $source_content = preg_replace_callback($search, create_function ('$matches', "return '"
+                                       . $this->_quote_replace($this->left_delimiter) . 'php'
+                                       . "' . str_repeat(\"\n\", substr_count('\$matches[1]', \"\n\")) .'"
+                                       . $this->_quote_replace($this->right_delimiter)
+                                       . "';")
                                        , $source_content);
 
         /* Gather all template tags. */
