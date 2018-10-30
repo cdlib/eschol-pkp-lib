@@ -115,8 +115,8 @@ class PKPTemplateManager extends Smarty {
 		// Register custom functions
 		$this->register_modifier('translate', array('Locale', 'translate'));
 		$this->register_modifier('get_value', array(&$this, 'smartyGetValue'));
-		$this->register_modifier('strip_unsafe_html', array('String', 'stripUnsafeHtml'));
-		$this->register_modifier('String_substr', array('String', 'substr'));
+		$this->register_modifier('strip_unsafe_html', array('OjsString', 'stripUnsafeHtml'));
+		$this->register_modifier('String_substr', array('OjsString', 'substr'));
 		$this->register_modifier('to_array', array(&$this, 'smartyToArray'));
 		$this->register_modifier('concat', array(&$this, 'smartyConcat'));
 		$this->register_modifier('escape', array(&$this, 'smartyEscape'));
