@@ -343,7 +343,24 @@ class OjsString {
 	 */
 	function regexp_replace($pattern, $replacement, $subject, $limit = -1) {
 		if (PCRE_UTF8 && !OjsString::utf8_compliant($subject)) $subject = OjsString::utf8_bad_strip($subject);
-		return preg_replace($pattern . PCRE_UTF8, $replacement, $subject, $limit);
+		// MH CDL 2019-01-23: PHP 7 no longer supports the "e" flag on preg_replace. I believe that flag
+		//    does an "eval" on the replacement string each time. The following shenanigans should, I hope,
+		//    convert most replacement expressions with their "\1" group references into a callback
+		//    function using "$matches[1]" instead. See
+		//    https://www.smarty.net/forums/viewtopic.php?t=24428&sid=2e1d39b27d40f1d5eb041546e9a69ce8
+		//    but note that confusingly they change the number of the group. Not sure why.
+		if (preg_match('/^(~.*~|\/.*\/)(\w*)e(\w*)$/', $pattern, $patPieces)) {
+			$fixedReplacement = str_replace("\\0", "\$matches[0]",
+						str_replace("\\1", "\$matches[1]",
+						str_replace("\\2", "\$matches[2]",
+						str_replace("\\3", "\$matches[3]", $replacement))));
+			$fixedPattern = $patPieces[1] . $patPieces[2] . $patPieces[3];
+			return preg_replace_callback($fixedPattern . PCRE_UTF8,
+				create_function('$matches', "return " . $fixedReplacement . ";"),
+				$subject, $limit);
+		}
+		else
+			return preg_replace($pattern . PCRE_UTF8, $replacement, $subject, $limit);
 	}
 
 	/**
