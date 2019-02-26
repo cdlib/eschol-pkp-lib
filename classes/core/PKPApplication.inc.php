@@ -31,7 +31,7 @@ class PKPApplication {
 	var $enabledProducts;
 	var $allProducts;
 
-	function PKPApplication() {
+	function __construct() {
 		// Configure error reporting
 		// FIXME: Error logging needs to be suppressed for strict
 		// and deprecation errors in PHP5 as long as we support PHP 4.

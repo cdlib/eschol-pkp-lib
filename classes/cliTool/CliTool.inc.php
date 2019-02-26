@@ -49,7 +49,7 @@ class CommandLineTool {
 	/** @vary array Command-line arguments */
 	var $argv;
 
-	function CommandLineTool($argv = array()) {
+	function __construct($argv = array()) {
 		// Initialize the a request object with a page router
 		$application =& PKPApplication::getApplication();
 		$request =& $application->getRequest();
