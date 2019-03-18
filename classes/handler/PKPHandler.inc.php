@@ -235,11 +235,13 @@ class PKPHandler {
 	function authorize(&$request, &$args, $roleAssignments) {
 		// Enforce restricted site access.
 		import('lib.pkp.classes.security.authorization.RestrictedSiteAccessPolicy');
-		$this->addPolicy(new RestrictedSiteAccessPolicy($request), true);
+		$rsap= new RestrictedSiteAccessPolicy($request);
+		$this->addPolicy($rsap, true);
 
 		// Enforce SSL site-wide.
 		import('lib.pkp.classes.security.authorization.HttpsPolicy');
-		$this->addPolicy(new HttpsPolicy($request), true);
+		$hp = new HttpsPolicy($request);
+		$this->addPolicy($hp, true);
 
 		// Make sure that we have a valid decision manager instance.
 		assert(is_a($this->_authorizationDecisionManager, 'AuthorizationDecisionManager'));
