@@ -220,7 +220,7 @@ class ControlledVocabEntryDAO extends DAO {
 	 * Get the ID of the last inserted controlled vocab.
 	 * @return int
 	 */
-	function getInsertId() {
+	function getInsertId($table = '', $id = '', $callHooks = true) {
 		return parent::getInsertId('controlled_vocab_entries', 'controlled_vocab_entry_id');
 	}
 }

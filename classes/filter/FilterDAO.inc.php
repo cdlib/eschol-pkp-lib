@@ -351,7 +351,7 @@ class FilterDAO extends DAO {
 	 * Get the ID of the last inserted Source Description.
 	 * @return int
 	 */
-	function getInsertId() {
+	function getInsertId($table = '', $id = '', $callHooks = true) {
 		return parent::getInsertId('filters', 'filter_id');
 	}
 
