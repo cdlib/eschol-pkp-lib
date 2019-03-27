@@ -454,7 +454,7 @@ class CitationDAO extends DAO {
 	 * Get the id of the last inserted citation.
 	 * @return int
 	 */
-	function getInsertId() {
+	function getInsertId($table = '', $id = '', $callHooks = true) {
 		return parent::getInsertId('citations', 'citation_id');
 	}
 

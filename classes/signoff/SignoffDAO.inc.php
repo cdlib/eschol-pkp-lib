@@ -361,7 +361,7 @@ class SignoffDAO extends DAO {
 	 * Get the ID of the last inserted signoff.
 	 * @return int
 	 */
-	function getInsertId() {
+	function getInsertId($table = '', $id = '', $callHooks = true) {
 		return parent::getInsertId('signoffs', 'signoff_id');
 	}
 }
