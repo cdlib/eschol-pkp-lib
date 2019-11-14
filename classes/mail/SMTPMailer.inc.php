@@ -85,7 +85,8 @@ class SMTPMailer {
 		}
 
 		// Send MAIL command
-		$sender = $mail->getEnvelopeSender();
+		// MH CDL: For SES, we have to control the envelope sender.
+		$sender = 'eschol-no-reply@escholarship.org'; // was: $mail->getEnvelopeSender();
 		if (!isset($sender) || empty($sender)) {
 			$from = $mail->getFrom();
 			if (isset($from['email']) && !empty($from['email']))
@@ -129,6 +130,15 @@ class SMTPMailer {
 			return $this->disconnect('Could not send subject');
 
 		$lines = explode(MAIL_EOL, $headers);
+		// MH CDL: For SES, move From to Reply-To, and replace the From with an address we reliably control.
+		for ($i = 0, $num = count($lines); $i < $num; $i++) {
+			if (preg_match('/^from:/i', $lines[$i])) {
+				array_push($lines, preg_replace('/^from:/i', 'Reply-To:', $lines[$i]));
+				$lines[$i] = preg_replace('/" <.*>/',
+					        ' (via eScholarship Publishing)" <eschol-no-reply@escholarship.org>',
+					        $lines[$i]);
+			}
+		}
 		for ($i = 0, $num = count($lines); $i < $num; $i++) {
 			if (preg_match('/^bcc:/i', $lines[$i]))
 				continue;
