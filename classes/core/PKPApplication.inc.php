@@ -356,7 +356,10 @@ class PKPApplication {
 	 * @param $errfile string
 	 * @param $errline string
 	 */
-	function errorHandler($errorno, $errstr, $errfile, $errline) {
+        function errorHandler($errorno, $errstr, $errfile, $errline) {
+		// Suppress "Declaration ... should be compatible" warnings
+		if(strpos($errstr, 'Declaration of') === 0)
+		        return true;
 		// We only report/log errors if their corresponding
 		// error level bit is set in error_reporting.
 		// We have to check error_reporting() each time as
