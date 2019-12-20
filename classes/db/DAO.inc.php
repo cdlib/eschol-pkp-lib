@@ -19,6 +19,8 @@
 
 // $Id$
 
+// MH CDL: Sanitize to remove <script> tags everywhere
+require_once './lib/pkp/lib/htmlpurifier/library/HTMLPurifier.auto.php';
 
 import('lib.pkp.classes.db.DBConnection');
 import('lib.pkp.classes.db.DAOResultFactory');
@@ -49,6 +51,10 @@ class DAO {
 		} else {
 			$this->_dataSource = $dataSource;
 		}
+
+		// MH CDL: Sanitize to remove <script> tags everywhere
+		$config = HTMLPurifier_Config::createDefault();
+		$this->purifier = new HTMLPurifier($config);
 	}
 
 	/**
@@ -309,8 +315,10 @@ class DAO {
 				if ($value !== null) $value = strtotime($value);
 				break;
 			case 'string':
+				// MH CDL: Sanitize to remove <script> tags everywhere
+				$value = $this->purifier->purify($value);
+				break;
 			default:
-				// Nothing required.
 				break;
 		}
 		return $value;
@@ -364,6 +372,10 @@ class DAO {
 					if (!is_numeric($value)) $value = strtotime($value);
 					$value = strftime('%Y-%m-%d %H:%M:%S', $value);
 				}
+				break;
+			case 'string':
+				// MH CDL: Sanitize to remove <script> tags everywhere
+				$value = $this->purifier->purify($value);
 				break;
 			default:
 		}
