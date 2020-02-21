@@ -62,7 +62,39 @@ class SMTPMailer {
 	 * @param $body string
 	 * @param $headers string
 	 */
-	function mail(&$mail, $recipients, $subject, $body, $headers = '') {
+	function mail(&$mail, $recipientsOrig, $subject, $body, $headers = '') {
+
+		// MH CDL: Because we use Amazon SES to send emails and they're very concerned about
+		//         avoiding sending to bouncing or especially complaining emails, we need to
+		//         consult the database flag for this, and filter out all bouncing recipients.
+		//         (Complaints also get marked as bouncing.)
+		$rcptOrig = array();
+		if (($addrs = $mail->getRecipients()) !== null)
+			$rcptOrig = array_merge($rcptOrig, $addrs);
+		if (($addrs = $mail->getCcs()) !== null)
+			$rcptOrig = array_merge($rcptOrig, $addrs);
+		if (($addrs = $mail->getBccs()) !== null)
+			$rcptOrig = array_merge($rcptOrig, $addrs);
+
+		$userDao =& DAORegistry::getDAO('UserDAO');
+		$rcpt = array();
+		foreach ($rcptOrig as $addr) {
+			$email = $addr['email'];
+			$user =& $userDao->getUserByEmail($email);
+			if ($user != null) {
+				$bouncing = $user->getData('eschol_bouncing_email');
+				//error_log("  flag for " . $email . " = " . print_r($bouncing,TRUE));
+				if (is_array($bouncing) && count($bouncing) == 1 && $bouncing['en_US'] == "yes")
+					error_log("Note: " . $email . " is marked as bouncing; removing from recipient list.");
+				else
+					array_push($rcpt, $addr);
+			}
+		}
+		if (empty($rcpt)) {
+			error_log("No non-bouncing recipients; skipping email send of '" . $subject . "'.");
+			return FALSE;
+		}
+
 		// Establish connection
 		if (!$this->connect())
 			return false;
@@ -102,13 +134,6 @@ class SMTPMailer {
 			return $this->disconnect('Did not receive expected 250 (2)');
 
 		// Send RCPT command(s)
-		$rcpt = array();
-		if (($addrs = $mail->getRecipients()) !== null)
-			$rcpt = array_merge($rcpt, $addrs);
-		if (($addrs = $mail->getCcs()) !== null)
-			$rcpt = array_merge($rcpt, $addrs);
-		if (($addrs = $mail->getBccs()) !== null)
-			$rcpt = array_merge($rcpt, $addrs);
 		foreach ($rcpt as $addr) {
 			if (!$this->send('RCPT', 'TO:<' . $addr['email'] .'>'))
 				return $this->disconnect('Could not send recipients');
