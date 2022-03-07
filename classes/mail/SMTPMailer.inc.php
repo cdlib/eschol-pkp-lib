@@ -89,6 +89,9 @@ class SMTPMailer {
 				else
 					array_push($rcpt, $addr);
 			}
+			else {
+				array_push($rcpt, $addr);
+			}
 		}
 		if (empty($rcpt)) {
 			error_log("No non-bouncing recipients; skipping email send of '" . $subject . "'.");
