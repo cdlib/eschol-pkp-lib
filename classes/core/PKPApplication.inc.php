@@ -48,8 +48,8 @@ class PKPApplication {
 		$pkpProfiler = new PKPProfiler();
 
 		// Begin debug logging
-		Console::logMemory('', 'PKPApplication::construct');
-		Console::logSpeed('PKPApplication::construct');
+		//Console::logMemory('', 'PKPApplication::construct');
+		//Console::logSpeed('PKPApplication::construct');
 
 		// Seed random number generator
 		mt_srand(((double) microtime()) * 1000000);

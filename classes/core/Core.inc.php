@@ -25,7 +25,7 @@ class Core {
 	 * Get the path to the base installation directory.
 	 * @return string
 	 */
-	function getBaseDir() {
+	static function getBaseDir() {
 		static $baseDir;
 
 		if (!isset($baseDir)) {

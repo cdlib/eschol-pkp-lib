@@ -31,7 +31,7 @@ class Config {
 	 * @param $key string
 	 * @return string
 	 */
-	function getVar($section, $key) {
+	static function getVar($section, $key) {
 		$configData =& Config::getData();
 		return isset($configData[$section][$key]) ? $configData[$section][$key] : null;
 	}
@@ -40,7 +40,7 @@ class Config {
 	 * Get the current configuration data.
 	 * @return array the configuration data
 	 */
-	function &getData() {
+	static function &getData() {
 		$configData =& Registry::get('configData', true, null);
 
 		if ($configData === null) {
@@ -57,7 +57,7 @@ class Config {
 	 * The file is assumed to be formatted in php.ini style.
 	 * @return array the configuration data
 	 */
-	function &reloadData() {
+	static function &reloadData() {
 		if (($configData =& ConfigParser::readConfig(Config::getConfigFileName())) === false) {
 			fatalError(sprintf('Cannot read configuration file %s', Config::getConfigFileName()));
 		}
@@ -69,7 +69,7 @@ class Config {
 	 * Set the path to the configuration file.
 	 * @param $configFile string
 	 */
-	function setConfigFileName($configFile) {
+	static function setConfigFileName($configFile) {
 		// Reset the config data
 		$configData = null;
 		Registry::set('configData', $configData);
@@ -82,7 +82,7 @@ class Config {
 	 * Return the path to the configuration file.
 	 * @return string
 	 */
-	function getConfigFileName() {
+	static function getConfigFileName() {
 		return Registry::get('configFile', true, CONFIG_FILE);
 	}
 }
