@@ -16,12 +16,12 @@
 // $Id$
 
 
-import('lib.pkp.classes.xml.XMLParser');
+import('lib.pkp.classes.xml.PKPXMLParser');
 import('lib.pkp.classes.rt.RTStruct');
 
 class RTXMLParser {
 
-	/** @var XMLParser the parser to use */
+	/** @var PKPXMLParser the parser to use */
 	var $parser;
 
 
@@ -31,7 +31,7 @@ class RTXMLParser {
 	 * @return RTVersion
 	 */
 	function &parse($file) {
-		$parser = new XMLParser();
+		$parser = new PKPXMLParser();
 		$tree = $parser->parse($file);
 		$parser->destroy();
 		$version = false;

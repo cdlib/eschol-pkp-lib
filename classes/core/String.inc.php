@@ -55,7 +55,7 @@ class OjsString {
 	/**
 	 * Perform initialization required for the string wrapper library.
 	 */
-	function init() {
+	static function init() {
 		$clientCharset = strtolower(Config::getVar('i18n', 'client_charset'));
 
 		// Check if mbstring is installed (requires PHP >= 4.3.0)
@@ -66,7 +66,7 @@ class OjsString {
 			// Set up required ini settings for mbstring
 			// FIXME Do any other mbstring settings need to be set?
 			mb_internal_encoding($clientCharset);
-			mb_substitute_character('63');		// question mark
+			mb_substitute_character(63);		// question mark
 		}
 
 		// Define modifier to be used in regexp_* routines
@@ -84,7 +84,7 @@ class OjsString {
 	 * and mb_substr_count)
 	 * @return boolean
 	 */
-	function hasMBString() {
+	static function hasMBString() {
 		static $hasMBString;
 		if (isset($hasMBString)) return $hasMBString;
 
@@ -113,7 +113,7 @@ class OjsString {
 	 * Check if server supports the PCRE_UTF8 modifier.
 	 * @return boolean
 	 */
-	function hasPCREUTF8() {
+	static function hasPCREUTF8() {
 		// The PCRE_UTF8 modifier is only supported on PHP >= 4.1.0 (*nix) or PHP >= 4.2.3 (win32)
 		// Evil check to see if PCRE_UTF8 is supported
 		if (@preg_match('//u', '')) {
@@ -131,7 +131,7 @@ class OjsString {
 	/**
 	 * @see http://ca.php.net/manual/en/function.strlen.php
 	 */
-	function strlen($string) {
+	static function strlen($string) {
 		if (defined('ENABLE_MBSTRING')) {
 			require_once './lib/pkp/lib/phputf8/mbstring/core.php';
 		} else {
@@ -144,7 +144,7 @@ class OjsString {
 	/**
 	 * @see http://ca.php.net/manual/en/function.strpos.php
 	 */
-	function strpos($haystack, $needle, $offset = 0) {
+	static function strpos($haystack, $needle, $offset = 0) {
 		if (defined('ENABLE_MBSTRING')) {
 			require_once './lib/pkp/lib/phputf8/mbstring/core.php';
 		} else {
@@ -157,7 +157,7 @@ class OjsString {
 	/**
 	 * @see http://ca.php.net/manual/en/function.strrpos.php
 	 */
-	function strrpos($haystack, $needle) {
+	static function strrpos($haystack, $needle) {
 		if (defined('ENABLE_MBSTRING')) {
 			require_once './lib/pkp/lib/phputf8/mbstring/core.php';
 		} else {
@@ -170,7 +170,7 @@ class OjsString {
 	/**
 	 * @see http://ca.php.net/manual/en/function.substr.php
 	 */
-	function substr($string, $start, $length = false) {
+	static function substr($string, $start, $length = false) {
 		if (defined('ENABLE_MBSTRING')) {
 			require_once './lib/pkp/lib/phputf8/mbstring/core.php';
 		} else {
@@ -187,7 +187,7 @@ class OjsString {
 	 * @see http://ca.php.net/manual/en/function.substr_replace.php
 	 * Thanks to poster at http://ca.php.net/manual/en/function.substr-replace.php#90146
 	 */
-	function substr_replace($string, $replacement, $start, $length = null) {
+	static function substr_replace($string, $replacement, $start, $length = null) {
 		if (function_exists('mb_substr_replace') === false) {
 			function mb_substr_replace($string, $replacement, $start, $length = null) {
 				if (extension_loaded('mbstring') === true) {
@@ -220,7 +220,7 @@ class OjsString {
 	/**
 	 * @see http://ca.php.net/manual/en/function.strtolower.php
 	 */
-	function strtolower($string) {
+	static function strtolower($string) {
 		if (defined('ENABLE_MBSTRING')) {
 			require_once './lib/pkp/lib/phputf8/mbstring/core.php';
 		} else {
@@ -233,7 +233,7 @@ class OjsString {
 	/**
 	 * @see http://ca.php.net/manual/en/function.strtoupper.php
 	 */
-	function strtoupper($string) {
+	static function strtoupper($string) {
 		if (defined('ENABLE_MBSTRING')) {
 			require_once './lib/pkp/lib/phputf8/mbstring/core.php';
 		} else {
@@ -246,7 +246,7 @@ class OjsString {
 	/**
 	 * @see http://ca.php.net/manual/en/function.ucfirst.php
 	 */
-	function ucfirst($string) {
+	static function ucfirst($string) {
 		if (defined('ENABLE_MBSTRING')) {
 			require_once './lib/pkp/lib/phputf8/mbstring/core.php';
 			require_once './lib/pkp/lib/phputf8/ucfirst.php';
@@ -261,7 +261,7 @@ class OjsString {
 	/**
 	 * @see http://ca.php.net/manual/en/function.substr_count.php
 	 */
-	function substr_count($haystack, $needle) {
+	static function substr_count($haystack, $needle) {
 		if (defined('ENABLE_MBSTRING')) {
 			return mb_substr_count($haystack, $needle); // Requires PHP >= 4.3.0
 		} else {
@@ -272,7 +272,7 @@ class OjsString {
 	/**
 	 * @see http://ca.php.net/manual/en/function.encode_mime_header.php
 	 */
-	function encode_mime_header($string) {
+	static function encode_mime_header($string) {
 		if (defined('ENABLE_MBSTRING')) {
 			return mb_encode_mimeheader($string, mb_internal_encoding(), 'B', MAIL_EOL);
 		}  else {
@@ -283,7 +283,7 @@ class OjsString {
 	/**
 	 * @see http://ca.php.net/manual/en/function.mail.php
 	 */
-	function mail($to, $subject, $message, $additional_headers = '', $additional_parameters = '') {
+	static function mail($to, $subject, $message, $additional_headers = '', $additional_parameters = '') {
 		// Cannot use mb_send_mail as it base64 encodes the whole body of the email,
 		// making it useless for multipart emails
 		if (empty($additional_parameters)) {
@@ -301,14 +301,14 @@ class OjsString {
 	/**
 	 * @see http://ca.php.net/manual/en/function.regexp_quote.php
 	 */
-	function regexp_quote($string, $delimiter = '/') {
+	static function regexp_quote($string, $delimiter = '/') {
 		return preg_quote($string, $delimiter);
 	}
 
 	/**
 	 * @see http://ca.php.net/manual/en/function.regexp_grep.php
 	 */
-	function regexp_grep($pattern, $input) {
+	static function regexp_grep($pattern, $input) {
 		if (PCRE_UTF8 && !OjsString::utf8_compliant($input)) $input = OjsString::utf8_bad_strip($input);
 		return preg_grep($pattern . PCRE_UTF8, $input);
 	}
@@ -316,7 +316,7 @@ class OjsString {
 	/**
 	 * @see http://ca.php.net/manual/en/function.regexp_match.php
 	 */
-	function regexp_match($pattern, $subject) {
+	static function regexp_match($pattern, $subject) {
 		if (PCRE_UTF8 && !OjsString::utf8_compliant($subject)) $subject = OjsString::utf8_bad_strip($subject);
 		return preg_match($pattern . PCRE_UTF8, $subject);
 	}
@@ -324,7 +324,7 @@ class OjsString {
 	/**
 	 * @see http://ca.php.net/manual/en/function.regexp_match_get.php
 	 */
-	function regexp_match_get($pattern, $subject, &$matches) {
+	static function regexp_match_get($pattern, $subject, &$matches) {
 		// NOTE: This function was created since PHP < 5.x does not support optional reference parameters
 		if (PCRE_UTF8 && !OjsString::utf8_compliant($subject)) $subject = OjsString::utf8_bad_strip($subject);
 		return preg_match($pattern . PCRE_UTF8, $subject, $matches);
@@ -333,7 +333,7 @@ class OjsString {
 	/**
 	 * @see http://ca.php.net/manual/en/function.regexp_match_all.php
 	 */
-	function regexp_match_all($pattern, $subject, &$matches) {
+	static function regexp_match_all($pattern, $subject, &$matches) {
 		if (PCRE_UTF8 && !OjsString::utf8_compliant($subject)) $subject = OjsString::utf8_bad_strip($subject);
 		return preg_match_all($pattern . PCRE_UTF8, $subject, $matches);
 	}
@@ -341,7 +341,7 @@ class OjsString {
 	/**
 	 * @see http://ca.php.net/manual/en/function.regexp_replace.php
 	 */
-	function regexp_replace($pattern, $replacement, $subject, $limit = -1) {
+	static function regexp_replace($pattern, $replacement, $subject, $limit = -1) {
 		if (PCRE_UTF8 && !OjsString::utf8_compliant($subject)) $subject = OjsString::utf8_bad_strip($subject);
 		// MH CDL 2019-01-23: PHP 7 no longer supports the "e" flag on preg_replace. I believe that flag
 		//    does an "eval" on the replacement string each time. The following shenanigans should, I hope,
@@ -366,7 +366,7 @@ class OjsString {
 	/**
 	 * @see http://ca.php.net/manual/en/function.regexp_replace_callback.php
 	 */
-	function regexp_replace_callback($pattern, $callback, $subject, $limit = -1) {
+	static function regexp_replace_callback($pattern, $callback, $subject, $limit = -1) {
 		if (PCRE_UTF8 && !OjsString::utf8_compliant($subject)) $subject = OjsString::utf8_bad_strip($subject);
 		return preg_replace_callback($pattern . PCRE_UTF8, $callback, $subject, $limit);
 	}
@@ -374,7 +374,7 @@ class OjsString {
 	/**
 	 * @see http://ca.php.net/manual/en/function.regexp_split.php
 	 */
-	function regexp_split($pattern, $subject, $limit = -1) {
+	static function regexp_split($pattern, $subject, $limit = -1) {
 		if (PCRE_UTF8 && !OjsString::utf8_compliant($subject)) $subject = OjsString::utf8_bad_strip($subject);
 		return preg_split($pattern . PCRE_UTF8, $subject, $limit);
 	}
@@ -382,7 +382,7 @@ class OjsString {
 	/**
 	 * @see http://ca.php.net/manual/en/function.mime_content_type.php
 	 */
-	function mime_content_type($filename) {
+	static function mime_content_type($filename) {
 		if (function_exists('mime_content_type')) {
 			$result = mime_content_type($filename);
 			// mime_content_type appears to return a charset
@@ -418,7 +418,7 @@ class OjsString {
 	 * @param $input string input string
 	 * @return string
 	 */
-	function stripUnsafeHtml($input) {
+	static function stripUnsafeHtml($input) {
 		// Parts of this implementation were taken from Horde:
 		// see http://cvs.horde.org/co.php/framework/MIME/MIME/Viewer/html.php.
 
@@ -479,7 +479,7 @@ class OjsString {
 	 * @param $html string
 	 * @return string
 	 */
-	function html2text($html) {
+	static function html2text($html) {
 		$html = OjsString::regexp_replace('/<[\/]?p>/', "\n", $html);
 		$html = OjsString::regexp_replace('/<li>/', '&bull; ', $html);
 		$html = OjsString::regexp_replace('/<\/li>/', "\n", $html);
@@ -498,7 +498,7 @@ class OjsString {
 	 * @param $str string input string
 	 * @return boolean
 	 */
-	function utf8_is_valid($str) {
+	static function utf8_is_valid($str) {
 		require_once './lib/pkp/lib/phputf8/utils/validation.php';
 		return utf8_is_valid($str);
 	}
@@ -509,7 +509,7 @@ class OjsString {
 	 * @param $str string input string
 	 * @return boolean
 	 */
-	function utf8_compliant($str) {
+	static function utf8_compliant($str) {
 		require_once './lib/pkp/lib/phputf8/utils/validation.php';
 		return utf8_compliant($str);
 	}
@@ -519,7 +519,7 @@ class OjsString {
 	 * @param $str string input string
 	 * @return string
 	 */
-	function utf8_bad_find($str) {
+	static function utf8_bad_find($str) {
 		require_once './lib/pkp/lib/phputf8/utils/bad.php';
 		return utf8_bad_find($str);
 	}
@@ -529,7 +529,7 @@ class OjsString {
 	 * @param $str string input string
 	 * @return string
 	 */
-	function utf8_bad_strip($str) {
+	static function utf8_bad_strip($str) {
 		require_once './lib/pkp/lib/phputf8/utils/bad.php';
 		return utf8_bad_strip($str);
 	}
@@ -540,7 +540,7 @@ class OjsString {
 	 * @param $replace string optional
 	 * @return string
 	 */
-	function utf8_bad_replace($str, $replace = '?') {
+	static function utf8_bad_replace($str, $replace = '?') {
 		require_once './lib/pkp/lib/phputf8/utils/bad.php';
 		return utf8_bad_replace($str, $replace);
 	}
@@ -550,7 +550,7 @@ class OjsString {
 	 * @param $str string input string
 	 * @return string
 	 */
-	function utf8_strip_ascii_ctrl($str) {
+	static function utf8_strip_ascii_ctrl($str) {
 		require_once './lib/pkp/lib/phputf8/utils/ascii.php';
 		return utf8_strip_ascii_ctrl($str);
 	}
@@ -560,7 +560,7 @@ class OjsString {
 	 * @param $str string input string
 	 * @return string
 	 */
-	function utf8_normalize($str) {
+	static function utf8_normalize($str) {
 		import('lib.pkp.classes.core.Transcoder');
 
 		if (OjsString::hasMBString()) {
@@ -599,7 +599,7 @@ class OjsString {
 	 * @param $str string input string
 	 * @return string
 	 */
-	function utf8_to_ascii($str) {
+	static function utf8_to_ascii($str) {
 		require_once('./lib/pkp/lib/phputf8/utf8_to_ascii.php');
 		return utf8_to_ascii($str);
 	}
@@ -611,7 +611,7 @@ class OjsString {
 	 * @param $num int
 	 * @return string
 	 */
-	function code2utf ($num) {
+	static function code2utf ($num) {
 		if ($num < 128) return chr($num);
 		if ($num < 2048) return chr(($num >> 6) + 192) . chr(($num & 63) + 128);
 		if ($num < 65536) return chr(($num >> 12) + 224) . chr((($num >> 6) & 63) + 128) . chr(($num & 63) + 128);
@@ -625,7 +625,7 @@ class OjsString {
 	 * @param $str string input string
 	 * @return string
 	 */
-	function utf2html ($str) {
+	static function utf2html ($str) {
 		$ret = "";
 		$max = strlen($str);
 		$last = 0;  // keeps the index of the last regular character
@@ -669,7 +669,7 @@ class OjsString {
 	 * @param $str string input string
 	 * @return string
 	 */
-	function html2utf($str) {
+	static function html2utf($str) {
 		// convert named entities to numeric entities
 		$str = strtr($str, OjsString::getHTMLEntities());
 
@@ -686,7 +686,7 @@ class OjsString {
 	 * From php.net: function.get-html-translation-table.php
 	 * @return string
 	 */
-	function getHTMLEntities () {
+	static function getHTMLEntities () {
 		// define the conversion table
 		$html_entities = array(
 			"&Aacute;" => "&#193;",	"&aacute;" => "&#225;",	"&Acirc;" => "&#194;",
@@ -783,7 +783,7 @@ class OjsString {
 	 * Wrapper around fputcsv for systems that may or may not support it
 	 * (i.e. PHP before 5.1.0); see PHP documentation for fputcsv.
 	 */
-	function fputcsv(&$handle, $fields = array(), $delimiter = ',', $enclosure = '"') {
+	static function fputcsv(&$handle, $fields = array(), $delimiter = ',', $enclosure = '"') {
 		// From PHP website, thanks to boefje at hotmail dot com
 		if (function_exists('fputcsv')) {
 			return fputcsv($handle, $fields, $delimiter, $enclosure);
@@ -823,7 +823,7 @@ class OjsString {
 	 * @param $string string input string
 	 * @return string the trimmed string
 	 */
-	function trimPunctuation($string) {
+	static function trimPunctuation($string) {
 		return trim($string, ' ,.;:!?&()[]\\/');
 	}
 
@@ -832,7 +832,7 @@ class OjsString {
 	 * @param $title string
 	 * @return string
 	 */
-	function titleCase($title) {
+	static function titleCase($title) {
 		$smallWords = array(
 			'of', 'a', 'the', 'and', 'an', 'or', 'nor', 'but', 'is', 'if', 'then',
 			'else', 'when', 'at', 'from', 'by', 'on', 'off', 'for', 'in', 'out',
@@ -860,7 +860,7 @@ class OjsString {
 	 * @param $input string
 	 * @return array
 	 */
-	function iterativeExplode($delimiters, $input) {
+	static function iterativeExplode($delimiters, $input) {
 		// Run through the delimiters and try them out
 		// one by one.
 		foreach($delimiters as $delimiter) {
@@ -883,7 +883,7 @@ class OjsString {
 	 * @param $type which kind of camel case?
 	 * @return string the string in camel case
 	 */
-	function camelize($string, $type = CAMEL_CASE_HEAD_UP) {
+	static function camelize($string, $type = CAMEL_CASE_HEAD_UP) {
 		assert($type == CAMEL_CASE_HEAD_UP || $type == CAMEL_CASE_HEAD_DOWN);
 
 		// Transform "handler-class" to "HandlerClass" and "my-op" to "MyOp"
@@ -903,7 +903,7 @@ class OjsString {
 	 * and "myOp" to "my-op".
 	 * @param $string
 	 */
-	function uncamelize($string) {
+	static function uncamelize($string) {
 		assert(!empty($string));
 
 		// Transform "myOp" to "MyOp"
@@ -940,7 +940,7 @@ class OjsString {
 	 * @param $string2 string
 	 * @return array
 	 */
-	function diff($originalString, $editedString) {
+	static function diff($originalString, $editedString) {
 		// Split strings into character arrays (multi-byte compatible).
 		foreach(array('originalStringCharacters' => $originalString, 'editedStringCharacters' => $editedString) as $characterArrayName => $string) {
 			${$characterArrayName} = array();

@@ -46,9 +46,9 @@ class DBConnection {
 	 * otherwise calls initCustomDBConnection with custom connection
 	 * parameters.
 	 */
-	function DBConnection() {
+	function __construct() {
 		$this->connected = false;
-
+                error_log("in constructor");
 		if (func_num_args() == 0) {
 			$this->initDefaultDBConnection();
 		} else {
@@ -212,13 +212,15 @@ class DBConnection {
 	 * @param $setInstance DBConnection
 	 * @return DBConnection
 	 */
-	function &getInstance($setInstance = null) {
+        static function &getInstance($setInstance = null) {
 		$instance =& Registry::get('dbInstance', true, null);
 
 		if (isset($setInstance)) {
 			$instance = $setInstance;
 		} else if ($instance === null) {
 			$instance = new DBConnection();
+                        error_log("doing getInstance");
+                        error_log(print_r($instance,true));
 		}
 
 		return $instance;

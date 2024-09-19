@@ -522,7 +522,7 @@ class UserGroupDAO extends DAO {
 	 * @param $filename
 	 */
 	function installSettings($pressId, $filename) {
-		$xmlParser = new XMLParser();
+		$xmlParser = new PKPXMLParser();
 		$tree = $xmlParser->parse($filename);
 
 		if (!$tree) {

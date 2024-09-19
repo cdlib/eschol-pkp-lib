@@ -5,12 +5,12 @@
  */
 
 /**
- * @file classes/xml/XMLParser.inc.php
+ * @file classes/xml/PKPXMLParser.inc.php
  *
  * Copyright (c) 2000-2011 John Willinsky
  * Distributed under the GNU GPL v2. For full terms see the file docs/COPYING.
  *
- * @class XMLParser
+ * @class PKPXMLParser
  * @ingroup xml
  *
  * @brief Generic class for parsing an XML document into a data structure.
@@ -25,7 +25,7 @@ define('XML_PARSER_TARGET_ENCODING', Config::getVar('i18n', 'client_charset'));
 
 import('lib.pkp.classes.xml.XMLParserDOMHandler');
 
-class XMLParser {
+class PKPXMLParser {
 
 	/** @var int original magic_quotes_runtime setting */
 	var $magicQuotes;
@@ -40,7 +40,7 @@ class XMLParser {
 	 * Constructor.
 	 * Initialize parser and set parser options.
 	 */
-	function XMLParser() {
+	function PKPXMLParser() {
 		// magic_quotes_runtime must be disabled for XML parsing
 		$this->magicQuotes = get_magic_quotes_runtime();
 		if ($this->magicQuotes) set_magic_quotes_runtime(0);
@@ -292,7 +292,7 @@ class XMLParser {
 }
 
 /**
- * Interface for handler class used by XMLParser.
+ * Interface for handler class used by PKPXMLParser.
  * All XML parser handler classes must implement these methods.
  */
 class XMLParserHandler {

@@ -8,9 +8,9 @@
  *
  * @class XMLParserDOMHandler
  * @ingroup xml
- * @see XMLParser
+ * @see PKPXMLParser
  *
- * @brief Default handler for XMLParser returning a simple DOM-style object.
+ * @brief Default handler for PKPXMLParser returning a simple DOM-style object.
  * This handler parses an XML document into a tree structure of XMLNode objects.
  *
  */
