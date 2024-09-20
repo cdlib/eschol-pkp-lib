@@ -41,8 +41,8 @@ class PKPReviewAssignment extends DataObject {
 	/**
 	 * Constructor.
 	 */
-	function PKPReviewAssignment() {
-		parent::DataObject();
+	function __construct() {
+		parent::__construct();
 	}
 
 	//

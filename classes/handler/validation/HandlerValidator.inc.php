@@ -30,7 +30,7 @@ class HandlerValidator {
 	 * @param $handler Handler the associated form
 	 * @param $message string the error message for validation failures (i18n key)
 	 */
-	function HandlerValidator(&$handler, $redirectToLogin = false, $message = null, $additionalArgs = array()) {
+	function __construct(&$handler, $redirectToLogin = false, $message = null, $additionalArgs = array()) {
 		// All handler validators are deprecated and
 		// only exist for backwards compatibility.
 		// FIXME: Switch warning message on when handler validator re-factoring is complete:

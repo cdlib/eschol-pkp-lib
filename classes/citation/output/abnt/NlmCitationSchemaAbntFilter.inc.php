@@ -25,14 +25,14 @@ class NlmCitationSchemaAbntFilter extends NlmCitationSchemaCitationOutputFormatF
 	 * Constructor
 	 * @param $request PKPRequest
 	 */
-	function NlmCitationSchemaAbntFilter() {
+	function __construct() {
 		$this->setDisplayName('ABNT Citation Output');
 		// FIXME: Implement conference proceedings support for ABNT.
 		$this->setSupportedPublicationTypes(array(
 			NLM_PUBLICATION_TYPE_BOOK, NLM_PUBLICATION_TYPE_JOURNAL
 		));
 
-		parent::NlmCitationSchemaCitationOutputFormatFilter();
+		parent::__construct();
 	}
 
 

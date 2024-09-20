@@ -24,8 +24,8 @@ class PluginHelpMappingFile extends HelpMappingFile {
 	/**
 	 * Constructor
 	 */
-	function PluginHelpMappingFile(&$plugin) {
-		parent::HelpMappingFile($plugin->getHelpMappingFilename());
+	function __construct(&$plugin) {
+		parent::__construct($plugin->getHelpMappingFilename());
 		$this->plugin =& $plugin;
 	}
 

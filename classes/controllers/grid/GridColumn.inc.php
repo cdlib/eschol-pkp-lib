@@ -42,7 +42,7 @@ class GridColumn {
 	/**
 	 * Constructor
 	 */
-	function GridColumn($id = '', $title = null, $titleTranslated = null,
+	function __construct($id = '', $title = null, $titleTranslated = null,
 		$template = 'controllers/grid/gridCell.tpl', $cellProvider = null, $flags = array()) {
 		$this->_id = $id;
 		$this->_title = $title;

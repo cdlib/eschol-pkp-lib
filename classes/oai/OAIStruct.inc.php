@@ -46,7 +46,7 @@ class OAIConfig {
 	/**
 	 * Constructor.
 	 */
-	function OAIConfig($baseUrl, $repositoryId) {
+	function __construct($baseUrl, $repositoryId) {
 		$this->baseUrl = $baseUrl;
 		$this->repositoryId = $repositoryId;
 
@@ -99,7 +99,7 @@ class OAIResumptionToken {
 	/**
 	 * Constructor.
 	 */
-	function OAIResumptionToken($id, $offset, $params, $expire) {
+	function __construct($id, $offset, $params, $expire) {
 		$this->id = $id;
 		$this->offset = $offset;
 		$this->params = $params;
@@ -126,7 +126,7 @@ class OAIMetadataFormat {
 	/**
 	 * Constructor.
 	 */
-	function OAIMetadataFormat($prefix, $schema, $namespace) {
+	function __construct($prefix, $schema, $namespace) {
 		$this->prefix = $prefix;
 		$this->schema = $schema;
 		$this->namespace = $namespace;
@@ -177,7 +177,7 @@ class OAISet {
 	/**
 	 * Constructor.
 	 */
-	function OAISet($spec, $name, $description) {
+	function __construct($spec, $name, $description) {
 		$this->spec = $spec;
 		$this->name = $name;
 		$this->description = $description;
@@ -198,7 +198,7 @@ class OAIIdentifier {
 	/** @var $sets array sets this record belongs to */
 	var $sets;
 
-	function OAIIdentifier() {
+	function __construct() {
 	}
 }
 
@@ -210,8 +210,8 @@ class OAIIdentifier {
 class OAIRecord extends OAIIdentifier {
 	var $data;
 
-	function OAIRecord() {
-		parent::OAIIdentifier();
+	function __construct() {
+		parent::__construct();
 		$this->data = array();
 	}
 

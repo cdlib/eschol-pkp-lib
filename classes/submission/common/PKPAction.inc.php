@@ -21,7 +21,7 @@ class PKPAction {
 	/**
 	 * Constructor.
 	 */
-	function PKPAction() {
+	function __construct() {
 
 	}
 

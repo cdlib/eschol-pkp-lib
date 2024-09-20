@@ -23,8 +23,8 @@ class CategoryGridHandler extends GridHandler {
 	/**
 	 * Constructor.
 	 */
-	function CategoryGridHandler() {
-		parent::GridHandler();
+	function __construct() {
+		parent::__construct();
 	}
 
 

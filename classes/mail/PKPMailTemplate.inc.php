@@ -56,8 +56,8 @@ class PKPMailTemplate extends Mail {
 	 * @param $enableAttachments boolean optional Whether or not to enable article attachments in the template
 	 * @param $includeSignature boolean optional
 	 */
-	function PKPMailTemplate($emailKey = null, $locale = null, $enableAttachments = null, $includeSignature = true) {
-		parent::Mail();
+	function __construct($emailKey = null, $locale = null, $enableAttachments = null, $includeSignature = true) {
+		parent::__construct();
 		$this->emailKey = isset($emailKey) ? $emailKey : null;
 
 		// Use current user's locale if none specified

@@ -20,10 +20,10 @@ class DateStringNormalizerFilter extends Filter {
 	/**
 	 * Constructor
 	 */
-	function DateStringNormalizerFilter() {
+	function __construct() {
 		$this->setDisplayName('Date String Normalizer');
 
-		parent::Filter();
+		parent::__construct();
 	}
 
 	//

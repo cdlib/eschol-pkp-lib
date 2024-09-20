@@ -51,8 +51,8 @@ class ListbuilderHandler extends GridHandler {
 	/**
 	 * Constructor.
 	 */
-	function ListbuilderHandler() {
-		parent::GridHandler();
+	function __construct() {
+		parent::__construct();
 	}
 
 	/**

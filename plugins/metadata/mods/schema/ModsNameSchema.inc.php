@@ -39,7 +39,7 @@ class ModsNameSchema extends MetadataSchema {
 	 */
 	function ModsNameSchema() {
 		// Configure the meta-data schema.
-		parent::MetadataSchema(
+		parent::__construct(
 			'mods-3.4-name',
 			'mods34',
 			array(ASSOC_TYPE_AUTHOR, ASSOC_TYPE_EDITOR)

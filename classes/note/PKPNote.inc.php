@@ -19,8 +19,8 @@ class PKPNote extends DataObject {
 	/**
 	 * Constructor.
 	 */
-	function PKPNote() {
-		parent::DataObject();
+	function __construct() {
+		parent::__construct();
 	}
 
 	/**

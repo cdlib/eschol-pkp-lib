@@ -18,7 +18,7 @@ class LookupFilterGridHandler extends FilterGridHandler {
 	/**
 	 * Constructor
 	 */
-	function LookupFilterGridHandler() {
+	function __construct() {
 		parent::FilterGridHandler();
 	}
 

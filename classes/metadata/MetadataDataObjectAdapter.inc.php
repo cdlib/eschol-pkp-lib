@@ -47,7 +47,7 @@ class MetadataDataObjectAdapter extends Filter {
 	 * @param $dataObjectName string a fully qualified class name
 	 * @param $assocType integer
 	 */
-	function MetadataDataObjectAdapter($metadataSchemaName, $dataObjectName, $assocType) {
+	function __construct($metadataSchemaName, $dataObjectName, $assocType) {
 		assert(is_string($metadataSchemaName) && is_string($dataObjectName)
 				&& is_integer($assocType));
 
@@ -56,7 +56,7 @@ class MetadataDataObjectAdapter extends Filter {
 		$this->_metadataSchemaName = $metadataSchemaName;
 		$this->_dataObjectName = $dataObjectName;
 		$this->_assocType = $assocType;
-		parent::Filter();
+		parent::__construct();
 	}
 
 	//

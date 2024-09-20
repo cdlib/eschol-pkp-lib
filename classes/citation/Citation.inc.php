@@ -46,8 +46,8 @@ class Citation extends DataObject {
 	 * Constructor.
 	 * @param $rawCitation string an unparsed citation string
 	 */
-	function Citation($rawCitation = null) {
-		parent::DataObject();
+	function __construct($rawCitation = null) {
+		parent::__construct();
 
 		// Add NLM meta-data adapter.
 		// FIXME: This will later be done via plugin/user-configurable settings,

@@ -22,9 +22,9 @@ class NlmCitationSchemaCitationAdapter extends MetadataDataObjectAdapter {
 	/**
 	 * Constructor
 	 */
-	function NlmCitationSchemaCitationAdapter() {
+	function __construct() {
 		// Configure the adapter
-		parent::MetadataDataObjectAdapter('lib.pkp.classes.metadata.nlm.NlmCitationSchema', 'lib.pkp.classes.citation.Citation', ASSOC_TYPE_CITATION);
+		parent::__construct('lib.pkp.classes.metadata.nlm.NlmCitationSchema', 'lib.pkp.classes.citation.Citation', ASSOC_TYPE_CITATION);
 	}
 
 	//

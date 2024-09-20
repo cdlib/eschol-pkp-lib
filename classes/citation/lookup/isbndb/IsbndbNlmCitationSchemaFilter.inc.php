@@ -26,7 +26,7 @@ class IsbndbNlmCitationSchemaFilter extends NlmCitationSchemaFilter {
 	 * Constructor
 	 * @param $apiKey string
 	 */
-	function IsbndbNlmCitationSchemaFilter($apiKey = null) {
+	function __construct($apiKey = null) {
 		if (!is_null($apiKey)) $this->setData('apiKey', $apiKey);
 
 		// Instantiate the settings of this filter
@@ -35,7 +35,7 @@ class IsbndbNlmCitationSchemaFilter extends NlmCitationSchemaFilter {
 				'metadata.filters.isbndb.settings.apiKey.validationMessage');
 		$this->addSetting($apiKeySetting);
 
-		parent::NlmCitationSchemaFilter(null, array(NLM_PUBLICATION_TYPE_BOOK));
+		parent::__construct(null, array(NLM_PUBLICATION_TYPE_BOOK));
 	}
 
 	//

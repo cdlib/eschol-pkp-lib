@@ -24,7 +24,7 @@ class PKPProfiler {
 	/**
 	 * Constructor.
 	 */
-	function PKPProfiler() {
+	function __construct() {
 		$this->profiler = new PhpQuickProfiler(PhpQuickProfiler::getMicroTime());
 	}
 
@@ -54,7 +54,7 @@ class PKPDBProfiler {
 	/**
 	 * Constructor.
 	 */
-	function PKPDBProfiler() {
+	function __construct() {
 		$dbconn =& DBConnection::getInstance();
 
 		$this->queryCount = $dbconn->getNumQueries();

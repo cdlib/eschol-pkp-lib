@@ -26,8 +26,8 @@ class LoggedInWithValidUserGroupPolicy extends AuthorizationPolicy {
 	 *
 	 * @param $request PKPRequest
 	 */
-	function LoggedInWithValidUserGroupPolicy(&$request) {
-		parent::AuthorizationPolicy('user.authorization.userGroupRequired');
+	function __construct(&$request) {
+		parent::__construct('user.authorization.userGroupRequired');
 		$this->_request =& $request;
 	}
 

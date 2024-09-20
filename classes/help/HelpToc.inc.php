@@ -28,8 +28,8 @@ class HelpToc extends DataObject {
 	/**
 	 * Constructor.
 	 */
-	function HelpToc() {
-		parent::DataObject();
+	function __construct() {
+		parent::__construct();
 		$this->topics = array();
 		$this->breadcrumbs = array();
 	}

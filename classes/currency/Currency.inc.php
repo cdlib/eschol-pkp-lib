@@ -22,8 +22,8 @@ class Currency extends DataObject {
 	/**
 	 * Constructor
 	 */
-	function Currency() {
-		parent::DataObject();
+	function __construct() {
+		parent::__construct();
 	}
 
 	//

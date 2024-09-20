@@ -320,7 +320,7 @@
 	/**
 	 * Constructor
 	 */
-	function ADOConnection()			
+	function __construct()			
 	{
 		die('Virtual Class -- cannot instantiate');
 	}
@@ -361,7 +361,7 @@
 	function outp($msg,$newline=true)
 	{
 	global $ADODB_FLUSH,$ADODB_OUTP;
-	
+
 		if (defined('ADODB_OUTP')) {
 			$fn = ADODB_OUTP;
 			$fn($msg,$newline);
@@ -371,13 +371,13 @@
 			$fn($msg,$newline);
 			return;
 		}
-		
+
 		if ($newline) $msg .= "<br>\n";
-		
+
 		if (isset($_SERVER['HTTP_USER_AGENT']) || !$newline) echo $msg;
 		else echo strip_tags($msg);
-	
-		
+
+
 		if (!empty($ADODB_FLUSH) && ob_get_length() !== false) flush(); //  do not flush if output buffering enabled - useless - thx to Jesse Mullan 
 		
 	}
@@ -815,27 +815,27 @@
 				foreach($inputarr as $arr) {
 					$sql = ''; $i = 0;
 					//Use each() instead of foreach to reduce memory usage -mikefedyk
-					while(list(, $v) = each($arr)) {
-						$sql .= $sqlarr[$i];
-						// from Ron Baldwin <ron.baldwin#sourceprose.com>
-						// Only quote string types	
-						$typ = gettype($v);
-						if ($typ == 'string')
-							//New memory copy of input created here -mikefedyk
-							$sql .= $this->qstr($v);
-						else if ($typ == 'double')
-							$sql .= str_replace(',','.',$v); // locales fix so 1.1 does not get converted to 1,1
-						else if ($typ == 'boolean')
-							$sql .= $v ? $this->true : $this->false;
-						else if ($typ == 'object') {
-							if (method_exists($v, '__toString')) $sql .= $this->qstr($v->__toString());
-							else $sql .= $this->qstr((string) $v);
-						} else if ($v === null)
-							$sql .= 'NULL';
-						else
-							$sql .= $v;
-						$i += 1;
-					}
+					foreach ($arr as $v) {
+         $sql .= $sqlarr[$i];
+         // from Ron Baldwin <ron.baldwin#sourceprose.com>
+         // Only quote string types
+         $typ = gettype($v);
+         if ($typ == 'string')
+   							//New memory copy of input created here -mikefedyk
+   							$sql .= $this->qstr($v);
+   						else if ($typ == 'double')
+   							$sql .= str_replace(',','.',$v); // locales fix so 1.1 does not get converted to 1,1
+   						else if ($typ == 'boolean')
+   							$sql .= $v ? $this->true : $this->false;
+   						else if ($typ == 'object') {
+   							if (method_exists($v, '__toString')) $sql .= $this->qstr($v->__toString());
+   							else $sql .= $this->qstr((string) $v);
+   						} else if ($v === null)
+   							$sql .= 'NULL';
+   						else
+   							$sql .= $v;
+         $i += 1;
+     }
 					if (isset($sqlarr[$i])) {
 						$sql .= $sqlarr[$i];
 						if ($i+1 != sizeof($sqlarr)) ADOConnection::outp( "Input Array does not match ?: ".htmlspecialchars($sql));
@@ -2675,7 +2675,7 @@ http://www.stanford.edu/dept/itss/docs/oracle/10g/server.101/b10759/statements_1
 	 * @param queryID  	this is the queryID returned by ADOConnection->_query()
 	 *
 	 */
-	function ADORecordSet($queryID) 
+	function __construct($queryID) 
 	{
 		$this->_queryID = $queryID;
 	}
@@ -3624,7 +3624,7 @@ http://www.stanford.edu/dept/itss/docs/oracle/10g/server.101/b10759/statements_1
 		 * Constructor
 		 *
 		 */
-		function ADORecordSet_array($fakeid=1)
+		function __construct($fakeid=1)
 		{
 		global $ADODB_FETCH_MODE,$ADODB_COMPAT_FETCH;
 		

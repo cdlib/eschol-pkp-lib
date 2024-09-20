@@ -24,8 +24,8 @@ class OpenUrlDissertationSchema extends OpenUrlBaseSchema {
 	/**
 	 * Constructor
 	 */
-	function OpenUrlDissertationSchema() {
-		parent::OpenUrlBaseSchema('openurl-1.0-dissertation');
+	function __construct() {
+		parent::__construct('openurl-1.0-dissertation');
 
 		// Add meta-data properties that only appear in the OpenURL dissertation standard
 		$this->addProperty('co'); // Country of publication (plain text)

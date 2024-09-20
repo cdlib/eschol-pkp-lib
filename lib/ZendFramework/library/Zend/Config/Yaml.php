@@ -283,33 +283,27 @@ class Zend_Config_Yaml extends Zend_Config
     {
         $config   = array();
         $inIndent = false;
-        while (list($n, $line) = each($lines)) {
+        foreach ($lines as $n => $line) {
             $lineno = $n + 1;
-            
             $line = rtrim(preg_replace("/#.*$/", "", $line));
             if (strlen($line) == 0) {
                 continue;
             }
-
             $indent = strspn($line, " ");
-
             // line without the spaces
             $line = trim($line);
             if (strlen($line) == 0) {
                 continue;
             }
-
             if ($indent < $currentIndent) {
                 // this level is done
                 prev($lines);
                 return $config;
             }
-
             if (!$inIndent) {
                 $currentIndent = $indent;
                 $inIndent      = true;
             }
-
             if (preg_match("/(\w+):\s*(.*)/", $line, $m)) {
                 // key: value
                 if (strlen($m[2])) {

@@ -32,8 +32,8 @@ class PKPNotification extends DataObject {
 	/**
 	 * Constructor.
 	 */
-	function PKPNotification() {
-		parent::DataObject();
+	function __construct() {
+		parent::__construct();
 	}
 
 	/**

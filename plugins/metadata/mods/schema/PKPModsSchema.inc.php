@@ -53,7 +53,7 @@ class PKPModsSchema extends MetadataSchema {
 		// Configure the meta-data schema.
 		$assocTypes = array(ASSOC_TYPE_CITATION);
 		if (!is_null($appSpecificAssocType)) array_push($assocTypes, $appSpecificAssocType);
-		parent::MetadataSchema(
+		parent::__construct(
 			'mods-3.4',
 			'mods34',
 			$assocTypes

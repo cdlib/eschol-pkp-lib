@@ -21,8 +21,8 @@ class HelpTopicSection extends DataObject {
 	/**
 	 * Constructor.
 	 */
-	function HelpTopicSection() {
-		parent::DataObject();
+	function __construct() {
+		parent::__construct();
 	}
 
 	//

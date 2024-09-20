@@ -52,7 +52,7 @@ class PKPTemplateManager extends Smarty {
 	 * Initialize template engine and assign basic template variables.
 	 * @param $request PKPRequest FIXME: is optional for backwards compatibility only - make mandatory
 	 */
-	function PKPTemplateManager($request = null) {
+	function __construct($request = null) {
 		// FIXME: for backwards compatibility only - remove
 		if (!isset($request)) {
 			if (Config::getVar('debug', 'deprecation_warnings')) trigger_error('Deprecated function call.');
@@ -64,7 +64,7 @@ class PKPTemplateManager extends Smarty {
 		$router =& $request->getRouter();
 		assert(is_a($router, 'PKPRouter'));
 
-		parent::Smarty();
+		parent::__construct();
 
 		// Set up Smarty configuration
 		$baseDir = Core::getBaseDir();

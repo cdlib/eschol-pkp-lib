@@ -27,7 +27,7 @@ class TypeDescriptionFactory {
 	 * NB: Should not be called directly!
 	 * Always use getInstance().
 	 **/
-	function TypeDescriptionFactory() {
+	function __construct() {
 	}
 
 	//

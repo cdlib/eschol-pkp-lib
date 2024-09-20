@@ -23,8 +23,8 @@ class ReviewForm extends DataObject {
 	/**
 	 * Constructor.
 	 */
-	function ReviewForm() {
-		parent::DataObject();
+	function __construct() {
+		parent::__construct();
 	}
 
 	/**

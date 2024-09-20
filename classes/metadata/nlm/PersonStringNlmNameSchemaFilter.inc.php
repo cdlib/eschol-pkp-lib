@@ -29,14 +29,14 @@ class PersonStringNlmNameSchemaFilter extends NlmPersonStringFilter {
 	/**
 	 * Constructor
 	 */
-	function PersonStringNlmNameSchemaFilter($assocType, $filterMode = PERSON_STRING_FILTER_SINGLE, $filterTitle = false, $filterDegrees = false) {
+	function __construct($assocType, $filterMode = PERSON_STRING_FILTER_SINGLE, $filterTitle = false, $filterDegrees = false) {
 		$this->setDisplayName('String to NLM Name Schema conversion');
 
 		assert(in_array($assocType, array(ASSOC_TYPE_AUTHOR, ASSOC_TYPE_EDITOR)));
 		$this->_assocType = $assocType;
 		$this->_filterTitle = $filterTitle;
 		$this->_filterDegrees = $filterDegrees;
-		parent::NlmPersonStringFilter($filterMode);
+		parent::__construct($filterMode);
 	}
 
 	//

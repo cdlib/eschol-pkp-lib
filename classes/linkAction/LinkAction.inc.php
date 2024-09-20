@@ -77,7 +77,7 @@ class LinkAction {
 	 * @param $actOn string (optional) a specification of the target object
 	 *  to act on
 	 */
-	function LinkAction($id, $mode, $type, $url, $title = null, $titleLocalized = null, $image = null, $confirmMessageLocalized = null, $actOn = null) {
+	function __construct($id, $mode, $type, $url, $title = null, $titleLocalized = null, $image = null, $confirmMessageLocalized = null, $actOn = null) {
 		$this->_id = $id;
 		$this->_mode = $mode;
 		$this->_type = $type;

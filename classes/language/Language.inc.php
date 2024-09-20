@@ -22,8 +22,8 @@ class Language extends DataObject {
 	/**
 	 * Constructor
 	 */
-	function Language() {
-		parent::DataObject();
+	function __construct() {
+		parent::__construct();
 	}
 
 	//

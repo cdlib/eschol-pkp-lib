@@ -37,7 +37,7 @@ class DAO {
 	 * Constructor.
 	 * Initialize the database connection.
 	 */
-	function DAO($dataSource = null, $callHooks = true) {
+	function __construct($dataSource = null, $callHooks = true) {
 		if ($callHooks === true && checkPhpVersion('4.3.0')) {
 			// Call hooks based on the object name. Results
 			// in hook calls named e.g. "sessiondao::_Constructor"

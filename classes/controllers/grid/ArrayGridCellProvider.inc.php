@@ -18,8 +18,8 @@ class ArrayGridCellProvider extends GridCellProvider {
 	/**
 	 * Constructor
 	 */
-	function ArrayGridCellProvider() {
-		parent::GridCellProvider();
+	function __construct() {
+		parent::__construct();
 	}
 
 	//

@@ -20,8 +20,8 @@
 
 class PKPUser extends DataObject {
 
-	function PKPUser() {
-		parent::DataObject();
+	function __construct() {
+		parent::__construct();
 	}
 
 	//

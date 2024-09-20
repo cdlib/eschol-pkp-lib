@@ -22,8 +22,8 @@ class PKPTemporaryFileManager extends FileManager {
 	/**
 	 * Constructor
 	 */
-	function PKPTemporaryFileManager() {
-		parent::FileManager();
+	function __construct() {
+		parent::__construct();
 		$this->filesDir = Config::getVar('files', 'files_dir') . '/temp/';
 
 		$this->_performPeriodicCleanup();

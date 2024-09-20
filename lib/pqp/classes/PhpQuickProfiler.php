@@ -19,7 +19,7 @@ class PhpQuickProfiler {
 
 	var $output = array();
 
-	function PhpQuickProfiler($startTime) {
+	function __construct($startTime) {
 		$this->startTime = $startTime;
 		require_once('Console.php');
 		Console::init();
@@ -128,7 +128,7 @@ class PhpQuickProfiler {
 	     HELPER FUNCTIONS TO FORMAT DATA
 	-------------------------------------------*/
 
-	function getMicroTime() {
+	static function getMicroTime() {
 		$time = microtime();
 		$time = explode(' ', $time);
 		return $time[1] + $time[0];

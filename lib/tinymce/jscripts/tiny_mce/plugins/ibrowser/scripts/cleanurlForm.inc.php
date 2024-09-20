@@ -2,7 +2,7 @@
 	// urlForm.inc.php
 	// Matt Crider, Aug. 7 2008
 	// Displays form for user to enter image url
-	
+
 ?>
 <!-- do not delete this line - it's need for proper working of the resizeDialogToContent() function -->
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -25,7 +25,7 @@
     </div>
 	<form name="source" action="#">
 		<input type="hidden" name="wraped" id="wraped"/>
-		
+
 		<input name="htmlSource" id="htmlSource" type="text" size="50" maxlength="80" style="margin-left:20px;">
 		<br /><br />
 		<div class="mceActionPanel">

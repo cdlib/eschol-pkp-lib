@@ -27,7 +27,7 @@ class WebServiceRequest {
 	/**
 	 * Constructor
 	 */
-	function WebServiceRequest($url, $params = array(), $method = 'GET') {
+	function __construct($url, $params = array(), $method = 'GET') {
 		$this->_url = $url;
 		$this->_params = $params;
 		$this->_method = $method;

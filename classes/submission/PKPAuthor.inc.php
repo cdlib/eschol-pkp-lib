@@ -20,8 +20,8 @@ class PKPAuthor extends DataObject {
 	/**
 	 * Constructor.
 	 */
-	function PKPAuthor() {
-		parent::DataObject();
+	function __construct() {
+		parent::__construct();
 	}
 
 	/**

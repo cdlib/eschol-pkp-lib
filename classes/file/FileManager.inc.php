@@ -34,7 +34,7 @@ class FileManager {
 	/**
 	 * Constructor
 	 */
-	function FileManager() {
+	function __construct() {
 	}
 
 	/**

@@ -27,8 +27,8 @@ class OpenUrlCrosswalkFilter extends CrosswalkFilter {
 	/**
 	 * Constructor
 	 */
-	function OpenUrlCrosswalkFilter() {
-		parent::CrosswalkFilter();
+	function __construct() {
+		parent::__construct();
 	}
 
 	//

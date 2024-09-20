@@ -23,7 +23,7 @@ class HelpMappingFile {
 	/**
 	 * Constructor.
 	 */
-	function HelpMappingFile($filename) {
+	function __construct($filename) {
 		$this->filename = $filename;
 	}
 

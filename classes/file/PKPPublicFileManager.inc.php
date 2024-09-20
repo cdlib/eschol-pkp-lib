@@ -22,8 +22,8 @@ class PKPPublicFileManager extends FileManager {
 	/**
 	 * Constructor
 	 */
-	function PKPPublicFileManager() {
-		parent::FileManager();
+	function __construct() {
+		parent::__construct();
 	}
 
 	/**

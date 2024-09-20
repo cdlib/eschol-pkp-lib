@@ -41,7 +41,7 @@ class PKPHelp {
 	/**
 	 * Constructor.
 	 */
-	function PKPHelp() {
+	function __construct() {
 		$this->mappingFiles = array();
 	}
 

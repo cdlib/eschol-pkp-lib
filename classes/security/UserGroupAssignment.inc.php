@@ -22,8 +22,8 @@ class UserGroupAssignment extends DataObject {
 	/**
 	 * Constructor.
 	 */
-	function UserGroupAssignment() {
-		parent::DataObject();
+	function __construct() {
+		parent::__construct();
 	}
 
 	//

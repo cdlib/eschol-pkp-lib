@@ -25,10 +25,10 @@ class NlmCitationSchemaMlaFilter extends NlmCitationSchemaCitationOutputFormatFi
 	 * Constructor
 	 * @param $request PKPRequest
 	 */
-	function NlmCitationSchemaMlaFilter() {
+	function __construct() {
 		$this->setDisplayName('MLA Citation Output');
 
-		parent::NlmCitationSchemaCitationOutputFormatFilter();
+		parent::__construct();
 	}
 
 

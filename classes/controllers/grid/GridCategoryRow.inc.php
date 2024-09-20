@@ -18,8 +18,8 @@ class GridCategoryRow extends GridRow {
 	/**
 	 * Constructor.
 	 */
-	function GridCategoryRow() {
-		parent::GridRow();
+	function __construct() {
+		parent::__construct();
 	}
 
 	//

@@ -23,7 +23,7 @@ class AccessKeyManager {
 	 * Constructor.
 	 * Create a manager for access keys.
 	 */
-	function AccessKeyManager() {
+	function __construct() {
 		$this->accessKeyDao =& DAORegistry::getDAO('AccessKeyDAO');
 		$this->_performPeriodicCleanup();
 	}

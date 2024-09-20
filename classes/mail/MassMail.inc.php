@@ -24,7 +24,7 @@ class MassMail extends MailTemplate {
 	/**
 	 * Constructor
 	 */
-	function MassMail($emailKey = null, $locale = null, $enableAttachments = null) {
+	function __construct($emailKey = null, $locale = null, $enableAttachments = null) {
 		parent::MailTemplate($emailKey, $locale, $enableAttachments);
 		$this->callback = null;
 		$this->frequency = 10;

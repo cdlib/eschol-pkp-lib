@@ -32,7 +32,7 @@ class UpgradeTool extends CommandLineTool {
 	 * @param $argv array command-line arguments
 	 */
 	function upgradeTool($argv = array()) {
-		parent::CommandLineTool($argv);
+		parent::__construct($argv);
 
 		if (!isset($this->argv[0]) || !in_array($this->argv[0], array('check', 'latest', 'upgrade', 'patch', 'download'))) {
 			$this->usage();

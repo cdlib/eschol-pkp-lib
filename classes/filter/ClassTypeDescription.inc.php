@@ -28,8 +28,8 @@ class ClassTypeDescription extends TypeDescription {
 	 *
 	 * @param $typeName string a fully qualified class name.
 	 */
-	function ClassTypeDescription($typeName) {
-		parent::TypeDescription($typeName);
+	function __construct($typeName) {
+		parent::__construct($typeName);
 	}
 
 	//

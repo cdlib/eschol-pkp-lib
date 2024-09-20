@@ -16,7 +16,7 @@
 class Console {
 
 	// constructor to initialize log counts
-	function init() {
+	static function init() {
 		$GLOBALS['debugger_logs']['logCount'] = 0;
 		$GLOBALS['debugger_logs']['memoryCount'] = 0;
 		$GLOBALS['debugger_logs']['errorCount'] = 0;

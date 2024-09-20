@@ -24,8 +24,8 @@ class CrosswalkFilter extends Filter {
 	 * @param $fromSchema string fully qualified class name of supported input meta-data schema
 	 * @param $toSchema string fully qualified class name of supported output meta-data schema
 	 */
-	function CrosswalkFilter() {
-		parent::Filter();
+	function __construct() {
+		parent::__construct();
 	}
 
 	//

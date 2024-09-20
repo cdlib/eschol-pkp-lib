@@ -19,8 +19,8 @@ class TemplateBasedFilter extends Filter {
 	/**
 	 * Constructor
 	 */
-	function TemplateBasedFilter() {
-		parent::Filter();
+	function __construct() {
+		parent::__construct();
 	}
 
 

@@ -25,10 +25,10 @@ class FreeciteRawCitationNlmCitationSchemaFilter extends NlmCitationSchemaFilter
 	/*
 	 * Constructor
 	 */
-	function FreeciteRawCitationNlmCitationSchemaFilter() {
+	function __construct() {
 		$this->setDisplayName('FreeCite');
 
-		parent::NlmCitationSchemaFilter(NLM_CITATION_FILTER_PARSE);
+		parent::__construct(NLM_CITATION_FILTER_PARSE);
 	}
 
 	//

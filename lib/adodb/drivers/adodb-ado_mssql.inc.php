@@ -38,7 +38,7 @@ class  ADODB_ado_mssql extends ADODB_ado {
 	
 	//var $_inTransaction = 1; // always open recordsets, so no transaction problems.
 	
-	function ADODB_ado_mssql()
+	function __construct()
 	{
 	        $this->ADODB_ado();
 	}
@@ -128,7 +128,7 @@ class  ADODB_ado_mssql extends ADODB_ado {
 		$num = $this->GetOne("select id from $seq");
 		$this->Execute('COMMIT TRANSACTION adodbseq'); 
 		return $num;
-		
+
 		// in old implementation, pre 1.90, we returned GUID...
 		//return $this->GetOne("SELECT CONVERT(varchar(255), NEWID()) AS 'Char'");
 	}
@@ -139,7 +139,7 @@ class  ADODB_ado_mssql extends ADODB_ado {
 	
 	var $databaseType = 'ado_mssql';
 	
-	function ADORecordSet_ado_mssql($id,$mode=false)
+	function __construct($id,$mode=false)
 	{
 	        return $this->ADORecordSet_ado($id,$mode);
 	}

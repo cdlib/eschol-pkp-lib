@@ -54,8 +54,8 @@ class GridHandler extends PKPHandler {
 	/**
 	 * Constructor.
 	 */
-	function GridHandler() {
-		parent::PKPHandler();
+	function __construct() {
+		parent::__construct();
 	}
 
 	//

@@ -31,7 +31,7 @@ class SearchFileParser {
 	 * Constructor.
 	 * @param $filePath string
 	 */
-	function SearchFileParser($filePath) {
+	function __construct($filePath) {
 		$this->filePath = $filePath;
 	}
 

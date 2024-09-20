@@ -15,7 +15,7 @@
 import('classes.handler.Handler');
 
 class PKPAnnouncementHandler extends Handler {
-	function PKPAnnouncementHandler() {
+	function __construct() {
 		parent::Handler();
 	}
 

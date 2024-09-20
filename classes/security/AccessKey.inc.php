@@ -22,8 +22,8 @@
 
 class AccessKey extends DataObject {
 
-	function AccessKey() {
-		parent::DataObject();
+	function __construct() {
+		parent::__construct();
 	}
 
 	//

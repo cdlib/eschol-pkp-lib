@@ -179,7 +179,7 @@ $ADODB_INCLUDED_CSV = 1;
 								$err = "Timeout 0";
 								return $false;
 							} // switch
-							
+
 						} // if check flush cache
 					}// (timeout>0)
 					$ttl = $meta[1];

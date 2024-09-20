@@ -5,13 +5,13 @@ V4.90 8 June 2006  (c) 2000-2006 John Lim (jlim#natsoft.com.my). All rights rese
   Whenever there is any discrepancy between the two licenses, 
   the BSD license will take precedence.
   Set tabs to 4.
-  
+
   Currently unsupported: MetaDatabases, MetaTables and MetaColumns, and also inputarr in Execute.
   Native types have been converted to MetaTypes.
   Transactions not supported yet.
-  
+
   Limitation of url length. For IIS, see MaxClientRequestBuffer registry value.
-  
+
 	  http://support.microsoft.com/default.aspx?scid=kb;en-us;260694
 */ 
 
@@ -22,7 +22,7 @@ if (! defined("_ADODB_CSV_LAYER")) {
  define("_ADODB_CSV_LAYER", 1 );
 
 include_once(ADODB_DIR.'/adodb-csvlib.inc.php');
- 
+
 class ADODB_csv extends ADOConnection {
 	var $databaseType = 'csv';
 	var $databaseProvider = 'csv';
@@ -35,27 +35,27 @@ class ADODB_csv extends ADOConnection {
 	var $replaceQuote = "''"; // string to use to replace quotes
 	var $hasTransactions = false;
 	var $_errorNo = false;
-	
-	function ADODB_csv() 
+
+	function __construct() 
 	{		
 	}
-	
+
 	function _insertid()
 	{
 			return $this->_insertid;
 	}
-	
+
 	function _affectedrows()
 	{
 			return $this->_affectedrows;
 	}
-  
+
   	function &MetaDatabases()
 	{
 		return false;
 	}
 
-	
+
 	// returns true or false
 	function _connect($argHostname, $argUsername, $argPassword, $argDatabasename)
 	{
@@ -63,7 +63,7 @@ class ADODB_csv extends ADOConnection {
 		$this->_url = $argHostname;
 		return true;	
 	}
-	
+
 	// returns true or false
 	function _pconnect($argHostname, $argUsername, $argPassword, $argDatabasename)
 	{
@@ -71,24 +71,24 @@ class ADODB_csv extends ADOConnection {
 		$this->_url = $argHostname;
 		return true;
 	}
-	
+
  	function &MetaColumns($table) 
 	{
 		return false;
 	}
-		
-		
+
+
 	// parameters use PostgreSQL convention, not MySQL
 	function &SelectLimit($sql,$nrows=-1,$offset=-1)
 	{
 	global $ADODB_FETCH_MODE;
-	
+
 		$url = $this->_url.'?sql='.urlencode($sql)."&nrows=$nrows&fetch=".
 			(($this->fetchMode !== false)?$this->fetchMode : $ADODB_FETCH_MODE).
 			"&offset=$offset";
 		$err = false;
 		$rs = csv2rs($url,$err,false);
-		
+
 		if ($this->debug) print "$url<br><i>$err</i><br>";
 
 		$at = strpos($err,'::::');
@@ -103,21 +103,21 @@ class ADODB_csv extends ADOConnection {
 			if ($fn = $this->raiseErrorFn) {
 				$fn($this->databaseType,'EXECUTE',$this->ErrorNo(),$this->ErrorMsg(),$sql,'');
 			}
-			
+
 		if (is_object($rs)) {	
-		
+
 			$rs->databaseType='csv';		
 			$rs->fetchMode = ($this->fetchMode !== false) ?  $this->fetchMode : $ADODB_FETCH_MODE;
 			$rs->connection = &$this;
 		}
 		return $rs;
 	}
-	
+
 	// returns queryID or false
 	function &_Execute($sql,$inputarr=false)
 	{
 	global $ADODB_FETCH_MODE;
-	
+
 		if (!$this->_bindInputArray && $inputarr) {
 			$sqlarr = explode('?',$sql);
 			$sql = '';
@@ -132,19 +132,19 @@ class ADODB_csv extends ADOConnection {
 				else
 					$sql .= $v;
 				$i += 1;
-	
+
 			}
 			$sql .= $sqlarr[$i];
 			if ($i+1 != sizeof($sqlarr))	
 				print "Input Array does not match ?: ".htmlspecialchars($sql);
 			$inputarr = false;
 		}
-		
+
 		$url =  $this->_url.'?sql='.urlencode($sql)."&fetch=".
 			(($this->fetchMode !== false)?$this->fetchMode : $ADODB_FETCH_MODE);
 		$err = false;
-		
-		
+
+
 		$rs = csv2rs($url,$err,false);
 		if ($this->debug) print urldecode($url)."<br><i>$err</i><br>";
 		$at = strpos($err,'::::');
@@ -155,14 +155,14 @@ class ADODB_csv extends ADOConnection {
 			$this->_errorMsg = substr($err,$at+4,1024);
 			$this->_errorNo = -9999;
 		}
-		
+
 		if ($this->_errorNo) 
 			if ($fn = $this->raiseErrorFn) {
 				$fn($this->databaseType,'EXECUTE',$this->ErrorNo(),$this->ErrorMsg(),$sql,$inputarr);
 			}
 		if (is_object($rs)) {
 			$rs->fetchMode = ($this->fetchMode !== false) ?  $this->fetchMode : $ADODB_FETCH_MODE;
-			
+
 			$this->_affectedrows = $rs->affectedrows;
 			$this->_insertid = $rs->insertid;
 			$rs->databaseType='csv';
@@ -176,13 +176,13 @@ class ADODB_csv extends ADOConnection {
 	{
 			return $this->_errorMsg;
 	}
-	
+
 	/*	Returns: the last error number from previous database operation	*/	
 	function ErrorNo() 
 	{
 		return $this->_errorNo;
 	}
-	
+
 	// returns true or false
 	function _close()
 	{
@@ -191,11 +191,11 @@ class ADODB_csv extends ADOConnection {
 } // class
 
 class ADORecordset_csv extends ADORecordset {
-	function ADORecordset_csv($id,$mode=false)
+	function __construct($id,$mode=false)
 	{
 		$this->ADORecordset($id,$mode);
 	}
-	
+
 	function _close()
 	{
 		return true;
@@ -203,5 +203,5 @@ class ADORecordset_csv extends ADORecordset {
 }
 
 } // define
-	
+
 ?>

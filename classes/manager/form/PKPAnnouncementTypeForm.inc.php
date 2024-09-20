@@ -25,10 +25,10 @@ class PKPAnnouncementTypeForm extends Form {
 	 * Constructor
 	 * @param typeId int leave as default for new announcement type
 	 */
-	function PKPAnnouncementTypeForm($typeId = null) {
+	function __construct($typeId = null) {
 		$this->typeId = isset($typeId) ? (int) $typeId : null;
 
-		parent::Form('manager/announcement/announcementTypeForm.tpl');
+		parent::__construct('manager/announcement/announcementTypeForm.tpl');
 
 		// Type name is provided
 		$this->addCheck(new FormValidatorLocale($this, 'name', 'required', 'manager.announcementTypes.form.typeNameRequired'));

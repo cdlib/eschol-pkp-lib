@@ -39,8 +39,8 @@ class PKPFilterGridHandler extends GridHandler {
 	/**
 	 * Constructor
 	 */
-	function PKPFilterGridHandler() {
-		parent::GridHandler();
+	function __construct() {
+		parent::__construct();
 	}
 
 	//

@@ -28,7 +28,7 @@ class HelpHandler extends Handler {
 	/**
 	 * Constructor
 	 */
-	function HelpHandler() {
+	function __construct() {
 		parent::Handler();
 	}
 

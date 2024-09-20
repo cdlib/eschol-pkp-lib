@@ -24,10 +24,10 @@ class PKPAnnouncementForm extends Form {
 	 * Constructor
 	 * @param announcementId int leave as default for new announcement
 	 */
-	function PKPAnnouncementForm($announcementId = null) {
+	function __construct($announcementId = null) {
 
 		$this->announcementId = isset($announcementId) ? (int) $announcementId : null;
-		parent::Form('manager/announcement/announcementForm.tpl');
+		parent::__construct('manager/announcement/announcementForm.tpl');
 
 		// Title is provided
 		$this->addCheck(new FormValidatorLocale($this, 'title', 'required', 'manager.announcements.form.titleRequired'));

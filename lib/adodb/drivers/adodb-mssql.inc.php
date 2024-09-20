@@ -5,13 +5,13 @@ V4.90 8 June 2006  (c) 2000-2006 John Lim (jlim#natsoft.com.my). All rights rese
   Whenever there is any discrepancy between the two licenses, 
   the BSD license will take precedence. 
 Set tabs to 4 for best viewing.
-  
+
   Latest version is available at http://adodb.sourceforge.net
-  
+
   Native mssql driver. Requires mssql client. Works on Windows. 
   To configure for Unix, see 
    	http://phpbuilder.com/columns/alberto20000919.php3
-	
+
 */
 
 // security - hide paths
@@ -102,8 +102,8 @@ class ADODB_mssql extends ADOConnection {
 	var $identitySQL = 'select @@IDENTITY'; // 'select SCOPE_IDENTITY'; # for mssql 2000
 	var $uniqueOrderBy = true;
 	var $_bindInputArray = true;
-	
-	function ADODB_mssql() 
+
+	function __construct() 
 	{		
 		$this->_has_mssql_init = (strnatcmp(PHP_VERSION,'4.1.0')>=0);
 	}
@@ -111,7 +111,7 @@ class ADODB_mssql extends ADOConnection {
 	function ServerInfo()
 	{
 	global $ADODB_FETCH_MODE;
-	
+
 		$stmt = $this->PrepareSP('sp_server_info');
 		$val = 2;
 		if ($this->fetchMode === false) {
@@ -119,29 +119,29 @@ class ADODB_mssql extends ADOConnection {
 			$ADODB_FETCH_MODE = ADODB_FETCH_NUM;
 		} else 
 			$savem = $this->SetFetchMode(ADODB_FETCH_NUM);
-		
-		
+
+
 		$this->Parameter($stmt,$val,'attribute_id');
 		$row = $this->GetRow($stmt);
-		
+
 		//$row = $this->GetRow("execute sp_server_info 2");
-		
-		
+
+
 		if ($this->fetchMode === false) {
 			$ADODB_FETCH_MODE = $savem;
 		} else
 			$this->SetFetchMode($savem);
-		
+
 		$arr['description'] = $row[2];
 		$arr['version'] = ADOConnection::_findvers($arr['description']);
 		return $arr;
 	}
-	
+
 	function IfNull( $field, $ifNull ) 
 	{
 		return " ISNULL($field, $ifNull) "; // if MS SQL Server
 	}
-	
+
 	function _insertid()
 	{
 	// SCOPE_IDENTITY()
@@ -158,10 +158,10 @@ class ADODB_mssql extends ADOConnection {
 	}
 
 	var $_dropSeqSQL = "drop table %s";
-	
+
 	function CreateSequence($seq='adodbseq',$start=1)
 	{
-		
+
 		$this->Execute('BEGIN TRANSACTION adodbseq');
 		$start -= 1;
 		$this->Execute("create table $seq (id float(53))");
@@ -192,11 +192,11 @@ class ADODB_mssql extends ADOConnection {
 		$num = $this->GetOne("select id from $seq");
 		$this->Execute('COMMIT TRANSACTION adodbseq'); 
 		return $num;
-		
+
 		// in old implementation, pre 1.90, we returned GUID...
 		//return $this->GetOne("SELECT CONVERT(varchar(255), NEWID()) AS 'Char'");
 	}
-	
+
 
 	function &SelectLimit($sql,$nrows=-1,$offset=-1, $inputarr=false,$secs2cache=0)
 	{
@@ -206,17 +206,17 @@ class ADODB_mssql extends ADOConnection {
 			$rs =& $this->Execute($sql,$inputarr);
 		} else
 			$rs =& ADOConnection::SelectLimit($sql,$nrows,$offset,$inputarr,$secs2cache);
-	
+
 		return $rs;
 	}
-	
-	
+
+
 	// Format date column in sql string given an input format that understands Y M D
 	function SQLDate($fmt, $col=false)
 	{	
 		if (!$col) $col = $this->sysTimeStamp;
 		$s = '';
-		
+
 		$len = strlen($fmt);
 		for ($i=0; $i < $len; $i++) {
 			if ($s) $s .= '+';
@@ -243,11 +243,11 @@ class ADODB_mssql extends ADOConnection {
 			case 'h':
 				$s .= "substring(convert(char(14),$col,0),13,2)";
 				break;
-			
+
 			case 'H':
 				$s .= "replace(str(datepart(hh,$col),2),' ','0')";
 				break;
-				
+
 			case 'i':
 				$s .= "replace(str(datepart(mi,$col),2),' ','0')";
 				break;
@@ -258,7 +258,7 @@ class ADODB_mssql extends ADOConnection {
 			case 'A':
 				$s .= "substring(convert(char(19),$col,0),18,2)";
 				break;
-				
+
 			default:
 				if ($ch == '\\') {
 					$i++;
@@ -271,7 +271,7 @@ class ADODB_mssql extends ADOConnection {
 		return $s;
 	}
 
-	
+
 	function BeginTrans()
 	{
 		if ($this->transOff) return true; 
@@ -279,7 +279,7 @@ class ADODB_mssql extends ADOConnection {
 	   	$this->Execute('BEGIN TRAN');
 	   	return true;
 	}
-		
+
 	function CommitTrans($ok=true) 
 	{ 
 		if ($this->transOff) return true; 
@@ -295,7 +295,7 @@ class ADODB_mssql extends ADOConnection {
 		$this->Execute('ROLLBACK TRAN');
 		return true;
 	}
-	
+
 	function SetTransactionMode( $transaction_mode ) 
 	{
 		$this->_transmode  = $transaction_mode;
@@ -306,17 +306,17 @@ class ADODB_mssql extends ADOConnection {
 		if (!stristr($transaction_mode,'isolation')) $transaction_mode = 'ISOLATION LEVEL '.$transaction_mode;
 		$this->Execute("SET TRANSACTION ".$transaction_mode);
 	}
-	
+
 	/*
 		Usage:
-		
+
 		$this->BeginTrans();
 		$this->RowLock('table1,table2','table1.id=33 and table2.id=table1.id'); # lock row 33 for both tables
-		
+
 		# some operation on both tables table1 and table2
-		
+
 		$this->CommitTrans();
-		
+
 		See http://www.swynk.com/friends/achigrik/SQL70Locks.asp
 	*/
 	function RowLock($tables,$where,$flds='top 1 null as ignore') 
@@ -324,8 +324,8 @@ class ADODB_mssql extends ADOConnection {
 		if (!$this->transCnt) $this->BeginTrans();
 		return $this->GetOne("select $flds from $tables with (ROWLOCK,HOLDLOCK) where $where");
 	}
-	
-	
+
+
 	function &MetaIndexes($table,$primary=false)
 	{
 		$table = $this->qstr($table);
@@ -345,7 +345,7 @@ class ADODB_mssql extends ADOConnection {
         if ($this->fetchMode !== FALSE) {
         	$savem = $this->SetFetchMode(FALSE);
         }
-        
+
         $rs = $this->Execute($sql);
         if (isset($savem)) {
         	$this->SetFetchMode($savem);
@@ -359,21 +359,21 @@ class ADODB_mssql extends ADOConnection {
 		$indexes = array();
 		while ($row = $rs->FetchRow()) {
 			if (!$primary && $row[5]) continue;
-			
+
             $indexes[$row[0]]['unique'] = $row[6];
             $indexes[$row[0]]['columns'][] = $row[1];
     	}
         return $indexes;
 	}
-	
+
 	function MetaForeignKeys($table, $owner=false, $upper=false)
 	{
 	global $ADODB_FETCH_MODE;
-	
+
 		$save = $ADODB_FETCH_MODE;
 		$ADODB_FETCH_MODE = ADODB_FETCH_NUM;
 		$table = $this->qstr(strtoupper($table));
-		
+
 		$sql = 
 "select object_name(constid) as constraint_name,
 	col_name(fkeyid, fkey) as column_name,
@@ -382,20 +382,20 @@ class ADODB_mssql extends ADOConnection {
 from sysforeignkeys
 where upper(object_name(fkeyid)) = $table
 order by constraint_name, referenced_table_name, keyno";
-		
+
 		$constraints =& $this->GetArray($sql);
-		
+
 		$ADODB_FETCH_MODE = $save;
-		
+
 		$arr = false;
 		foreach($constraints as $constr) {
 			//print_r($constr);
 			$arr[$constr[0]][$constr[2]][] = $constr[1].'='.$constr[3]; 
 		}
 		if (!$arr) return false;
-		
+
 		$arr2 = false;
-		
+
 		foreach($arr as $k => $v) {
 			foreach($v as $a => $b) {
 				if ($upper) $a = strtoupper($a);
@@ -432,7 +432,7 @@ order by constraint_name, referenced_table_name, keyno";
 	function &MetaPrimaryKeys($table)
 	{
 	global $ADODB_FETCH_MODE;
-	
+
 		$schema = '';
 		$this->_findschema($table,$schema);
 		if (!$schema) $schema = $this->database;
@@ -442,18 +442,18 @@ order by constraint_name, referenced_table_name, keyno";
 		information_schema.table_constraints tc 
 		where tc.constraint_name = k.constraint_name and tc.constraint_type =
 		'PRIMARY KEY' and k.table_name = '$table' $schema order by ordinal_position ";
-		
+
 		$savem = $ADODB_FETCH_MODE;
 		$ADODB_FETCH_MODE = ADODB_FETCH_NUM;
 		$a = $this->GetCol($sql);
 		$ADODB_FETCH_MODE = $savem;
-		
+
 		if ($a && sizeof($a)>0) return $a;
 		$false = false;
 		return $false;	  
 	}
 
-	
+
 	function &MetaTables($ttype=false,$showSchema=false,$mask=false) 
 	{
 		if ($mask) {
@@ -462,13 +462,13 @@ order by constraint_name, referenced_table_name, keyno";
 			$this->metaTablesSQL .= " AND name like $mask";
 		}
 		$ret =& ADOConnection::MetaTables($ttype,$showSchema);
-		
+
 		if ($mask) {
 			$this->metaTablesSQL = $save;
 		}
 		return $ret;
 	}
- 
+
 	function SelectDB($dbName) 
 	{
 		$this->database = $dbName;
@@ -478,7 +478,7 @@ order by constraint_name, referenced_table_name, keyno";
 		}
 		else return false;	
 	}
-	
+
 	function ErrorMsg() 
 	{
 		if (empty($this->_errorMsg)){
@@ -486,7 +486,7 @@ order by constraint_name, referenced_table_name, keyno";
 		}
 		return $this->_errorMsg;
 	}
-	
+
 	function ErrorNo() 
 	{
 		if ($this->_logsql && $this->_errorCode !== false) return $this->_errorCode;
@@ -500,7 +500,7 @@ order by constraint_name, referenced_table_name, keyno";
 		if (is_array($arr)) return $arr[0];
 	   else return -1;
 	}
-	
+
 	// returns true or false
 	function _connect($argHostname, $argUsername, $argPassword, $argDatabasename)
 	{
@@ -510,15 +510,15 @@ order by constraint_name, referenced_table_name, keyno";
 		if ($argDatabasename) return $this->SelectDB($argDatabasename);
 		return true;	
 	}
-	
-	
+
+
 	// returns true or false
 	function _pconnect($argHostname, $argUsername, $argPassword, $argDatabasename)
 	{
 		if (!function_exists('mssql_pconnect')) return null;
 		$this->_connectionID = mssql_pconnect($argHostname,$argUsername,$argPassword);
 		if ($this->_connectionID === false) return false;
-		
+
 		// persistent connections can forget to rollback on crash, so we do it here.
 		if ($this->autoRollback) {
 			$cnt = $this->GetOne('select @@TRANCOUNT');
@@ -527,7 +527,7 @@ order by constraint_name, referenced_table_name, keyno";
 		if ($argDatabasename) return $this->SelectDB($argDatabasename);
 		return true;	
 	}
-	
+
 	function Prepare($sql)
 	{
 		$sqlarr = explode('?',$sql);
@@ -538,7 +538,7 @@ order by constraint_name, referenced_table_name, keyno";
 		} 
 		return array($sql,$this->qstr($sql2),$max);
 	}
-	
+
 	function PrepareSP($sql)
 	{
 		if (!$this->_has_mssql_init) {
@@ -549,7 +549,7 @@ order by constraint_name, referenced_table_name, keyno";
 		if (!$stmt)  return $sql;
 		return array($sql,$stmt);
 	}
-	
+
 	// returns concatenated string
     // MSSQL requires integers to be cast as strings
     // automatically cast every datatype to VARCHAR(255)
@@ -570,26 +570,26 @@ order by constraint_name, referenced_table_name, keyno";
             array_walk($arr, create_function('&$v', '$v = "CAST(" . $v . " AS VARCHAR(255))";'));
             $s = implode('+',$arr);
             if (sizeof($arr) > 0) return "$s";
-            
+
 			return '';
     }
-	
+
 	/* 
 	Usage:
 		$stmt = $db->PrepareSP('SP_RUNSOMETHING'); -- takes 2 params, @myid and @group
-		
+
 		# note that the parameter does not have @ in front!
 		$db->Parameter($stmt,$id,'myid');
 		$db->Parameter($stmt,$group,'group',false,64);
 		$db->Execute($stmt);
-		
+
 		@param $stmt Statement returned by Prepare() or PrepareSP().
 		@param $var PHP variable to bind to. Can set to null (for isNull support).
 		@param $name Name of stored procedure variable name to bind to.
 		@param [$isOutput] Indicates direction of parameter 0/false=IN  1=OUT  2= IN/OUT. This is ignored in oci8.
 		@param [$maxLen] Holds an maximum length of the variable.
 		@param [$type] The data type of $var. Legal values depend on driver.
-		
+
 		See mssql_bind documentation at php.net.
 	*/
 	function Parameter(&$stmt, &$var, $name, $isOutput=false, $maxLen=4000, $type=false)
@@ -600,7 +600,7 @@ order by constraint_name, referenced_table_name, keyno";
 		}
 
 		$isNull = is_null($var); // php 4.0.4 and above...
-			
+
 		if ($type === false) 
 			switch(gettype($var)) {
 			default:
@@ -609,7 +609,7 @@ order by constraint_name, referenced_table_name, keyno";
 			case 'integer': $type = SQLINT4; break;
 			case 'boolean': $type = SQLINT1; break; # SQLBIT not supported in 4.1.0
 			}
-		
+
 		if  ($this->debug) {
 			$prefix = ($isOutput) ? 'Out' : 'In';
 			$ztype = (empty($type)) ? 'false' : $type;
@@ -617,7 +617,7 @@ order by constraint_name, referenced_table_name, keyno";
 		}
 		/*
 			See http://phplens.com/lens/lensforum/msgs.php?id=7231
-			
+
 			RETVAL is HARD CODED into php_mssql extension:
 			The return value (a long integer value) is treated like a special OUTPUT parameter, 
 			called "RETVAL" (without the @). See the example at mssql_execute to 
@@ -627,13 +627,13 @@ order by constraint_name, referenced_table_name, keyno";
 		if ($name !== 'RETVAL') $name = '@'.$name;
 		return mssql_bind($stmt[1], $name, $var, $type, $isOutput, $isNull, $maxLen);
 	}
-	
+
 	/* 
 		Unfortunately, it appears that mssql cannot handle varbinary > 255 chars
 		So all your blobs must be of type "image".
-		
+
 		Remember to set in php.ini the following...
-		
+
 		; Valid range 0 - 2147483647. Default = 4096. 
 		mssql.textlimit = 0 ; zero to pass through 
 
@@ -642,7 +642,7 @@ order by constraint_name, referenced_table_name, keyno";
 	*/
 	function UpdateBlob($table,$column,$val,$where,$blobtype='BLOB')
 	{
-	
+
 		if (strtoupper($blobtype) == 'CLOB') {
 			$sql = "UPDATE $table SET $column='" . $val . "' WHERE $where";
 			return $this->Execute($sql) != false;
@@ -650,13 +650,13 @@ order by constraint_name, referenced_table_name, keyno";
 		$sql = "UPDATE $table SET $column=0x".bin2hex($val)." WHERE $where";
 		return $this->Execute($sql) != false;
 	}
-	
+
 	// returns query ID if successful, otherwise false
 	function _query($sql,$inputarr)
 	{
 		$this->_errorMsg = false;
 		if (is_array($inputarr)) {
-			
+
 			# bind input params with sp_executesql: 
 			# see http://www.quest-pipelines.com/newsletter-v3/0402_F.htm
 			# works only with sql server 7 and newer
@@ -672,7 +672,7 @@ order by constraint_name, referenced_table_name, keyno";
 				if (is_string($v)) {
 					$len = strlen($v);
 					if ($len == 0) $len = 1;
-					
+
 					if ($len > 4000 ) {
 						// NVARCHAR is max 4000 chars. Let's use NTEXT
 						$decl .= "@P$i NTEXT";
@@ -699,17 +699,17 @@ order by constraint_name, referenced_table_name, keyno";
 			$decl = $this->qstr($decl);
 			if ($this->debug) ADOConnection::outp("<font size=-1>sp_executesql N{$sql[1]},N$decl,$params</font>");
 			$rez = mssql_query("sp_executesql N{$sql[1]},N$decl,$params");
-			
+
 		} else if (is_array($sql)) {
 			# PrepareSP()
 			$rez = mssql_execute($sql[1]);
-			
+
 		} else {
 			$rez = mssql_query($sql,$this->_connectionID);
 		}
 		return $rez;
 	}
-	
+
 	// returns true or false
 	function _close()
 	{ 
@@ -718,19 +718,19 @@ order by constraint_name, referenced_table_name, keyno";
 		$this->_connectionID = false;
 		return $rez;
 	}
-	
+
 	// mssql uses a default date like Dec 30 2000 12:00AM
 	function UnixDate($v)
 	{
 		return ADORecordSet_array_mssql::UnixDate($v);
 	}
-	
+
 	function UnixTimeStamp($v)
 	{
 		return ADORecordSet_array_mssql::UnixTimeStamp($v);
 	}	
 }
-	
+
 /*--------------------------------------------------------------------------------------
 	 Class Name: Recordset
 --------------------------------------------------------------------------------------*/
@@ -741,8 +741,8 @@ class ADORecordset_mssql extends ADORecordSet {
 	var $canSeek = true;
 	var $hasFetchAssoc; // see http://phplens.com/lens/lensforum/msgs.php?id=6083
 	// _mths works only in non-localised system
-	
-	function ADORecordset_mssql($id,$mode=false)
+
+	function __construct($id,$mode=false)
 	{
 		// freedts check...
 		$this->hasFetchAssoc = function_exists('mssql_fetch_assoc');
@@ -755,15 +755,15 @@ class ADORecordset_mssql extends ADORecordSet {
 		$this->fetchMode = $mode;
 		return $this->ADORecordSet($id,$mode);
 	}
-	
-	
+
+
 	function _initrs()
 	{
 	GLOBAL $ADODB_COUNTRECS;	
 		$this->_numOfRows = ($ADODB_COUNTRECS)? @mssql_num_rows($this->_queryID):-1;
 		$this->_numOfFields = @mssql_num_fields($this->_queryID);
 	}
-	
+
 
 	//Contributed by "Sven Axelsson" <sven.axelsson@bokochwebb.se>
 	// get next resultset - requires PHP 4.0.5 or later
@@ -788,10 +788,10 @@ class ADORecordset_mssql extends ADORecordSet {
 				$this->bind[strtoupper($o->name)] = $i;
 			}
 		}
-		
+
 		 return $this->fields[$this->bind[strtoupper($colname)]];
 	}
-	
+
 	/*	Returns: an object containing field information. 
 		Get column information in the Recordset object. fetchField() can be used in order to obtain information about
 		fields in a certain query result. If the field offset isn't specified, the next field that wasn't yet retrieved by
@@ -809,7 +809,7 @@ class ADORecordset_mssql extends ADORecordSet {
 		if (empty($f)) return $false;
 		return $f;
 	}
-	
+
 	function _seek($row) 
 	{
 		return @mssql_data_seek($this->_queryID, $row);
@@ -819,9 +819,9 @@ class ADORecordset_mssql extends ADORecordSet {
 	function MoveNext() 
 	{
 		if ($this->EOF) return false;
-		
+
 		$this->_currentRow++;
-		
+
 		if ($this->fetchMode & ADODB_FETCH_ASSOC) {
 			if ($this->fetchMode & ADODB_FETCH_NUM) {
 				//ADODB_FETCH_BOTH mode
@@ -843,7 +843,7 @@ class ADORecordset_mssql extends ADORecordSet {
 						$this->fields = false;
 				}
 			}
-			
+
 			if (is_array($this->fields)) {
 				if (ADODB_ASSOC_CASE == 0) {
 					foreach($this->fields as $k=>$v) {
@@ -860,11 +860,11 @@ class ADORecordset_mssql extends ADORecordSet {
 		}
 		if ($this->fields) return true;
 		$this->EOF = true;
-		
+
 		return false;
 	}
 
-	
+
 	// INSERT UPDATE DELETE returns false even if no error occurs in 4.0.4
 	// also the date format has been changed from YYYY-mm-dd to dd MMM YYYY in 4.0.4. Idiot!
 	function _fetch($ignore_fields=false) 
@@ -888,7 +888,7 @@ class ADORecordset_mssql extends ADORecordSet {
 					}
 				}
 			}
-			
+
 			if (!$this->fields) {
 			} else if (ADODB_ASSOC_CASE == 0) {
 				foreach($this->fields as $k=>$v) {
@@ -904,7 +904,7 @@ class ADORecordset_mssql extends ADORecordSet {
 		}
 		return $this->fields;
 	}
-	
+
 	/*	close() only needs to be called if you are worried about using too much memory while your script
 		is running. All associated result memory for the specified result identifier will automatically be freed.	*/
 
@@ -919,36 +919,36 @@ class ADORecordset_mssql extends ADORecordSet {
 	{
 		return ADORecordSet_array_mssql::UnixDate($v);
 	}
-	
+
 	function UnixTimeStamp($v)
 	{
 		return ADORecordSet_array_mssql::UnixTimeStamp($v);
 	}
-	
+
 }
 
 
 class ADORecordSet_array_mssql extends ADORecordSet_array {
-	function ADORecordSet_array_mssql($id=-1,$mode=false) 
+	function __construct($id=-1,$mode=false) 
 	{
 		$this->ADORecordSet_array($id,$mode);
 	}
-	
+
 		// mssql uses a default date like Dec 30 2000 12:00AM
 	function UnixDate($v)
 	{
-	
+
 		if (is_numeric(substr($v,0,1)) && ADODB_PHPVER >= 0x4200) return parent::UnixDate($v);
-		
+
 	global $ADODB_mssql_mths,$ADODB_mssql_date_order;
-	
+
 		//Dec 30 2000 12:00AM 
 		if ($ADODB_mssql_date_order == 'dmy') {
 			if (!preg_match( "|^([0-9]{1,2})[-/\. ]+([A-Za-z]{3})[-/\. ]+([0-9]{4})|" ,$v, $rr)) {
 				return parent::UnixDate($v);
 			}
 			if ($rr[3] <= TIMESTAMP_FIRST_YEAR) return 0;
-			
+
 			$theday = $rr[1];
 			$themth =  substr(strtoupper($rr[2]),0,3);
 		} else {
@@ -956,7 +956,7 @@ class ADORecordSet_array_mssql extends ADORecordSet_array {
 				return parent::UnixDate($v);
 			}
 			if ($rr[3] <= TIMESTAMP_FIRST_YEAR) return 0;
-			
+
 			$theday = $rr[2];
 			$themth = substr(strtoupper($rr[1]),0,3);
 		}
@@ -965,34 +965,34 @@ class ADORecordSet_array_mssql extends ADORecordSet_array {
 		// h-m-s-MM-DD-YY
 		return  mktime(0,0,0,$themth,$theday,$rr[3]);
 	}
-	
+
 	function UnixTimeStamp($v)
 	{
-	
+
 		if (is_numeric(substr($v,0,1)) && ADODB_PHPVER >= 0x4200) return parent::UnixTimeStamp($v);
-		
+
 	global $ADODB_mssql_mths,$ADODB_mssql_date_order;
-	
+
 		//Dec 30 2000 12:00AM
 		 if ($ADODB_mssql_date_order == 'dmy') {
 			 if (!preg_match( "|^([0-9]{1,2})[-/\. ]+([A-Za-z]{3})[-/\. ]+([0-9]{4}) +([0-9]{1,2}):([0-9]{1,2}) *([apAP]{0,1})|"
 			,$v, $rr)) return parent::UnixTimeStamp($v);
 			if ($rr[3] <= TIMESTAMP_FIRST_YEAR) return 0;
-		
+
 			$theday = $rr[1];
 			$themth =  substr(strtoupper($rr[2]),0,3);
 		} else {
 			if (!preg_match( "|^([A-Za-z]{3})[-/\. ]+([0-9]{1,2})[-/\. ]+([0-9]{4}) +([0-9]{1,2}):([0-9]{1,2}) *([apAP]{0,1})|"
 			,$v, $rr)) return parent::UnixTimeStamp($v);
 			if ($rr[3] <= TIMESTAMP_FIRST_YEAR) return 0;
-		
+
 			$theday = $rr[2];
 			$themth = substr(strtoupper($rr[1]),0,3);
 		}
-		
+
 		$themth = $ADODB_mssql_mths[$themth];
 		if ($themth <= 0) return false;
-		
+
 		switch (strtoupper($rr[6])) {
 		case 'P':
 			if ($rr[4]<12) $rr[4] += 12;

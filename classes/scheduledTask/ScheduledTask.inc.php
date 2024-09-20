@@ -20,7 +20,7 @@ class ScheduledTask {
 	/** @var array task arguments */
 	var $args;
 
-	function ScheduledTask($args = array()) {
+	function __construct($args = array()) {
 		$this->args = $args;
 	}
 

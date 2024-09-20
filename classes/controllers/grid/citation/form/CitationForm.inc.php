@@ -43,8 +43,8 @@ class CitationForm extends Form {
 	 * @param $citation Citation
 	 * @param $assocObject DataObject
 	 */
-	function CitationForm(&$request, &$citation, &$assocObject) {
-		parent::Form();
+	function __construct(&$request, &$citation, &$assocObject) {
+		parent::__construct();
 		assert(is_a($citation, 'Citation'));
 		assert(is_a($assocObject, 'DataObject'));
 

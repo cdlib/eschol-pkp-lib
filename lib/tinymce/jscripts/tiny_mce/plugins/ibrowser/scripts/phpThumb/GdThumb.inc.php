@@ -94,14 +94,14 @@ class GdThumb extends ThumbBase
 	public function __construct ($fileName, $options = array(), $isDataStream = false)
 	{
 		parent::__construct($fileName, $isDataStream);
-		
+
 		$this->determineFormat();
-		
+
 		if ($this->isDataStream === false)
 		{
 			$this->verifyFormatCompatiblity();
 		}
-		
+
 		switch ($this->format)
 		{
 			case 'GIF':
@@ -117,15 +117,15 @@ class GdThumb extends ThumbBase
 				$this->oldImage = imagecreatefromstring($this->fileName);
 				break;
 		}
-	
+
 		$this->currentDimensions = array
 		(
 			'width' 	=> imagesx($this->oldImage),
 			'height'	=> imagesy($this->oldImage)
 		);
-		
+
 		$this->setOptions($options);
-		
+
 		// TODO: Port gatherImageMeta to a separate function that can be called to extract exif data
 	}
 	

@@ -23,7 +23,7 @@ class CaptchaManager {
 	 * Constructor.
 	 * Create a manager for handling temporary file uploads.
 	 */
-	function CaptchaManager() {
+	function __construct() {
 		$this->_performPeriodicCleanup();
 	}
 

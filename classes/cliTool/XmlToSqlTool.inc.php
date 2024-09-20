@@ -37,7 +37,7 @@ class XmlToSqlTool extends CommandLineTool {
 	 * 	If specified, the first argument should be the file to parse
 	 */
 	function XmlToSqlTool($argv = array()) {
-		parent::CommandLineTool($argv);
+		parent::__construct($argv);
 
 		if (isset($this->argv[0]) && in_array($this->argv[0], array('-schema', '-data'))) {
 			$this->type = substr($this->argv[0], 1);

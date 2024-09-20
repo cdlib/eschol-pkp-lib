@@ -24,7 +24,7 @@ class EditableFile {
 		return file_exists($this->filename);
 	}
 
-	function EditableFile($filename) {
+	function __construct($filename) {
 		import('lib.pkp.classes.file.FileWrapper');
 		$this->filename = $filename;
 		$wrapper =& FileWrapper::wrapper($this->filename);

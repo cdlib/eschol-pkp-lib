@@ -58,22 +58,22 @@ function utf8_byte_position() {
         $safety_valve = 50;
         
         do {
-            
+
             if ( ($c - $prev[1]) == 0 ) {
                 // Hack: gone past end of string
                 $error = 0;
                 $i = strlen($str);
                 break;
             }
-            
+
             $j = $i + (int)(($offset-$c) * ($i - $prev[0]) / ($c - $prev[1]));
-            
+
             // correct to utf8 character boundary
             $j = utf8_locate_next_chr($str, $j);
-            
+
             // save the index, offset for use next iteration
             $prev = array($i,$c);
-            
+
             if ($j > $i) {
                 // determine new character offset
                 $c += strlen(utf8_decode(substr($str,$i,$j-$i)));
@@ -81,12 +81,12 @@ function utf8_byte_position() {
                 // ditto
                 $c -= strlen(utf8_decode(substr($str,$j,$i-$j)));
             }
-            
+
             $error = abs($c-$offset);
-            
+
             // ready for next time around
             $i = $j;
-        
+
         // from 7 it is faster to iterate over the string
         } while ( ($error > 7) && --$safety_valve) ;
         

@@ -22,10 +22,10 @@ class GenericFilter extends Filter {
 	 * @param $displayName string
 	 * @param $transformation array
 	 */
-	function GenericFilter($displayName = null, $transformation = null) {
+	function __construct($displayName = null, $transformation = null) {
 		$this->setDisplayName($displayName);
 		if (!is_null($transformation)) $this->_genericTransformationType =& $transformation;
-		parent::Filter();
+		parent::__construct();
 	}
 
 	//

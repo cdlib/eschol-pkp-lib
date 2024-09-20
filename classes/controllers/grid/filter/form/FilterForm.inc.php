@@ -39,8 +39,8 @@ class FilterForm extends Form {
 	 * @param $title string
 	 * @param $description string
 	 */
-	function FilterForm(&$filter, $title, $description, &$inputSample, &$outputSample) {
-		parent::Form('controllers/grid/filter/form/filterForm.tpl');
+	function __construct(&$filter, $title, $description, &$inputSample, &$outputSample) {
+		parent::__construct('controllers/grid/filter/form/filterForm.tpl');
 
 		// Initialize internal state.
 		$this->_filter =& $filter;

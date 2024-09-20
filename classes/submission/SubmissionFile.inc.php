@@ -20,8 +20,8 @@ class SubmissionFile extends DataObject {
 	/**
 	 * Constructor.
 	 */
-	function SubmissionFile() {
-		parent::DataObject();
+	function __construct() {
+		parent::__construct();
 	}
 
 

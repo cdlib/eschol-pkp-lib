@@ -44,7 +44,7 @@ class NlmCitationSchemaFilter extends Filter {
 	 *  or a lookup filter
 	 * @param $supportedPublicationTypes array
 	 */
-	function NlmCitationSchemaFilter($filterType = null, $supportedPublicationTypes = array()) {
+	function __construct($filterType = null, $supportedPublicationTypes = array()) {
 		// All NLM citation filters require XSL functionality
 		// that is only present in PHP5.
 		$this->setData('phpVersionMin', '5.0.0');
@@ -78,7 +78,7 @@ class NlmCitationSchemaFilter extends Filter {
 				'metadata.filters.settings.isOptional.validationMessage');
 		$this->addSetting($isOptional);
 
-		parent::Filter();
+		parent::__construct();
 	}
 
 	//

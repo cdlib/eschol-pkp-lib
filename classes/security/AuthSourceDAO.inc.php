@@ -24,8 +24,8 @@ class AuthSourceDAO extends DAO {
 	/**
 	 * Constructor.
 	 */
-	function AuthSourceDAO() {
-		parent::DAO();
+	function __construct() {
+		parent::__construct();
 		$this->plugins =& PluginRegistry::loadCategory(AUTH_PLUGIN_CATEGORY);
 	}
 

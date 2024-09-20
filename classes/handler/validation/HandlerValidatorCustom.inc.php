@@ -26,8 +26,8 @@ class HandlerValidatorCustom extends HandlerValidator {
 	 * @param $message string the error message for validation failures (i18n key)
 	 */
 
-	function HandlerValidatorCustom(&$handler, $redirectLogin = false, $message = null, $urlArgs = array(), $userFunction, $userFunctionArgs = array(), $complementReturn = false) {
-		parent::HandlerValidator($handler, $redirectLogin, $message, $urlArgs);
+	function __construct(&$handler, $redirectLogin = false, $message = null, $urlArgs = array(), $userFunction, $userFunctionArgs = array(), $complementReturn = false) {
+		parent::__construct($handler, $redirectLogin, $message, $urlArgs);
 		$this->userFunction = $userFunction;
 		$this->userFunctionArgs = $userFunctionArgs;
 		$this->complementReturn = $complementReturn;

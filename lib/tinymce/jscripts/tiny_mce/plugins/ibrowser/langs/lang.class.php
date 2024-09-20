@@ -53,7 +53,7 @@ class PLUG_Lang {
 	var $default_lang_data;
 
 	// constructor
-	function PLUG_Lang( $lang = '' ) {
+	function __construct( $lang = '' ) {
 		$langs = array('cs','da','de','en','es','fr','it','nl','pl','pt_br','sk');
 		if(!in_array($lang, $langs)) die('invalid language set');
 		global $cfg;

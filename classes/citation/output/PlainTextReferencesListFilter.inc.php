@@ -28,7 +28,7 @@ class PlainTextReferencesListFilter extends TemplateBasedReferencesListFilter {
 	 * @param $citationOutputFilterName string
 	 * @param $ordering integer one of the REFERENCES_LIST_ORDERING_* constants
 	 */
-	function PlainTextReferencesListFilter($displayName = null, $citationOutputFilterName = null, $ordering = null) {
+	function __construct($displayName = null, $citationOutputFilterName = null, $ordering = null) {
 		import('lib.pkp.classes.filter.FilterSetting');
 		$this->addSetting(new FilterSetting('citationOutputFilterName', null, null));
 		import('lib.pkp.classes.filter.SetFilterSetting');
@@ -40,7 +40,7 @@ class PlainTextReferencesListFilter extends TemplateBasedReferencesListFilter {
 		if (!is_null($citationOutputFilterName)) $this->setData('citationOutputFilterName', $citationOutputFilterName);
 		if (!is_null($ordering)) $this->setData('ordering', $ordering);
 
-		parent::TemplateBasedReferencesListFilter();
+		parent::__construct();
 	}
 
 

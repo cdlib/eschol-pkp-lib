@@ -29,9 +29,9 @@ class NlmNameSchema extends MetadataSchema {
 	/**
 	 * Constructor
 	 */
-	function NlmNameSchema() {
+	function __construct() {
 		// Configure the meta-data schema.
-		parent::MetadataSchema(
+		parent::__construct(
 			'nlm-3.0-name',
 			'nlm30',
 			array(ASSOC_TYPE_AUTHOR, ASSOC_TYPE_EDITOR)

@@ -42,7 +42,7 @@ class SMTPMailer {
 	/**
 	 * Constructor.
 	 */
-	function SMTPMailer() {
+	function __construct() {
 		$this->server = Config::getVar('email', 'smtp_server');
 		$this->port = Config::getVar('email', 'smtp_port');
 		$this->auth = Config::getVar('email', 'smtp_auth');

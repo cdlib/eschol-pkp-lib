@@ -18,8 +18,8 @@ class FilterGridCellProvider extends GridCellProvider {
 	/**
 	 * Constructor
 	 */
-	function FilterGridCellProvider() {
-		parent::GridCellProvider();
+	function __construct() {
+		parent::__construct();
 	}
 
 	//

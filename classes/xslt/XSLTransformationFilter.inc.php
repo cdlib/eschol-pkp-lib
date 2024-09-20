@@ -26,14 +26,14 @@ class XSLTransformationFilter extends GenericFilter {
 	 * be an XML format. See the XMLTypeDescription class for
 	 * more details how to enable XML validation.
 	 */
-	function XSLTransformationFilter($displayName = 'XSL Transformation', $transformation = null) {
+	function __construct($displayName = 'XSL Transformation', $transformation = null) {
 		// Instantiate the settings of this filter
 		import('lib.pkp.classes.filter.FilterSetting');
 		$this->addSetting(new FilterSetting('xsl', null, null));
 		$this->addSetting(new FilterSetting('xslType', null, null));
 		$this->addSetting(new FilterSetting('resultType', null, null, FORM_VALIDATOR_OPTIONAL_VALUE));
 
-		parent::GenericFilter($displayName, $transformation);
+		parent::__construct($displayName, $transformation);
 	}
 
 

@@ -48,7 +48,7 @@ class GenericCache {
 	/**
 	 * Instantiate a cache.
 	 */
-	function GenericCache($context, $cacheId, $fallback) {
+	function __construct($context, $cacheId, $fallback) {
 		$this->context = $context;
 		$this->cacheId = $cacheId;
 		$this->fallback = $fallback;

@@ -20,10 +20,10 @@ class IsbndbNlmCitationSchemaIsbnFilter extends IsbndbNlmCitationSchemaFilter {
 	 * Constructor
 	 * @param $apiKey string
 	 */
-	function IsbndbNlmCitationSchemaIsbnFilter($apiKey = null) {
+	function __construct($apiKey = null) {
 		$this->setDisplayName('ISBNdb (from NLM)');
 
-		parent::IsbndbNlmCitationSchemaFilter($apiKey);
+		parent::__construct($apiKey);
 	}
 
 	//

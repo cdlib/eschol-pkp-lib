@@ -30,10 +30,10 @@ class NlmCitationDemultiplexerFilter extends Filter {
 	/**
 	 * Constructor
 	 */
-	function NlmCitationDemultiplexerFilter() {
+	function __construct() {
 		$this->setDisplayName('Join several NLM Citation descriptions into a single citation');
 
-		parent::Filter();
+		parent::__construct();
 	}
 
 	//

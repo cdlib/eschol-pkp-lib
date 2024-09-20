@@ -22,7 +22,7 @@ class CompatibilityTestFilter extends GenericFilter {
 	 * @param $transformation array
 	 */
 	function CompatibilityTestFilter($displayName = null, $transformation = null) {
-		parent::GenericFilter($displayName, $transformation);
+		parent::__construct($displayName, $transformation);
 	}
 
 	//

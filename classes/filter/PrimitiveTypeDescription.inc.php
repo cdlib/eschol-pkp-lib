@@ -24,8 +24,8 @@ class PrimitiveTypeDescription extends TypeDescription {
 	 * @param $typeName string Allowed primitive types are
 	 *  'integer', 'string', 'float' and 'boolean'.
 	 */
-	function PrimitiveTypeDescription($typeName) {
-		parent::TypeDescription($typeName);
+	function __construct($typeName) {
+		parent::__construct($typeName);
 	}
 
 

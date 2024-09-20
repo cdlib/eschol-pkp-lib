@@ -21,8 +21,8 @@ class ValidatorDate extends ValidatorRegExp {
 	/**
 	 * Constructor.
 	 */
-	function ValidatorDate($dateFormat = DATE_FORMAT_ISO) {
-		parent::ValidatorRegExp(ValidatorDate::getRegexp($dateFormat));
+	function __construct($dateFormat = DATE_FORMAT_ISO) {
+		parent::__construct(ValidatorDate::getRegexp($dateFormat));
 	}
 
 

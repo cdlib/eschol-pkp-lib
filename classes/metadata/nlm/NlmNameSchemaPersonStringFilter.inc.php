@@ -29,7 +29,7 @@ class NlmNameSchemaPersonStringFilter extends NlmPersonStringFilter {
 	 * @param $template string default: DRIVER guidelines 2.0 name template
 	 *  Possible template variables are %surname%, %suffix%, %prefix%, %initials%, %firstname%
 	 */
-	function NlmNameSchemaPersonStringFilter($filterMode = PERSON_STRING_FILTER_SINGLE, $template = '%surname%%suffix%,%initials% (%firstname%)%prefix%', $delimiter = '; ') {
+	function __construct($filterMode = PERSON_STRING_FILTER_SINGLE, $template = '%surname%%suffix%,%initials% (%firstname%)%prefix%', $delimiter = '; ') {
 		$this->setDisplayName('NLM Name Schema to string conversion');
 
 		assert(!empty($template) && is_string($template));
@@ -37,7 +37,7 @@ class NlmNameSchemaPersonStringFilter extends NlmPersonStringFilter {
 		assert(is_string($delimiter));
 		$this->_delimiter = $delimiter;
 
-		parent::NlmPersonStringFilter($filterMode);
+		parent::__construct($filterMode);
 	}
 
 	//

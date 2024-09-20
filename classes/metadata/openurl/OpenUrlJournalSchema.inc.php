@@ -26,8 +26,8 @@ class OpenUrlJournalSchema extends OpenUrlJournalBookBaseSchema {
 	/**
 	 * Constructor
 	 */
-	function OpenUrlJournalSchema() {
-		parent::OpenUrlJournalBookBaseSchema('openurl-1.0-journal');
+	function __construct() {
+		parent::__construct('openurl-1.0-journal');
 
 		// Add meta-data properties that only appear in the OpenURL journal standard
 		$this->addProperty('jtitle');

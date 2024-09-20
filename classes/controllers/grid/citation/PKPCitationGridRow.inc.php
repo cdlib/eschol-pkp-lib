@@ -24,8 +24,8 @@ class PKPCitationGridRow extends GridRow {
 	/**
 	 * Constructor
 	 */
-	function PKPCitationGridRow() {
-		parent::GridRow();
+	function __construct() {
+		parent::__construct();
 	}
 
 

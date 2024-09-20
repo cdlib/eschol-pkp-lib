@@ -24,8 +24,8 @@ class APCCache extends GenericCache {
 	/**
 	 * Instantiate a cache.
 	 */
-	function APCCache($context, $cacheId, $fallback) {
-		parent::GenericCache($context, $cacheId, $fallback);
+	function __construct($context, $cacheId, $fallback) {
+		parent::__construct($context, $cacheId, $fallback);
 	}
 
 	/**

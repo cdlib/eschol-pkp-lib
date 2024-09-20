@@ -28,7 +28,7 @@ class CrossrefNlmCitationSchemaFilter extends NlmCitationSchemaFilter {
 	 * Constructor
 	 * @param $email string
 	 */
-	function CrossrefNlmCitationSchemaFilter($email = null) {
+	function __construct($email = null) {
 		$this->setDisplayName('CrossRef');
 		if (!is_null($email)) $this->setEmail($email);
 
@@ -38,7 +38,7 @@ class CrossrefNlmCitationSchemaFilter extends NlmCitationSchemaFilter {
 				'metadata.filters.crossref.settings.email.validationMessage');
 		$this->addSetting($emailSetting);
 
-		parent::NlmCitationSchemaFilter(
+		parent::__construct(
 			NLM_CITATION_FILTER_LOOKUP,
 			array(
 				NLM_PUBLICATION_TYPE_JOURNAL,

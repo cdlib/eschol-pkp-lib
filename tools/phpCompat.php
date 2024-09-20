@@ -57,7 +57,7 @@ class PhpCompat extends CommandLineTool {
 	 *  The first argument must be the file to check
 	 */
 	function PhpCompat($argv = array()) {
-		parent::CommandLineTool($argv);
+		parent::__construct($argv);
 
 		// Show the usage screen if explicitly requested or wrong
 		// number of command line arguments.

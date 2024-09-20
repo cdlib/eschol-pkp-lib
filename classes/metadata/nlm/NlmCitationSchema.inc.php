@@ -40,9 +40,9 @@ class NlmCitationSchema extends MetadataSchema {
 	/**
 	 * Constructor
 	 */
-	function NlmCitationSchema() {
+	function __construct() {
 		// Configure the meta-data schema.
-		parent::MetadataSchema(
+		parent::__construct(
 			'nlm-3.0-element-citation',
 			'nlm30',
 			ASSOC_TYPE_CITATION

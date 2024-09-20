@@ -23,7 +23,7 @@ class XmlWebService extends WebService {
 	/**
 	 * Constructor
 	 */
-	function XmlWebService() {
+	function __construct() {
 		if (checkPhpVersion('5.0.0') && extension_loaded('dom')) {
 			$this->_returnType = XSL_TRANSFORMER_DOCTYPE_DOM;
 		} else {

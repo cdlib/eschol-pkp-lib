@@ -20,8 +20,8 @@ class GenericSequencerFilter extends CompositeFilter {
 	/**
 	 * Constructor
 	 */
-	function GenericSequencerFilter($displayName = null, $transformation = null) {
-		parent::CompositeFilter($displayName, $transformation);
+	function __construct($displayName = null, $transformation = null) {
+		parent::__construct($displayName, $transformation);
 	}
 
 	//

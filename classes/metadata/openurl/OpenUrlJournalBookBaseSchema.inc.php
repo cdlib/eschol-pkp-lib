@@ -26,8 +26,8 @@ class OpenUrlJournalBookBaseSchema extends OpenUrlBaseSchema {
 	 * Constructor
 	 * @param $name string the meta-data schema name
 	 */
-	function OpenUrlJournalBookBaseSchema($name) {
-		parent::OpenUrlBaseSchema($name);
+	function __construct($name) {
+		parent::__construct($name);
 
 		// Add meta-data properties common to the OpenURL book/journal standard
 		$this->addProperty('aucorp');   // Organization or corporation that is the author or creator

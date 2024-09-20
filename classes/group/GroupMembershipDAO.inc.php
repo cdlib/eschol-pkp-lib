@@ -24,8 +24,8 @@ class GroupMembershipDAO extends DAO {
 	/**
 	 * Constructor.
 	 */
-	function GroupMembershipDAO() {
-		parent::DAO();
+	function __construct() {
+		parent::__construct();
 		$this->userDao =& DAORegistry::getDAO('UserDAO');
 	}
 

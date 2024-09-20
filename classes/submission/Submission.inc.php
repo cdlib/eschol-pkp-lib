@@ -27,8 +27,8 @@ class Submission extends DataObject {
 	/**
 	 * Constructor.
 	 */
-	function Submission() {
-		parent::DataObject();
+	function __construct() {
+		parent::__construct();
 		$this->authors = array();
 		$this->removedAuthors = array();
 	}

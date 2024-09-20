@@ -40,7 +40,7 @@ class ParaciteRawCitationNlmCitationSchemaFilter extends NlmCitationSchemaFilter
 	/*
 	 * Constructor
 	 */
-	function ParaciteRawCitationNlmCitationSchemaFilter($citationModule = CITATION_PARSER_PARACITE_STANDARD) {
+	function __construct($citationModule = CITATION_PARSER_PARACITE_STANDARD) {
 		$this->setDisplayName('ParaCite');
 
 		assert(in_array($citationModule, ParaciteRawCitationNlmCitationSchemaFilter::getSupportedCitationModules()));
@@ -53,7 +53,7 @@ class ParaciteRawCitationNlmCitationSchemaFilter extends NlmCitationSchemaFilter
 				ParaciteRawCitationNlmCitationSchemaFilter::getSupportedCitationModules());
 		$this->addSetting($citationModuleSetting);
 
-		parent::NlmCitationSchemaFilter(NLM_CITATION_FILTER_PARSE);
+		parent::__construct(NLM_CITATION_FILTER_PARSE);
 	}
 
 	//

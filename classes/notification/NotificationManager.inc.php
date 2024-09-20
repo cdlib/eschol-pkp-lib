@@ -21,7 +21,7 @@ class NotificationManager {
 	/**
 	 * Constructor.
 	 */
-	function NotificationManager() {
+	function __construct() {
 	}
 
 	/**

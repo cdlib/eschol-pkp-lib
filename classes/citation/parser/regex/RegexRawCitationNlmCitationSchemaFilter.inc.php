@@ -27,10 +27,10 @@ class RegexRawCitationNlmCitationSchemaFilter extends NlmCitationSchemaFilter {
 	/*
 	 * Constructor
 	 */
-	function RegexRawCitationNlmCitationSchemaFilter() {
+	function __construct() {
 		$this->setDisplayName('RegEx');
 
-		parent::NlmCitationSchemaFilter(NLM_CITATION_FILTER_PARSE);
+		parent::__construct(NLM_CITATION_FILTER_PARSE);
 	}
 
 	//

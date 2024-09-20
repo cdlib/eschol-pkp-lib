@@ -51,7 +51,7 @@ class PKPPlugin {
 	/**
 	 * Constructor
 	 */
-	function PKPPlugin() {
+	function __construct() {
 	}
 
 	/*

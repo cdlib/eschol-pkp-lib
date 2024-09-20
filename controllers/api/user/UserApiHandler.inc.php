@@ -22,8 +22,8 @@ class UserApiHandler extends PKPHandler {
 	/**
 	 * Constructor.
 	 */
-	function UserApiHandler() {
-		parent::PKPHandler();
+	function __construct() {
+		parent::__construct();
 	}
 
 

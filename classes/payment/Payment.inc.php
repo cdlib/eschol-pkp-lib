@@ -28,7 +28,7 @@ class Payment {
 
 	var $assocId;
 
-	function Payment($amount, $currencyCode, $userId = null, $assocId = null) {
+	function __construct($amount, $currencyCode, $userId = null, $assocId = null) {
 		$this->amount = $amount;
 		$this->currencyCode = $currencyCode;
 		$this->userId = $userId;

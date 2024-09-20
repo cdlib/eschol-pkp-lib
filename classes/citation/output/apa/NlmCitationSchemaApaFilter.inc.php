@@ -24,10 +24,10 @@ class NlmCitationSchemaApaFilter extends NlmCitationSchemaCitationOutputFormatFi
 	 * Constructor
 	 * @param $request PKPRequest
 	 */
-	function NlmCitationSchemaApaFilter() {
+	function __construct() {
 		$this->setDisplayName('APA Citation Output');
 
-		parent::NlmCitationSchemaCitationOutputFormatFilter();
+		parent::__construct();
 	}
 
 	//

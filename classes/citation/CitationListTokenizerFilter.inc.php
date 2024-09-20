@@ -19,10 +19,10 @@ class CitationListTokenizerFilter extends Filter {
 	/**
 	 * Constructor
 	 */
-	function CitationListTokenizerFilter() {
+	function __construct() {
 		$this->setDisplayName('Citation Tokenizer');
 
-		parent::Filter();
+		parent::__construct();
 	}
 
 	//

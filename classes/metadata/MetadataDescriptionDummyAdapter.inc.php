@@ -22,11 +22,11 @@ class MetadataDescriptionDummyAdapter extends MetadataDataObjectAdapter {
 	 *
 	 * @param $metadataDescription MetadataDescription
 	 */
-	function MetadataDescriptionDummyAdapter($metadataDescription) {
+	function __construct($metadataDescription) {
 		$this->setDisplayName('Inject/Extract Metadata into/from a MetadataDescription');
 
 		// Configure the adapter
-		parent::MetadataDataObjectAdapter($metadataDescription->getMetadataSchemaName(), 'lib.pkp.classes.metadata.MetadataDescription', $metadataDescription->getAssocType());
+		parent::__construct($metadataDescription->getMetadataSchemaName(), 'lib.pkp.classes.metadata.MetadataDescription', $metadataDescription->getAssocType());
 	}
 
 	//

@@ -29,8 +29,8 @@ class PKPCitationGridHandler extends GridHandler {
 	/**
 	 * Constructor
 	 */
-	function PKPCitationGridHandler() {
-		parent::GridHandler();
+	function __construct() {
+		parent::__construct();
 	}
 
 	//

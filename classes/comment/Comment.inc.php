@@ -25,8 +25,8 @@ class Comment extends DataObject {
 	/**
 	 * Constructor.
 	 */
-	function Comment() {
-		parent::DataObject();
+	function __construct() {
+		parent::__construct();
 		$this->setPosterIP(Request::getRemoteAddr());
 	}
 

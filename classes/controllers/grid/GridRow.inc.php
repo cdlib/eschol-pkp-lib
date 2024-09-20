@@ -46,7 +46,7 @@ class GridRow {
 	/**
 	 * Constructor.
 	 */
-	function GridRow() {
+	function __construct() {
 	}
 
 

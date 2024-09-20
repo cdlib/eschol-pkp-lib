@@ -50,8 +50,8 @@ class SubmissionRequiredPolicy extends AuthorizationPolicy {
 	 *  the submission id in.
 	 * @param $message string
 	 */
-	function SubmissionRequiredPolicy(&$request, &$args, $submissionParameterName = 'submissionId', $message = null) {
-		parent::AuthorizationPolicy($message);
+	function __construct(&$request, &$args, $submissionParameterName = 'submissionId', $message = null) {
+		parent::__construct($message);
 		$this->_request =& $request;
 		assert(is_array($args));
 		$this->_args =& $args;

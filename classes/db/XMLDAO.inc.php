@@ -21,7 +21,7 @@ class XMLDAO {
 	/**
 	 * Constructor.
 	 */
-	function XMLDAO() {
+	function __construct() {
 	}
 
 	/**

@@ -25,9 +25,9 @@ class HandlerValidatorPolicy extends HandlerValidator {
 	 * @param $policy AuthorizationPolicy
 	 * @see HandlerValidator::HandlerValidator()
 	 */
-	function HandlerValidatorPolicy(&$policy, &$handler, $redirectToLogin = false, $message = null, $additionalArgs = array()) {
+	function __construct(&$policy, &$handler, $redirectToLogin = false, $message = null, $additionalArgs = array()) {
 		$this->_policy =& $policy;
-		parent::HandlerValidator($handler, $redirectToLogin, $message, $additionalArgs);
+		parent::__construct($handler, $redirectToLogin, $message, $additionalArgs);
 	}
 
 	/**

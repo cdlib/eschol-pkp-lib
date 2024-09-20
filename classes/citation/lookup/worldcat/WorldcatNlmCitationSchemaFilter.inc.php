@@ -34,7 +34,7 @@ class WorldcatNlmCitationSchemaFilter extends NlmCitationSchemaFilter {
 	 * Constructor
 	 * @param $apiKey string
 	 */
-	function WorldcatNlmCitationSchemaFilter($apiKey = null) {
+	function __construct($apiKey = null) {
 		$this->setDisplayName('WorldCat');
 		if (!is_null($apiKey)) $this->setData('apiKey', $apiKey);
 
@@ -45,7 +45,7 @@ class WorldcatNlmCitationSchemaFilter extends NlmCitationSchemaFilter {
 				FORM_VALIDATOR_OPTIONAL_VALUE);
 		$this->addSetting($apiKeySetting);
 
-		parent::NlmCitationSchemaFilter(NLM_CITATION_FILTER_LOOKUP, array(NLM_PUBLICATION_TYPE_BOOK));
+		parent::__construct(NLM_CITATION_FILTER_LOOKUP, array(NLM_PUBLICATION_TYPE_BOOK));
 	}
 
 	//

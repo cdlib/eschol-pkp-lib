@@ -16,7 +16,7 @@ class InterestManager {
 	/**
 	 * Constructor.
 	 */
-	function InterestManager() {
+	function __construct() {
 	}
 
 	/**

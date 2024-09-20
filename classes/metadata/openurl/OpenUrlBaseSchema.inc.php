@@ -26,9 +26,9 @@ class OpenUrlBaseSchema extends MetadataSchema {
 	 * Constructor
 	 * @param $name string the meta-data schema name
 	 */
-	function OpenUrlBaseSchema($name) {
+	function __construct($name) {
 		// Configure the meta-data schema.
-		parent::MetadataSchema(
+		parent::__construct(
 			$name,
 			'openurl10',
 			ASSOC_TYPE_CITATION

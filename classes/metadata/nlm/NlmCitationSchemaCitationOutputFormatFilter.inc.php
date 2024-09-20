@@ -26,8 +26,8 @@ class NlmCitationSchemaCitationOutputFormatFilter extends TemplateBasedFilter {
 	/**
 	 * Constructor
 	 */
-	function NlmCitationSchemaCitationOutputFormatFilter() {
-		parent::TemplateBasedFilter();
+	function __construct() {
+		parent::__construct();
 	}
 
 

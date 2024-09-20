@@ -27,22 +27,22 @@ class  ADODB_access extends ADODB_odbc {
 	var $sysDate = "FORMAT(NOW,'yyyy-mm-dd')";
 	var $sysTimeStamp = 'NOW';
 	var $hasTransactions = false;
-	
-	function ADODB_access()
+
+	function __construct()
 	{
 	global $ADODB_EXTENSION;
-	
+
 		$ADODB_EXTENSION = false;
 		$this->ADODB_odbc();
 	}
-	
+
 	function Time()
 	{
 		return time();
 	}
-	
+
 	function BeginTrans() { return false;}
-	
+
 	function IfNull( $field, $ifNull ) 
 	{
 		return " IIF(IsNull($field), $ifNull, $field) "; // if Access
@@ -51,16 +51,16 @@ class  ADODB_access extends ADODB_odbc {
 	function &MetaTables()
 	{
 	global $ADODB_FETCH_MODE;
-	
+
 		$savem = $ADODB_FETCH_MODE;
 		$ADODB_FETCH_MODE = ADODB_FETCH_NUM;
 		$qid = odbc_tables($this->_connectionID);
 		$rs = new ADORecordSet_odbc($qid);
 		$ADODB_FETCH_MODE = $savem;
 		if (!$rs) return false;
-		
+
 		$rs->_has_stupid_odbc_fetch_api_change = $this->_has_stupid_odbc_fetch_api_change;
-		
+
 		$arr = &$rs->GetArray();
 		//print_pre($arr);
 		$arr2 = array();
@@ -72,12 +72,12 @@ class  ADODB_access extends ADODB_odbc {
 	}*/
 }
 
- 
+
 class  ADORecordSet_access extends ADORecordSet_odbc {	
-	
+
 	var $databaseType = "access";		
-	
-	function ADORecordSet_access($id,$mode=false)
+
+	function __construct($id,$mode=false)
 	{
 		return $this->ADORecordSet_odbc($id,$mode);
 	}

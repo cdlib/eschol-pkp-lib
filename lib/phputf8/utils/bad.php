@@ -335,11 +335,11 @@ function utf8_bad_identify($str, &$i) {
                         ((3 == $mBytes) && ($mUcs4 < 0x0800)) ||
                         ((4 == $mBytes) && ($mUcs4 < 0x10000)) ) {
                         return UTF8_BAD_NONSHORT;
-                        
+
                     // From Unicode 3.2, surrogate characters are illegal
                     } else if (($mUcs4 & 0xFFFFF800) == 0xD800) {
                         return UTF8_BAD_SURROGATE;
-                        
+
                     // Codepoints outside the Unicode range are illegal
                     } else if ($mUcs4 > 0x10FFFF) {
                         return UTF8_BAD_UNIOUTRANGE;

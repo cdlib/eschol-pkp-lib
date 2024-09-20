@@ -18,7 +18,7 @@ class ParserFilterGridHandler extends FilterGridHandler {
 	/**
 	 * Constructor
 	 */
-	function ParserFilterGridHandler() {
+	function __construct() {
 		parent::FilterGridHandler();
 	}
 

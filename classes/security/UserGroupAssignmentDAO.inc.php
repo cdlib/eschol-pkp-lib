@@ -19,8 +19,8 @@ class UserGroupAssignmentDAO extends DAO {
 	/**
 	 * Constructor.
 	 */
-	function UserGroupAssignmentDAO() {
-		parent::DAO();
+	function __construct() {
+		parent::__construct();
 	}
 
 	/**

@@ -24,8 +24,8 @@ class CompositeFilter extends GenericFilter {
 	/**
 	 * Constructor
 	 */
-	function CompositeFilter($displayName = null, $transformation = null) {
-		parent::GenericFilter($displayName, $transformation);
+	function __construct($displayName = null, $transformation = null) {
+		parent::__construct($displayName, $transformation);
 	}
 
 	//

@@ -441,12 +441,12 @@ select viewname,'V' from pg_views where viewname like $mask";
 	function BlobEncode($blob)
 	{
 		if (ADODB_PHPVER >= 0x4200) return pg_escape_bytea($blob);
-		
+
 		/*92=backslash, 0=null, 39=single-quote*/
 		$badch = array(chr(92),chr(0),chr(39)); # \  null  '
 		$fixch = array('\\\\134','\\\\000','\\\\047');
 		return adodb_str_replace($badch,$fixch,$blob);
-		
+
 		// note that there is a pg_escape_bytea function only for php 4.2.0 or later
 	}
 	

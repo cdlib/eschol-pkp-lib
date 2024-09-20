@@ -116,7 +116,7 @@ class Filter extends DataObject {
 	 * configured via DataObject::setData(). Only parameters
 	 * that are available in the DataObject will be persisted.
 	 */
-	function Filter() {
+	function __construct() {
 		// If we only support one transformation then we can
 		// set it immediately. Otherwise this has to be done by
 		// the user.

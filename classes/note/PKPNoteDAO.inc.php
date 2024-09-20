@@ -20,8 +20,8 @@ class PKPNoteDAO extends DAO {
 	/**
 	 * Constructor.
 	 */
-	function PKPNoteDAO() {
-		parent::DAO();
+	function __construct() {
+		parent::__construct();
 	}
 
 	/**

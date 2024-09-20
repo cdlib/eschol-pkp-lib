@@ -25,8 +25,8 @@ class Captcha extends DataObject {
 	/**
 	 * Constructor.
 	 */
-	function Captcha() {
-		parent::DataObject();
+	function __construct() {
+		parent::__construct();
 	}
 
 	/**

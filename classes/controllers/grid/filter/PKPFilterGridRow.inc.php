@@ -18,8 +18,8 @@ class PKPFilterGridRow extends GridRow {
 	/**
 	 * Constructor
 	 */
-	function PKPFilterGridRow() {
-		parent::GridRow();
+	function __construct() {
+		parent::__construct();
 	}
 
 	//

@@ -19,8 +19,8 @@ class TemplateBasedReferencesListFilter extends TemplateBasedFilter {
 	/**
 	 * Constructor
 	 */
-	function TemplateBasedReferencesListFilter() {
-		parent::TemplateBasedFilter();
+	function __construct() {
+		parent::__construct();
 	}
 
 

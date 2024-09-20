@@ -31,9 +31,9 @@ class NlmPersonStringFilter extends Filter {
 	/**
 	 * Constructor
 	 */
-	function NlmPersonStringFilter($filterMode = PERSON_STRING_FILTER_SINGLE) {
+	function __construct($filterMode = PERSON_STRING_FILTER_SINGLE) {
 		$this->_filterMode = $filterMode;
-		parent::Filter();
+		parent::__construct();
 	}
 
 	//

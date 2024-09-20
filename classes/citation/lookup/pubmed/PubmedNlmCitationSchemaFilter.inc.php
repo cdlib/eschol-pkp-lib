@@ -30,7 +30,7 @@ class PubmedNlmCitationSchemaFilter extends NlmCitationSchemaFilter {
 	 * Constructor
 	 * @param $email string the pubmed registration email
 	 */
-	function PubmedNlmCitationSchemaFilter($email = null) {
+	function __construct($email = null) {
 		$this->setDisplayName('PubMed');
 		if (!is_null($email)) $this->setData('email', $email);
 
@@ -41,7 +41,7 @@ class PubmedNlmCitationSchemaFilter extends NlmCitationSchemaFilter {
 				FORM_VALIDATOR_OPTIONAL_VALUE);
 		$this->addSetting($emailSetting);
 
-		parent::NlmCitationSchemaFilter(
+		parent::__construct(
 			NLM_CITATION_FILTER_LOOKUP,
 			array(
 				NLM_PUBLICATION_TYPE_JOURNAL,

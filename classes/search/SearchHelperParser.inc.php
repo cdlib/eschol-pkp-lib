@@ -22,8 +22,8 @@ class SearchHelperParser extends SearchFileParser {
 	/** @var $type string Type should match an index[$type] setting in the "search" section of config.inc.php */
 	var $type;
 
-	function SearchHelperParser($type, $filePath) {
-		parent::SearchFileParser($filePath);
+	function __construct($type, $filePath) {
+		parent::__construct($filePath);
 		$this->type = $type;
 	}
 

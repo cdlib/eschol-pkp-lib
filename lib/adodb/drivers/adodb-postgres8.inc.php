@@ -5,7 +5,7 @@
   Whenever there is any discrepancy between the two licenses, 
   the BSD license will take precedence.
   Set tabs to 4.
-  
+
   NOTE: The "postgres8" driver is remapped to "postgres7". 
 */
 

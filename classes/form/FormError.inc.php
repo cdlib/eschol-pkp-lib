@@ -29,7 +29,7 @@ class FormError {
 	 * @param $field string the name of the field
 	 * @param $message string the error message (i18n key)
 	 */
-	function FormError($field, $message) {
+	function __construct($field, $message) {
 		$this->field = $field;
 		$this->message = $message;
 	}

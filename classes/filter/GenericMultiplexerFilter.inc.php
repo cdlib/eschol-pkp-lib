@@ -28,8 +28,8 @@ class GenericMultiplexerFilter extends CompositeFilter {
 	/**
 	 * Constructor
 	 */
-	function GenericMultiplexerFilter($displayName = null, $transformation = null) {
-		parent::CompositeFilter($displayName, $transformation);
+	function __construct($displayName = null, $transformation = null) {
+		parent::__construct($displayName, $transformation);
 	}
 
 

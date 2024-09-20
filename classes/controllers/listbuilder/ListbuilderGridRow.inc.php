@@ -18,8 +18,8 @@ class ListbuilderGridRow extends GridRow {
 	/**
 	 * Constructor
 	 */
-	function ListbuilderGridRow() {
-		parent::GridRow();
+	function __construct() {
+		parent::__construct();
 	}
 
 	/**

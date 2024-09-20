@@ -24,8 +24,8 @@ class PKPReviewAssignmentDAO extends DAO {
 	/**
 	 * Constructor.
 	 */
-	function PKPReviewAssignmentDAO() {
-		parent::DAO();
+	function __construct() {
+		parent::__construct();
 		$this->userDao =& DAORegistry::getDAO('UserDAO');
 	}
 

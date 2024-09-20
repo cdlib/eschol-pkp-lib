@@ -21,8 +21,8 @@ class TemporaryFile extends DataObject {
 	/**
 	 * Constructor.
 	 */
-	function TemporaryFile() {
-		parent::DataObject();
+	function __construct() {
+		parent::__construct();
 	}
 
 	/**

@@ -23,7 +23,7 @@ class TestSchema extends MetadataSchema {
 	 */
 	function TestSchema() {
 		// Configure the meta-data schema.
-		parent::MetadataSchema(
+		parent::__construct(
 			'test-schema',
 			'test',
 			ASSOC_TYPE_CITATION

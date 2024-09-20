@@ -22,7 +22,7 @@ class EditableEmailFile {
 	var $locale;
 	var $editableFile;
 
-	function EditableEmailFile($locale, $filename) {
+	function __construct($locale, $filename) {
 		$this->locale = $locale;
 		$this->editableFile = new EditableFile($filename);
 	}

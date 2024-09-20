@@ -21,8 +21,8 @@ class GroupMembership extends DataObject {
 	/**
 	 * Constructor.
 	 */
-	function GroupMembership() {
-		parent::DataObject();
+	function __construct() {
+		parent::__construct();
 	}
 
 	//

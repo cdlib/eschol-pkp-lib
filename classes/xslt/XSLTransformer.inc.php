@@ -43,7 +43,7 @@ class XSLTransformer {
 	 * Initialize transformer and set parser options.
 	 * @return boolean returns false if no XSLT processor could be created
 	 */
-	function XSLTransformer() {
+	function __construct() {
 		$this->externalCommand = Config::getVar('cli', 'xslt_command');
 
 		// Determine the appropriate XSLT processor for the system

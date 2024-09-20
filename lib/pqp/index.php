@@ -65,13 +65,13 @@ class PQPExample {
 			'your DB password');
 		$this->db->connect(true);
 		$this->db->changeDatabase('your db name');
-		
+
 		$sql = 'SELECT PostId FROM Posts WHERE PostId > 2';
 		$rs = $this->db->query($sql);
-		
+
 		$sql = 'SELECT COUNT(PostId) FROM Posts';
 		$rs = $this->db->query($sql);
-		
+
 		$sql = 'SELECT COUNT(PostId) FROM Posts WHERE PostId != 1';
 		$rs = $this->db->query($sql);*/
 	}

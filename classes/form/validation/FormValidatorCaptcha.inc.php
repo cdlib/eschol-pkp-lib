@@ -23,8 +23,8 @@ class FormValidatorCaptcha extends FormValidator {
 	 * @param $captchaIdField string Name of captcha ID field
 	 * @param $message string Key of message to display on mismatch
 	 */
-	function FormValidatorCaptcha(&$form, $field, $captchaIdField, $message) {
-		parent::FormValidator($form, $field, FORM_VALIDATOR_REQUIRED_VALUE, $message);
+	function __construct(&$form, $field, $captchaIdField, $message) {
+		parent::__construct($form, $field, FORM_VALIDATOR_REQUIRED_VALUE, $message);
 		$this->_captchaIdField = $captchaIdField;
 	}
 

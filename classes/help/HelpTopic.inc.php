@@ -27,8 +27,8 @@ class HelpTopic extends DataObject {
 	/**
 	 * Constructor.
 	 */
-	function HelpTopic() {
-		parent::DataObject();
+	function __construct() {
+		parent::__construct();
 		$this->sections = array();
 		$this->relatedTopics = array();
 	}

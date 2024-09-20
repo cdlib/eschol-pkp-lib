@@ -23,9 +23,9 @@ class NlmCitationSchemaOpenUrlCrosswalkFilter extends OpenUrlCrosswalkFilter {
 	/**
 	 * Constructor
 	 */
-	function NlmCitationSchemaOpenUrlCrosswalkFilter() {
+	function __construct() {
 		$this->setDisplayName('Crosswalk from NLM Citation to Open URL');
-		parent::OpenUrlCrosswalkFilter();
+		parent::__construct();
 	}
 
 	//

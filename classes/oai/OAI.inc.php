@@ -37,7 +37,7 @@ class OAI {
 	 * Initializes object and parses user input.
 	 * @param $config OAIConfig repository configuration
 	 */
-	function OAI(&$config) {
+	function __construct(&$config) {
 		$this->config = $config;
 
 		// Initialize parameters from GET or POST variables

@@ -23,8 +23,8 @@ class AuthSource extends DataObject {
 	/**
 	 * Constructor.
 	 */
-	function AuthSource() {
-		parent::DataObject();
+	function __construct() {
+		parent::__construct();
 	}
 
 	//
