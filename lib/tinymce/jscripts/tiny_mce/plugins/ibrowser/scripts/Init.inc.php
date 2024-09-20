@@ -21,8 +21,8 @@ import('core.PageRouter');
 $router = new PageRouter();
 $router->setApplication($application);
 $request->setRouter($router);
-Locale::initialize();
-Locale::requireComponents(array(LOCALE_COMPONENT_PKP_INSTALLER));
+\OjsLocale::initialize();
+\OjsLocale::requireComponents(array(LOCALE_COMPONENT_PKP_INSTALLER));
 
 // Load user variables
 $sessionManager =& SessionManager::getManager();
@@ -35,7 +35,7 @@ $init['publicDir'] = Config::getVar('files', 'public_files_dir');
 if (isset($user)) {
 	// User is logged in
 	$init['user'] = $user->getUsername();
-	$init['lang'] = OjsString::substr(Locale::getLocale(), 0, 2);
+	$init['lang'] = OjsString::substr(\OjsLocale::getLocale(), 0, 2);
 	$init['baseUrl'] = Config::getVar('general', 'base_url');
 	$init['baseDir'] =  $baseDir;
 

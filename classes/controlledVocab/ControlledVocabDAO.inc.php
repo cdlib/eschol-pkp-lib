@@ -205,8 +205,8 @@ class ControlledVocabDAO extends DAO {
 			WHERE	e.controlled_vocab_id = ?
 			ORDER BY e.seq',
 			array(
-				$settingName, Locale::getLocale(),		// Current locale
-				$settingName, Locale::getPrimaryLocale(),	// Primary locale
+				$settingName, \OjsLocale::getLocale(),		// Current locale
+				$settingName, \OjsLocale::getPrimaryLocale(),	// Primary locale
 				$settingName, '',				// No locale
 				(int) $controlledVocabId
 			)

@@ -156,7 +156,7 @@ class InstallTool extends CommandLineTool {
 	 * @param $title string
 	 */
 	function printTitle($title) {
-		printf("\n%s\n%s\n%s\n", str_repeat('-', 80), Locale::translate($title), str_repeat('-', 80));
+		printf("\n%s\n%s\n%s\n", str_repeat('-', 80), \OjsLocale::translate($title), str_repeat('-', 80));
 	}
 
 	/**
@@ -181,9 +181,9 @@ class InstallTool extends CommandLineTool {
 	function readParam($name, $prompt, $defaultValue = null) {
 		do {
 			if (isset($defaultValue)) {
-				printf("%s (%s): ", Locale::translate($prompt), $defaultValue !== '' ? $defaultValue : Locale::translate('common.none'));
+				printf("%s (%s): ", \OjsLocale::translate($prompt), $defaultValue !== '' ? $defaultValue : \OjsLocale::translate('common.none'));
 			} else {
-				printf("%s: ", Locale::translate($prompt));
+				printf("%s: ", \OjsLocale::translate($prompt));
 			}
 
 			$value = $this->readInput();
@@ -203,11 +203,11 @@ class InstallTool extends CommandLineTool {
 	 */
 	function readParamBoolean($name, $prompt, $default = 'N') {
 		if ($default == 'N') {
-			printf("%s [y/N] ", Locale::translate($prompt));
+			printf("%s [y/N] ", \OjsLocale::translate($prompt));
 			$value = $this->readInput();
 			$this->params[$name] = (int)(strtolower(substr(trim($value), 0, 1)) == 'y');
 		} else {
-			printf("%s [Y/n] ", Locale::translate($prompt));
+			printf("%s [Y/n] ", \OjsLocale::translate($prompt));
 			$value = $this->readInput();
 			$this->params[$name] = (int)(strtolower(substr(trim($value), 0, 1)) != 'n');
 		}
@@ -222,17 +222,17 @@ class InstallTool extends CommandLineTool {
 	 */
 	function readParamOptions($name, $prompt, $options, $defaultValue = null, $allowMultiple = false) {
 		do {
-			printf("%s\n", Locale::translate($prompt));
+			printf("%s\n", \OjsLocale::translate($prompt));
 			foreach ($options as $k => $v) {
 				printf("  %-10s %s\n", '[' . $k . ']', $v);
 			}
 			if ($allowMultiple) {
-				printf("  (%s)\n", Locale::translate('installer.form.separateMultiple'));
+				printf("  (%s)\n", \OjsLocale::translate('installer.form.separateMultiple'));
 			}
 			if (isset($defaultValue)) {
-				printf("%s (%s): ", Locale::translate('common.select'), $defaultValue !== '' ? $defaultValue : Locale::translate('common.none'));
+				printf("%s (%s): ", \OjsLocale::translate('common.select'), $defaultValue !== '' ? $defaultValue : \OjsLocale::translate('common.none'));
 			} else {
-				printf("%s: ", Locale::translate('common.select'));
+				printf("%s: ", \OjsLocale::translate('common.select'));
 			}
 
 			$value = $this->readInput();

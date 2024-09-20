@@ -26,7 +26,7 @@ class CurrencyDAO extends DAO {
 	}
 
 	function &_getCache() {
-		$locale = Locale::getLocale();
+		$locale = \OjsLocale::getLocale();
 		$cache =& Registry::get('currencyCache', true, null);
 		if ($cache === null) {
 			$cacheManager = CacheManager::getManager();
@@ -48,7 +48,7 @@ class CurrencyDAO extends DAO {
 		if ($allCurrencies === null) {
 			// Add a locale load to the debug notes.
 			$notes =& Registry::get('system.debug.notes');
-			$filename = $this->getCurrencyFilename(Locale::getLocale());
+			$filename = $this->getCurrencyFilename(\OjsLocale::getLocale());
 			$notes[] = array('debug.notes.currencyListLoad', array('filename' => $filename));
 
 			// Reload locale registry file

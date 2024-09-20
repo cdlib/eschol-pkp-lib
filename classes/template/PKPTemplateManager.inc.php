@@ -103,11 +103,11 @@ class PKPTemplateManager extends Smarty {
 		$this->assign('timeFormat', Config::getVar('general', 'time_format'));
 		$this->assign('allowCDN', Config::getVar('general', 'enable_cdn'));
 
-		$locale = Locale::getLocale();
+		$locale = \OjsLocale::getLocale();
 		$this->assign('currentLocale', $locale);
 
 		// If there's a locale-specific stylesheet, add it.
-		if (($localeStyleSheet = Locale::getLocaleStyleSheet($locale)) != null) $this->addStyleSheet($request->getBaseUrl() . '/' . $localeStyleSheet);
+		if (($localeStyleSheet = \OjsLocale::getLocaleStyleSheet($locale)) != null) $this->addStyleSheet($request->getBaseUrl() . '/' . $localeStyleSheet);
 
 		$application =& PKPApplication::getApplication();
 		$this->assign('pageTitle', $application->getNameKey());
@@ -383,7 +383,7 @@ class PKPTemplateManager extends Smarty {
 	 */
 	function smartyTranslate($params, &$smarty) {
 		if (isset($params) && !empty($params)) {
-			if (!isset($params['key'])) return Locale::translate('');
+			if (!isset($params['key'])) return \OjsLocale::translate('');
 
 			$key = $params['key'];
 			unset($params['key']);
@@ -392,7 +392,7 @@ class PKPTemplateManager extends Smarty {
 				unset($params['params']);
 				$params = array_merge($params, $paramsArray);
 			}
-			return Locale::translate($key, $params);
+			return \OjsLocale::translate($key, $params);
 		}
 	}
 
@@ -438,7 +438,7 @@ class PKPTemplateManager extends Smarty {
 				// Translate values AND output
 				$newOptions = array();
 				foreach ($params['options'] as $k => $v) {
-					$newOptions[Locale::translate($k)] = Locale::translate($v);
+					$newOptions[\OjsLocale::translate($k)] = \OjsLocale::translate($v);
 				}
 				$params['options'] = $newOptions;
 			} else {
@@ -515,7 +515,7 @@ class PKPTemplateManager extends Smarty {
 				if (isset($params['alt'])) {
 					$iconHtml .= $params['alt'];
 				} else {
-					$iconHtml .= Locale::translate('icon.'.$params['name'].'.alt');
+					$iconHtml .= \OjsLocale::translate('icon.'.$params['name'].'.alt');
 				}
 				$iconHtml .= '" ';
 
@@ -557,7 +557,7 @@ class PKPTemplateManager extends Smarty {
 		$from = (($page - 1) * $itemsPerPage) + 1;
 		$to = min($itemTotal, $page * $itemsPerPage);
 
-		return Locale::translate('navigation.items', array(
+		return \OjsLocale::translate('navigation.items', array(
 			'from' => ($to===0?0:$from),
 			'to' => $to,
 			'total' => $itemTotal
@@ -1088,7 +1088,7 @@ class PKPTemplateManager extends Smarty {
 			}
 
 			$link = PKPRequest::url(null, null, null, Request::getRequestedArgs(), $sortParams, null, true);
-			$text = isset($params['key']) ? Locale::translate($params['key']) : '';
+			$text = isset($params['key']) ? \OjsLocale::translate($params['key']) : '';
 			$style = (isset($sort) && isset($params['sort']) && ($sort == $params['sort'])) ? ' style="font-weight:bold"' : '';
 
 			return "<a href=\"$link\"$style>$text</a>";
@@ -1120,7 +1120,7 @@ class PKPTemplateManager extends Smarty {
 			}
 
 			$heading = isset($params['sort']) ? $params['sort'] : $sort;
-			$text = isset($params['key']) ? Locale::translate($params['key']) : '';
+			$text = isset($params['key']) ? \OjsLocale::translate($params['key']) : '';
 			$style = (isset($sort) && isset($params['sort']) && ($sort == $params['sort'])) ? ' style="font-weight:bold"' : '';
 			return "<a href=\"javascript:sortSearch('$heading','$direction')\"$style>$text</a>";
 		}
@@ -1150,9 +1150,9 @@ class PKPTemplateManager extends Smarty {
 		if (isset($params['loadMessageId'])) {
 			$loadMessageId = $params['loadMessageId'];
 			unset($params['url'], $params['id'], $params['loadMessageId'], $params['class']);
-			$this->assign('inDivLoadMessage', Locale::translate($loadMessageId, $params));
+			$this->assign('inDivLoadMessage', \OjsLocale::translate($loadMessageId, $params));
 		} else {
-			$this->assign('inDivLoadMessage', Locale::translate('common.loading'));
+			$this->assign('inDivLoadMessage', \OjsLocale::translate('common.loading'));
 		}
 
 		return $this->fetch('common/urlInDiv.tpl');
@@ -1183,8 +1183,8 @@ class PKPTemplateManager extends Smarty {
 		}
 
 		// Translate modal submit/cancel buttons
-		$submitButton = Locale::translate('common.ok');
-		$cancelButton = Locale::translate('common.cancel');
+		$submitButton = \OjsLocale::translate('common.ok');
+		$cancelButton = \OjsLocale::translate('common.cancel');
 
 		// Add the modal javascript to the header
 		$dialogTitle = isset($dialogTitle) ? ", '$dialogTitle'" : "";
@@ -1224,7 +1224,7 @@ class PKPTemplateManager extends Smarty {
 			if(isset($params['translate']) && $params['translate'] == false) {
 				$dialogText = $params['dialogText'];
 			} else {
-				$dialogText = Locale::translate($params['dialogText']);
+				$dialogText = \OjsLocale::translate($params['dialogText']);
 			}
 		} else {
 			$showDialog = false;
@@ -1235,8 +1235,8 @@ class PKPTemplateManager extends Smarty {
 		}
 
 		// Translate modal submit/cancel buttons
-		$submitButton = Locale::translate('common.ok');
-		$cancelButton = Locale::translate('common.cancel');
+		$submitButton = \OjsLocale::translate('common.ok');
+		$cancelButton = \OjsLocale::translate('common.cancel');
 
 		if ($showDialog) {
 			$confirmCode = "<script type='text/javascript'>
@@ -1311,7 +1311,7 @@ class PKPTemplateManager extends Smarty {
 		} else $iconHtml = "";
 
 		if(isset($params['key'])) {
-			$keyHtml = "<span class='text'>" . Locale::translate($params['key']) . "</span>";
+			$keyHtml = "<span class='text'>" . \OjsLocale::translate($params['key']) . "</span>";
 		} elseif(isset($params['keyTranslated'])) {
 			$keyHtml = "<span class='text'>" . $params['keyTranslated'] . "</span>";
 		} else $keyHtml = "";

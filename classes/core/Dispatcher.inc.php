@@ -123,7 +123,7 @@ class Dispatcher {
 			}
 		}
 
-		Locale::initialize();
+		\OjsLocale::initialize();
 		PluginRegistry::loadCategory('generic', true);
 
 		$router->route($request);

@@ -60,7 +60,7 @@ class ParscitRawCitationNlmCitationSchemaFilter extends NlmCitationSchemaFilter 
 		// Detect errors.
 		if (!OjsString::regexp_match('/.*<algorithm[^>]+>.*<\/algorithm>.*/s', $result)) {
 			$translationParams = array('filterName' => $this->getDisplayName());
-			$this->addError(Locale::translate('submission.citations.filter.webserviceResultTransformationError', $translationParams));
+			$this->addError(\OjsLocale::translate('submission.citations.filter.webserviceResultTransformationError', $translationParams));
 			return $nullVar;
 		}
 

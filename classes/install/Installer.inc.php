@@ -150,11 +150,11 @@ class Installer {
 		}
 
 		if (!isset($this->locale)) {
-			$this->locale = Locale::getLocale();
+			$this->locale = \OjsLocale::getLocale();
 		}
 
 		if (!isset($this->installedLocales)) {
-			$this->installedLocales = array_keys(Locale::getAllLocales());
+			$this->installedLocales = array_keys(\OjsLocale::getAllLocales());
 		}
 
 		if (!isset($this->dataXMLParser)) {
@@ -209,7 +209,7 @@ class Installer {
 		// Inform users that they'll have to run the update script
 		// after doing a manual installation.
 		if ($this->getParam('manualInstall')) {
-			$this->log(Locale::translate('installer.pleaseUpgradeAfterManualInstall'));
+			$this->log(\OjsLocale::translate('installer.pleaseUpgradeAfterManualInstall'));
 		}
 
 		return $result;
@@ -392,7 +392,7 @@ class Installer {
 				if ($sql) {
 					return $this->executeSQL($sql);
 				} else {
-					$this->setError(INSTALLER_ERROR_DB, str_replace('{$file}', $fileName, Locale::translate('installer.installParseDBFileError')));
+					$this->setError(INSTALLER_ERROR_DB, str_replace('{$file}', $fileName, \OjsLocale::translate('installer.installParseDBFileError')));
 					return false;
 				}
 				break;
@@ -578,7 +578,7 @@ class Installer {
 			case INSTALLER_ERROR_DB:
 				return 'DB: ' . $this->getErrorMsg();
 			default:
-				return Locale::translate($this->getErrorMsg());
+				return \OjsLocale::translate($this->getErrorMsg());
 		}
 	}
 

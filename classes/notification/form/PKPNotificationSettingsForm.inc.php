@@ -45,8 +45,8 @@ class PKPNotificationSettingsForm extends Form {
 		$templateMgr =& TemplateManager::getManager();
 		$templateMgr->assign('notificationSettings', $notificationSettings);
 		$templateMgr->assign('emailSettings', $emailSettings);
-		$templateMgr->assign('titleVar', Locale::translate('common.title'));
-		$templateMgr->assign('userVar', Locale::translate('common.user'));
+		$templateMgr->assign('titleVar', \OjsLocale::translate('common.title'));
+		$templateMgr->assign('userVar', \OjsLocale::translate('common.user'));
 		return parent::display();
 	}
 }

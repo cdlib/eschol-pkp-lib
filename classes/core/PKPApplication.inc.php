@@ -125,7 +125,7 @@ class PKPApplication {
 	 * Get the current application object
 	 * @return Application
 	 */
-	function &getApplication() {
+	static function &getApplication() {
 		$application =& Registry::get('application');
 		return $application;
 	}
