@@ -48,7 +48,7 @@ function utf8_to_ascii($str, $unknown = '?') {
         $ord = NULL;
         $increment = 1;
         
-        $ord0 = ord($str{$i});
+        $ord0 = ord($str[$i]);
         
         # Much nested if /else - PHP fn calls expensive, no block scope...
         
@@ -61,7 +61,7 @@ function utf8_to_ascii($str, $unknown = '?') {
         } else {
             
             # 2 bytes
-            $ord1 = ord($str{$i+1});
+            $ord1 = ord($str[$i+1]);
             
             if ( $ord0 >= 192 && $ord0 <= 223 ) {
                 
@@ -71,7 +71,7 @@ function utf8_to_ascii($str, $unknown = '?') {
             } else {
                 
                 # 3 bytes
-                $ord2 = ord($str{$i+2});
+                $ord2 = ord($str[$i+2]);
                 
                 if ( $ord0 >= 224 && $ord0 <= 239 ) {
                     
@@ -81,7 +81,7 @@ function utf8_to_ascii($str, $unknown = '?') {
                 } else {
                     
                     # 4 bytes
-                    $ord3 = ord($str{$i+3});
+                    $ord3 = ord($str[$i+3]);
                     
                     if ($ord0>=240 && $ord0<=247) {
                         

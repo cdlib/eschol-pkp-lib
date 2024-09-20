@@ -19,7 +19,7 @@ class HookRegistry {
 	/**
 	 * Get the current set of hook registrations.
 	 */
-	function &getHooks() {
+	static function &getHooks() {
 		$hooks =& Registry::get('hooks', true, array());
 		return $hooks;
 	}
@@ -30,7 +30,7 @@ class HookRegistry {
 	 * @param $hookName string Name of hook to set
 	 * @param $hooks array Array of callbacks for this hook
 	 */
-	function setHooks($hookName, $hooks) {
+	static function setHooks($hookName, $hooks) {
 		$hooks =& HookRegistry::getHooks();
 		$hooks[$hookName] =& $hooks;
 	}
@@ -39,7 +39,7 @@ class HookRegistry {
 	 * Clear hooks registered against the given name.
 	 * @param $hookName string Name of hook
 	 */
-	function clear($hookName) {
+	static function clear($hookName) {
 		$hooks =& HookRegistry::getHooks();
 		unset($hooks[$hookName]);
 		return $hooks;
@@ -50,7 +50,7 @@ class HookRegistry {
 	 * @param $hookName string Name of hook to register against
 	 * @param $callback object Callback pseudotype
 	 */
-	function register($hookName, $callback) {
+	static function register($hookName, $callback) {
 		$hooks =& HookRegistry::getHooks();
 		if (!isset($hooks[$hookName])) {
 			$hooks[$hookName] = array();
@@ -69,7 +69,7 @@ class HookRegistry {
 	 * @param $args string Hooks are called with this as the second param
 	 * @return mixed
 	 */
-	function call($hookName, $args = null) {
+	static function call($hookName, $args = null) {
 		$hooks =& HookRegistry::getHooks();
 		if (!isset($hooks[$hookName])) {
 			return false;
