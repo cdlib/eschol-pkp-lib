@@ -26,7 +26,7 @@ class CacheManager {
 	 * Get the static instance of the cache manager.
 	 * @return object CacheManager
 	 */
-	function &getManager() {
+	static function &getManager() {
 		$manager =& Registry::get('cacheManager', true, null);
 		if ($manager === null) {
 			$manager = new CacheManager();
@@ -54,7 +54,7 @@ class CacheManager {
 		return $returner;
 	}
 
-	function getCacheImplementation($type) {
+        static function getCacheImplementation($type) {
 		switch ($type) {
 			case CACHE_TYPE_FILE: return 'file';
 			case CACHE_TYPE_OBJECT: return Config::getVar('cache', 'object_cache');
@@ -113,7 +113,7 @@ class CacheManager {
 	 * Get the path in which file caches will be stored.
 	 * @return string The full path to the file cache directory
 	 */
-	function getFileCachePath() {
+	static function getFileCachePath() {
 		return Core::getBaseDir() . DIRECTORY_SEPARATOR . 'cache';
 	}
 

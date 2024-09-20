@@ -23,7 +23,7 @@ class PluginRegistry {
 	 * arrays by category.
 	 * @param $category String the name of the category to retrieve
 	 */
-	function &getPlugins($category = null) {
+	static function &getPlugins($category = null) {
 		$plugins =& Registry::get('plugins');
 		if ($category !== null) return $plugins[$category];
 		return $plugins;
@@ -32,7 +32,7 @@ class PluginRegistry {
 	/**
 	 * Get all plugins in a single array.
 	 */
-	function &getAllPlugins() {
+	static function &getAllPlugins() {
 		$plugins =& PluginRegistry::getPlugins();
 		$allPlugins = array();
 		if (is_array($plugins)) foreach ($plugins as $category => $list) {
@@ -48,7 +48,7 @@ class PluginRegistry {
 	 * @param $path The path the plugin was found in
 	 * @return boolean True IFF the plugin was registered successfully
 	 */
-	function register($category, &$plugin, $path) {
+	static function register($category, &$plugin, $path) {
 		// Normalize plugin name to lower case for
 		// PHP4 compatibility in case we use class names here.
 		$pluginName = $plugin->getName();
@@ -72,7 +72,7 @@ class PluginRegistry {
 	 * @param $category String category name
 	 * @param $name String plugin name
 	 */
-	function &getPlugin ($category, $name) {
+	static function &getPlugin ($category, $name) {
 		$plugins =& PluginRegistry::getPlugins();
 		$plugin = @$plugins[$category][$name];
 		return $plugin;
@@ -85,7 +85,7 @@ class PluginRegistry {
 	 *  plug-ins (db-installation required), otherwise look on
 	 *  disk and load all available plug-ins (no db required).
 	 */
-	function &loadCategory ($category, $enabledOnly = false) {
+	static function &loadCategory ($category, $enabledOnly = false) {
 		$plugins = array();
 		$categoryDir = PLUGINS_PREFIX . $category;
 		if (!is_dir($categoryDir)) return $plugins;
@@ -152,7 +152,7 @@ class PluginRegistry {
 	 * @param $pathName string
 	 * @return object
 	 */
-	function &loadPlugin($category, $pathName) {
+	static function &loadPlugin($category, $pathName) {
 		$pluginPath = PLUGINS_PREFIX . $category . '/' . $pathName;
 		$plugin = null;
 		if (!file_exists($pluginPath . '/index.php')) return $plugin;
@@ -167,7 +167,7 @@ class PluginRegistry {
 	/**
 	 * Get a list of the various plugin categories available.
 	 */
-	function getCategories() {
+	static function getCategories() {
 		$application =& PKPApplication::getApplication();
 		$categories = $application->getPluginCategories();
 		HookRegistry::call('PluginRegistry::getCategories', array(&$categories));
@@ -178,7 +178,7 @@ class PluginRegistry {
 	 * Load all plugins in the system and return them in a single array.
 	 * @param $enabledOnly boolean load only enabled plug-ins
 	 */
-	function &loadAllPlugins($enabledOnly = false) {
+	static function &loadAllPlugins($enabledOnly = false) {
 		foreach (PluginRegistry::getCategories() as $category) {
 			PluginRegistry::loadCategory($category, $enabledOnly);
 		}

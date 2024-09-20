@@ -94,7 +94,7 @@ class PKPHandler {
 	/**
 	 * Fallback method in case request handler does not implement index method.
 	 */
-	function index() {
+	function index($args, &$request) {
 		$dispatcher =& $this->getDispatcher();
 		if (isset($dispatcher)) $dispatcher->handle404();
 		else Dispatcher::handle404(); // For old-style handlers

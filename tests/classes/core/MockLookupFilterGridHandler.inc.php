@@ -13,7 +13,7 @@
  */
 
 class LookupFilterGridHandler {
-	function LookupFilterGridHandler() {
+	function __construct() {
 	}
 
 	function fetchGrid() {

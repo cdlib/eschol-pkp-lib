@@ -248,7 +248,7 @@ class DBConnection {
 	 * @param $sql string SQL statement being run
 	 * @param $start string a float representing the unix microtime the query started
 	 */
-	function logQuery($sql, $start, $params = array()) {
+	static function logQuery($sql, $start, $params = array()) {
 		if (!Config::getVar('debug', 'show_stats')) return;
 
 		$queries =& Registry::get('queries', true, array());

@@ -76,7 +76,7 @@ class PKPRequest {
 	 * Perform an HTTP redirect to an absolute or relative (to base system URL) URL.
 	 * @param $url string (exclude protocol for local redirects)
 	 */
-	function redirectUrl($url) {
+	static function redirectUrl($url) {
 		PKPRequest::_checkThis();
 
 		if (HookRegistry::call('Request::redirect', array(&$url))) {
@@ -90,7 +90,7 @@ class PKPRequest {
 	/**
 	 * Redirect to the current URL, forcing the HTTPS protocol to be used.
 	 */
-	function redirectSSL() {
+	static function redirectSSL() {
 		$_this =& PKPRequest::_checkThis();
 
 		$url = 'https://' . $_this->getServerHost() . $_this->getRequestPath();
@@ -102,7 +102,7 @@ class PKPRequest {
 	/**
 	 * Redirect to the current URL, forcing the HTTP protocol to be used.
 	 */
-	function redirectNonSSL() {
+	static function redirectNonSSL() {
 		$_this =& PKPRequest::_checkThis();
 
 		$url = 'http://' . $_this->getServerHost() . $_this->getRequestPath();
@@ -115,7 +115,7 @@ class PKPRequest {
 	 * Get the IF_MODIFIED_SINCE date (as a numerical timestamp) if available
 	 * @return int
 	 */
-	function getIfModifiedSince() {
+	static function getIfModifiedSince() {
 		if (!isset($_SERVER['HTTP_IF_MODIFIED_SINCE'])) return null;
 		return strtotime($_SERVER['HTTP_IF_MODIFIED_SINCE']);
 	}
@@ -124,7 +124,7 @@ class PKPRequest {
 	 * Get the base URL of the request (excluding script).
 	 * @return string
 	 */
-	function getBaseUrl() {
+	static function getBaseUrl() {
 		$_this =& PKPRequest::_checkThis();
 
 		if (!isset($_this->_baseUrl)) {
@@ -146,7 +146,7 @@ class PKPRequest {
 	 * Get the base path of the request (excluding trailing slash).
 	 * @return string
 	 */
-	function getBasePath() {
+	static function getBasePath() {
 		$_this =& PKPRequest::_checkThis();
 
 		if (!isset($_this->_basePath)) {
@@ -164,7 +164,7 @@ class PKPRequest {
 	 * Deprecated
 	 * @see PKPPageRouter::getIndexUrl()
 	 */
-	function getIndexUrl() {
+	static function getIndexUrl() {
 		static $indexUrl;
 
 		$_this =& PKPRequest::_checkThis();
@@ -182,7 +182,7 @@ class PKPRequest {
 	 * Get the complete URL to this page, including parameters.
 	 * @return string
 	 */
-	function getCompleteUrl() {
+	static function getCompleteUrl() {
 		$_this =& PKPRequest::_checkThis();
 
 		static $completeUrl;
@@ -201,7 +201,7 @@ class PKPRequest {
 	 * Get the complete URL of the request.
 	 * @return string
 	 */
-	function getRequestUrl() {
+	static function getRequestUrl() {
 		$_this =& PKPRequest::_checkThis();
 
 		static $requestUrl;
@@ -218,7 +218,7 @@ class PKPRequest {
 	 * Get the complete set of URL parameters to the current request.
 	 * @return string
 	 */
-	function getQueryString() {
+	static function getQueryString() {
 		PKPRequest::_checkThis();
 
 		static $queryString;
@@ -235,7 +235,7 @@ class PKPRequest {
 	 * Get the complete set of URL parameters to the current request as an associative array.
 	 * @return array
 	 */
-	function getQueryArray() {
+	static function getQueryArray() {
 		$_this =& PKPRequest::_checkThis();
 
 		$queryString = $_this->getQueryString();
@@ -252,7 +252,7 @@ class PKPRequest {
 	 * Get the completed path of the request.
 	 * @return string
 	 */
-	function getRequestPath() {
+	static function getRequestPath() {
 		$_this =& PKPRequest::_checkThis();
 
 		if (!isset($_this->_requestPath)) {
@@ -275,7 +275,7 @@ class PKPRequest {
 	 * port number if non-standard.
 	 * @return string
 	 */
-	function getServerHost($default = 'localhost') {
+	static function getServerHost($default = 'localhost') {
 		$_this =& PKPRequest::_checkThis();
 
 		if (!isset($_this->_serverHost)) {
@@ -292,7 +292,7 @@ class PKPRequest {
 	 * Get the protocol used for the request (HTTP or HTTPS).
 	 * @return string
 	 */
-	function getProtocol() {
+	static function getProtocol() {
 		$_this =& PKPRequest::_checkThis();
 
 		if (!isset($_this->_protocol)) {
@@ -306,7 +306,7 @@ class PKPRequest {
 	 * Get the request method
 	 * @return string
 	 */
-	function getRequestMethod() {
+	static function getRequestMethod() {
 		PKPRequest::_checkThis();
 
 		$requestMethod = (isset($_SERVER['REQUEST_METHOD']) ? $_SERVER['REQUEST_METHOD'] : '');
@@ -317,7 +317,7 @@ class PKPRequest {
 	 * Determine whether the request is a POST request
 	 * @return boolean
 	 */
-	function isPost() {
+	static function isPost() {
 		$_this =& PKPRequest::_checkThis();
 
 		return ($_this->getRequestMethod() == 'POST');
@@ -327,7 +327,7 @@ class PKPRequest {
 	 * Determine whether the request is a GET request
 	 * @return boolean
 	 */
-	function isGet() {
+	static function isGet() {
 		$_this =& PKPRequest::_checkThis();
 
 		return ($_this->getRequestMethod() == 'GET');
@@ -337,7 +337,7 @@ class PKPRequest {
 	 * Get the remote IP address of the current request.
 	 * @return string
 	 */
-	function getRemoteAddr() {
+	static function getRemoteAddr() {
 		PKPRequest::_checkThis();
 
 		static $ipaddr;
@@ -364,7 +364,7 @@ class PKPRequest {
 	 * Get the remote domain of the current request
 	 * @return string
 	 */
-	function getRemoteDomain() {
+	static function getRemoteDomain() {
 		$_this =& PKPRequest::_checkThis();
 
 		static $remoteDomain;
@@ -380,7 +380,7 @@ class PKPRequest {
 	 * Get the user agent of the current request.
 	 * @return string
 	 */
-	function getUserAgent() {
+	static function getUserAgent() {
 		PKPRequest::_checkThis();
 
 		static $userAgent;
@@ -403,7 +403,7 @@ class PKPRequest {
 	 * Determine whether a user agent is a bot or not using an external
 	 * list of regular expressions.
 	 */
-	function isBot() {
+	static function isBot() {
 		$_this =& PKPRequest::_checkThis();
 
 		static $isBot;
@@ -425,7 +425,7 @@ class PKPRequest {
 	/**
 	 * Return true if PATH_INFO is enabled.
 	 */
-	function isPathInfoEnabled() {
+	static function isPathInfoEnabled() {
 		$_this =& PKPRequest::_checkThis();
 
 		if (!isset($_this->_isPathInfoEnabled)) {
@@ -437,7 +437,7 @@ class PKPRequest {
 	/**
 	 * Return true if RESTFUL_URLS is enabled.
 	 */
-	function isRestfulUrlsEnabled() {
+	static function isRestfulUrlsEnabled() {
 		$_this =& PKPRequest::_checkThis();
 
 		if (!isset($_this->_isRestfulUrlsEnabled)) {
@@ -450,7 +450,7 @@ class PKPRequest {
 	 * Get site data.
 	 * @return Site
 	 */
-	function &getSite() {
+	static function &getSite() {
 		PKPRequest::_checkThis();
 
 		$site =& Registry::get('site', true, null);
@@ -468,7 +468,7 @@ class PKPRequest {
 	 * Get the user session associated with the current request.
 	 * @return Session
 	 */
-	function &getSession() {
+	static function &getSession() {
 		PKPRequest::_checkThis();
 
 		$session =& Registry::get('session', true, null);
@@ -485,7 +485,7 @@ class PKPRequest {
 	 * Get the user associated with the current request.
 	 * @return User
 	 */
-	function &getUser() {
+	static function &getUser() {
 		PKPRequest::_checkThis();
 
 		$user =& Registry::get('user', true, null);
@@ -502,7 +502,7 @@ class PKPRequest {
 	 * Get the value of a GET/POST variable.
 	 * @return mixed
 	 */
-	function getUserVar($key) {
+	static function getUserVar($key) {
 		$_this =& PKPRequest::_checkThis();
 
 		// Get all vars (already cleaned)
@@ -519,7 +519,7 @@ class PKPRequest {
 	 * Get all GET/POST variables as an array
 	 * @return array
 	 */
-	function &getUserVars() {
+	static function &getUserVars() {
 		$_this =& PKPRequest::_checkThis();
 
 		if (!isset($_this->_requestVars)) {
@@ -542,7 +542,7 @@ class PKPRequest {
 	 * @param $defaultSecond int
 	 * @return Date
 	 */
-	function getUserDateVar($prefix, $defaultDay = null, $defaultMonth = null, $defaultYear = null, $defaultHour = 0, $defaultMinute = 0, $defaultSecond = 0) {
+	static function getUserDateVar($prefix, $defaultDay = null, $defaultMonth = null, $defaultYear = null, $defaultHour = 0, $defaultMinute = 0, $defaultSecond = 0) {
 		$_this =& PKPRequest::_checkThis();
 
 		$monthPart = $_this->getUserVar($prefix . 'Month');
@@ -578,7 +578,7 @@ class PKPRequest {
 	 * Strips slashes if necessary, then sanitizes variable as per Core::cleanVar().
 	 * @param $var mixed
 	 */
-	function cleanUserVar(&$var) {
+	static function cleanUserVar(&$var) {
 		$_this =& PKPRequest::_checkThis();
 
 		if (isset($var) && is_array($var)) {
@@ -597,7 +597,7 @@ class PKPRequest {
 	 * Get the value of a cookie variable.
 	 * @return mixed
 	 */
-	function getCookieVar($key) {
+	static function getCookieVar($key) {
 		$_this =& PKPRequest::_checkThis();
 
 		if (isset($_COOKIE[$key])) {
@@ -614,7 +614,7 @@ class PKPRequest {
 	 * @param $key string
 	 * @param $value mixed
 	 */
-	function setCookieVar($key, $value) {
+	static function setCookieVar($key, $value) {
 		$_this =& PKPRequest::_checkThis();
 
 		setcookie($key, $value, 0, $_this->getBasePath());
@@ -631,7 +631,7 @@ class PKPRequest {
 	 * @param $params array Map of name => value pairs for additional parameters
 	 * @param $anchor string Name of desired anchor on the target page
 	 */
-	function redirect($context = null, $page = null, $op = null, $path = null, $params = null, $anchor = null) {
+	static function redirect($context = null, $page = null, $op = null, $path = null, $params = null, $anchor = null) {
 		$_this =& PKPRequest::_checkThis();
 		$dispatcher =& $_this->getDispatcher();
 		$_this->redirectUrl($dispatcher->url($_this, ROUTE_PAGE, $context, $page, $op, $path, $params, $anchor));
@@ -641,7 +641,7 @@ class PKPRequest {
 	 * Deprecated
 	 * @see PKPPageRouter::getContext()
 	 */
-	function &getContext() {
+	static function &getContext() {
 		$_this =& PKPRequest::_checkThis();
 		return $_this->_delegateToRouter('getContext');
 	}
@@ -650,7 +650,7 @@ class PKPRequest {
 	 * Deprecated
 	 * @see PKPPageRouter::getRequestedContextPath()
 	 */
-	function getRequestedContextPath($contextLevel = null) {
+	static function getRequestedContextPath($contextLevel = null) {
 		$_this =& PKPRequest::_checkThis();
 
 		// Emulate the old behavior of getRequestedContextPath for
@@ -666,7 +666,7 @@ class PKPRequest {
 	 * Deprecated
 	 * @see PKPPageRouter::getRequestedPage()
 	 */
-	function getRequestedPage() {
+	static function getRequestedPage() {
 		$_this =& PKPRequest::_checkThis();
 		return $_this->_delegateToRouter('getRequestedPage');
 	}
@@ -675,7 +675,7 @@ class PKPRequest {
 	 * Deprecated
 	 * @see PKPPageRouter::getRequestedOp()
 	 */
-	function getRequestedOp() {
+	static function getRequestedOp() {
 		$_this =& PKPRequest::_checkThis();
 		return $_this->_delegateToRouter('getRequestedOp');
 	}
@@ -684,7 +684,7 @@ class PKPRequest {
 	 * Deprecated
 	 * @see PKPPageRouter::getRequestedArgs()
 	 */
-	function getRequestedArgs() {
+	static function getRequestedArgs() {
 		$_this =& PKPRequest::_checkThis();
 		return $_this->_delegateToRouter('getRequestedArgs');
 	}
@@ -693,7 +693,7 @@ class PKPRequest {
 	 * Deprecated
 	 * @see PKPPageRouter::url()
 	 */
-	function url($context = null, $page = null, $op = null, $path = null,
+	static function url($context = null, $page = null, $op = null, $path = null,
 				$params = null, $anchor = null, $escape = false) {
 		$_this =& PKPRequest::_checkThis();
 		return $_this->_delegateToRouter('url', $context, $page, $op, $path,
@@ -714,7 +714,7 @@ class PKPRequest {
 	 *
 	 * @return PKPRequest
 	 */
-	function &_checkThis() {
+	static function &_checkThis() {
 		if (isset($this) && is_a($this, 'PKPRequest')) {
 			return $this;
 		} else {
@@ -745,7 +745,7 @@ class PKPRequest {
 	 *
 	 * @return mixed depends on the called method
 	 */
-	function &_delegateToRouter($method) {
+	static function &_delegateToRouter($method) {
 		// This call is deprecated. We don't trigger a
 		// deprecation error, though, as there are so
 		// many instances of this error that it has a

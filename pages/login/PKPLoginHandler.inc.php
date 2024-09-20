@@ -23,7 +23,7 @@ class PKPLoginHandler extends Handler {
 	 * Display user login form.
 	 * Redirect to user index page if user is already validated.
 	 */
-	function index() {
+	function index($args, &$request) {
 		$this->validate();
 		$this->setupTemplate();
 		if (Validation::isLoggedIn()) {
