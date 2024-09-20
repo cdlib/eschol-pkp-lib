@@ -48,7 +48,6 @@ class DBConnection {
 	 */
 	function __construct() {
 		$this->connected = false;
-                error_log("in constructor");
 		if (func_num_args() == 0) {
 			$this->initDefaultDBConnection();
 		} else {
@@ -219,8 +218,6 @@ class DBConnection {
 			$instance = $setInstance;
 		} else if ($instance === null) {
 			$instance = new DBConnection();
-                        error_log("doing getInstance");
-                        error_log(print_r($instance,true));
 		}
 
 		return $instance;

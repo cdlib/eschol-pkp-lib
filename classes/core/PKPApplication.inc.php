@@ -134,7 +134,7 @@ class PKPApplication {
 	 * Get the request implementation singleton
 	 * @return Request
 	 */
-	function &getRequest() {
+	static function &getRequest() {
 		$request =& Registry::get('request', true, null);
 
 		if (is_null($request)) {
@@ -151,7 +151,7 @@ class PKPApplication {
 	 * Get the dispatcher implementation singleton
 	 * @return Dispatcher
 	 */
-	function &getDispatcher() {
+	static function &getDispatcher() {
 		$dispatcher =& Registry::get('dispatcher', true, null);
 
 		if (is_null($dispatcher)) {
@@ -161,7 +161,7 @@ class PKPApplication {
 			$dispatcher = new Dispatcher();
 
 			// Inject dependency
-			$dispatcher->setApplication($this->getApplication());
+			$dispatcher->setApplication(self::getApplication());
 
 			// Inject router configuration
 			$dispatcher->addRouterName('lib.pkp.classes.core.PKPComponentRouter', ROUTE_COMPONENT);
@@ -216,7 +216,7 @@ class PKPApplication {
 	 * (e.g. array('journal') or array('conference', 'schedConf'))
 	 * @return Array
 	 */
-	function getContextList() {
+	static function getContextList() {
 		// must be implemented by sub-classes
 		assert(false);
 	}
