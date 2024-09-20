@@ -586,7 +586,7 @@ class PKPRequest {
 				$_this->cleanUserVar($var[$key]);
 			}
 		} else if (isset($var)) {
-			$var = Core::cleanVar(get_magic_quotes_gpc() ? stripslashes($var) : $var);
+			$var = Core::cleanVar($var);
 
 		} else {
 			return null;

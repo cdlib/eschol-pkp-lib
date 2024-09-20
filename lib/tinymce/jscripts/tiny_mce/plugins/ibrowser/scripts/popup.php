@@ -12,9 +12,9 @@
 	// Revision: 1.0                   Date: 07/15/2006
 	// ================================================
 
-	if ( get_magic_quotes_gpc() ) {
-		$_GET['url'] = stripslashes($_GET['url']);
-	}
+	//if ( get_magic_quotes_gpc() ) {
+		//$_GET['url'] = stripslashes($_GET['url']);
+	//}
 	$src   = @$_REQUEST['url'];
 	$clTxt = (isset($_REQUEST['clTxt']) ? $_REQUEST['clTxt'] : $cfg['clTxt']);		
 ?>

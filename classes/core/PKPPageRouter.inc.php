@@ -147,7 +147,7 @@ class PKPPageRouter extends PKPRouter {
 				if (count($vars) > $contextDepth+3) {
 					$args = array_slice($vars, $contextDepth+3);
 					for ($i=0, $count=count($args); $i<$count; $i++) {
-						$args[$i] = Core::cleanVar(get_magic_quotes_gpc() ? stripslashes($args[$i]) : $args[$i]);
+						$args[$i] = Core::cleanVar($args[$i]);
 					}
 				}
 			}
