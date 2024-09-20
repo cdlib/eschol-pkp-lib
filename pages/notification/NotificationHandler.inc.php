@@ -20,7 +20,7 @@ class NotificationHandler extends Handler {
 	/**
 	 * Display help table of contents.
 	 */
-	function index() {
+	function index($args, &$request) {
 		$this->validate();
 		$this->setupTemplate();
 		$templateMgr =& TemplateManager::getManager();

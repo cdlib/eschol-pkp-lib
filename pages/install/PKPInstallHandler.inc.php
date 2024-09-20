@@ -23,7 +23,7 @@ class PKPInstallHandler extends Handler {
 	 * If no context is selected, list all.
 	 * Otherwise, display the index page for the selected context.
 	 */
-	function index() {
+	function index($args, &$request) {
 		// Make sure errors are displayed to the browser during install.
 		@ini_set('display_errors', true);
 

@@ -24,7 +24,7 @@ class PKPAnnouncementHandler extends ManagerHandler {
 				'index', 'updateAnnouncement', 'updateAnnouncementType'));
 	}
 
-	function index() {
+	function index($args, &$request) {
 		$this->announcements();
 	}
 

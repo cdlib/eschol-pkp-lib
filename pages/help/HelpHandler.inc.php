@@ -35,7 +35,7 @@ class HelpHandler extends Handler {
 	/**
 	 * Display help table of contents.
 	 */
-	function index() {
+	function index($args, &$request) {
 		$this->view(array('index', 'topic', '000000'));
 	}
 

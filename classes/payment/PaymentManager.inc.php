@@ -18,7 +18,7 @@ class PaymentManager {
 	/**
 	 * Get the payment manager.
 	 */
-	function &getManager() {
+	static function &getManager() {
 		// must be implemented by sub-classes
 		assert(false);
 	}
