@@ -116,7 +116,7 @@ class perf_mysql extends adodb_perf{
 		return $s;
 	}
 
-	function Tables()
+	function Tables($orderby = '1')
 	{
 		if (!$this->tablesSQL) return false;
 

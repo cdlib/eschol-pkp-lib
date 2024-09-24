@@ -80,7 +80,7 @@ class ADODB2_sapdb extends ADODB_DataDict {
 	}
 	
 	// return string must begin with space
-	function _CreateSuffix($fname,$ftype,$fnotnull,$fdefault,$fautoinc,$fconstraint,$funsigned)
+	function _CreateSuffix($fname,$ftype,$fnotnull,$fdefault,$fautoinc,$fconstraint,$funsigned = null)
 	{	
 		$suffix = '';
 		if ($funsigned) $suffix .= ' UNSIGNED';
@@ -99,7 +99,7 @@ class ADODB2_sapdb extends ADODB_DataDict {
 		return array( 'ALTER TABLE ' . $tabname . ' ADD (' . implode(', ',$lines) . ')' );
 	}
 	
-	function AlterColumnSQL($tabname, $flds)
+	function AlterColumnSQL($tabname, $flds, $tableflds = '', $tableoptions = '')
 	{
 		$tabname = $this->TableName ($tabname);
 		$sql = array();
@@ -107,7 +107,7 @@ class ADODB2_sapdb extends ADODB_DataDict {
 		return array( 'ALTER TABLE ' . $tabname . ' MODIFY (' . implode(', ',$lines) . ')' );
 	}
 
-	function DropColumnSQL($tabname, $flds)
+	function DropColumnSQL($tabname, $flds, $tableflds = '', $tableoptions = '')
 	{
 		$tabname = $this->TableName ($tabname);
 		if (!is_array($flds)) $flds = explode(',',$flds);

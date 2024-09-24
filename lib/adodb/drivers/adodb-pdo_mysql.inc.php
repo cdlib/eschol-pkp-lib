@@ -61,7 +61,7 @@ class ADODB_pdo_mysql extends ADODB_pdo {
 		$this->Execute("SET SESSION TRANSACTION ".$transaction_mode);
 	}
 	
- 	function &MetaColumns($table) 
+ 	function &MetaColumns($table, $normalize = \true) 
 	{
 		$this->_findschema($table,$schema);
 		if ($schema) {

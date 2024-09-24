@@ -440,7 +440,7 @@ class ADODB_odbtp extends ADOConnection{
 		return array($sql,$stmt,false);
 	}
 
-	function PrepareSP($sql)
+	function PrepareSP($sql, $param = \true)
 	{
 		if (!$this->_canPrepareSP) return $sql; // Can't prepare procedures
 

@@ -35,7 +35,7 @@ class  ADODB_ado_access extends ADODB_ado {
 	
 	function BeginTrans() { return false;}
 	
-	function CommitTrans() { return false;}
+	function CommitTrans($ok = \true) { return false;}
 	
 	function RollbackTrans() { return false;}
 

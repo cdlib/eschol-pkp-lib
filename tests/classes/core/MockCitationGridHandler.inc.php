@@ -31,7 +31,7 @@ class CitationGridHandler extends PKPHandler {
 		$this->addRoleAssignment(ROLE_ID_AUTHOR, 'fetch');
 	}
 
-	function authorize() {
+	function authorize(&$request, &$args, $roleAssignments) {
 		return true;
 	}
 

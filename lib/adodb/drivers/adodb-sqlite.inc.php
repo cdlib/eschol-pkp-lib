@@ -78,7 +78,7 @@ class ADODB_sqlite extends ADOConnection {
 	}
 	
 	// mark newnham
-	function &MetaColumns($tab)
+	function &MetaColumns($tab, $normalize = \true)
 	{
 	  global $ADODB_FETCH_MODE;
 	  $false = false;

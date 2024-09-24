@@ -46,7 +46,7 @@ class ADODB2_firebird extends ADODB_DataDict {
 		}
 	}
 	
-	function NameQuote($name = NULL)
+	function NameQuote($name = NULL, $allowBrackets = \false)
 	{
 		if (!is_string($name)) {
 			return FALSE;
@@ -93,7 +93,7 @@ class ADODB2_firebird extends ADODB_DataDict {
 	}
 	
 
-	function _CreateSuffix($fname,$ftype,$fnotnull,$fdefault,$fautoinc,$fconstraint,$funsigned)
+	function _CreateSuffix($fname,$ftype,$fnotnull,$fdefault,$fautoinc,$fconstraint,$funsigned = null)
 	{
 		$suffix = '';
 		

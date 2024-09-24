@@ -46,7 +46,7 @@ class PKPInstallHandler extends Handler {
 	/**
 	 * Redirect to index if system has already been installed.
 	 */
-	function validate() {
+	function validate($requiredContexts = \null, $request = \null) {
 		if (Config::getVar('general', 'installed')) {
 			PKPRequest::redirect(null, 'index');
 		}

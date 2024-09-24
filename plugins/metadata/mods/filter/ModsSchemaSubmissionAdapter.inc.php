@@ -39,7 +39,7 @@ class ModsSchemaSubmissionAdapter extends MetadataDataObjectAdapter {
 	 * @param $replace boolean whether to replace the existing submission
 	 * @param $authorClassName string the application specific author class name
 	 */
-	function &injectMetadataIntoDataObject(&$modsDescription, &$submission, $replace, $authorClassName) {
+	function &injectMetadataIntoDataObject(&$modsDescription, &$submission, $replace, $authorClassName = null) {
 		if ($replace) $submission = new Submission();
 		assert(is_a($submission, 'Submission'));
 		assert($modsDescription->getMetadataSchemaName() == 'plugins.metadata.mods.schema.ModsSchema');

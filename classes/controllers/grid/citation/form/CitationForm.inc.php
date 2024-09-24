@@ -169,7 +169,7 @@ class CitationForm extends Form {
 	 * injection can easily be done in one step. It therefore avoids
 	 * code duplication and improves performance to do both here.
 	 */
-	function validate() {
+	function validate($callHooks = \true) {
 		// Make sure that this method is not called twice which
 		// would corrupt internal state.
 		assert(empty($this->_metadataDescriptions));
@@ -300,7 +300,7 @@ class CitationForm extends Form {
 	 * @param $template string the template to render the form
 	 * @return string the rendered form
 	 */
-	function fetch($request, $template = CITATION_FORM_FULL_TEMPLATE) {
+	function fetch($request, $template = CITATION_FORM_FULL_TEMPLATE, $display = \false) {
 		// Instantiate objects used throughout.
 		$user =& $request->getUser();
 		$router =& $request->getRouter();

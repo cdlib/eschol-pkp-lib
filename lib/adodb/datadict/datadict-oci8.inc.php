@@ -121,7 +121,7 @@ class ADODB2_oci8 extends ADODB_DataDict {
 		return $sql;
 	}
 	
-	function AlterColumnSQL($tabname, $flds)
+	function AlterColumnSQL($tabname, $flds, $tableflds = '', $tableoptions = '')
 	{
 		$f = array();
 		list($lines,$pkey) = $this->_GenFields($flds);
@@ -134,7 +134,7 @@ class ADODB2_oci8 extends ADODB_DataDict {
 		return $sql;
 	}
 	
-	function DropColumnSQL($tabname, $flds)
+	function DropColumnSQL($tabname, $flds, $tableflds = '', $tableoptions = '')
 	{
 		if (!is_array($flds)) $flds = explode(',',$flds);
 		foreach ($flds as $k => $v) $flds[$k] = $this->NameQuote($v);
@@ -156,7 +156,7 @@ class ADODB2_oci8 extends ADODB_DataDict {
 	}
 	
 	// return string must begin with space
-	function _CreateSuffix($fname,$ftype,$fnotnull,$fdefault,$fautoinc,$fconstraint,$funsigned)
+	function _CreateSuffix($fname,$ftype,$fnotnull,$fdefault,$fautoinc,$fconstraint,$funsigned = null)
 	{
 		$suffix = '';
 		

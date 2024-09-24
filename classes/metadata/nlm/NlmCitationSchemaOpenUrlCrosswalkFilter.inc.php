@@ -34,7 +34,7 @@ class NlmCitationSchemaOpenUrlCrosswalkFilter extends OpenUrlCrosswalkFilter {
 	/**
 	 * @see Filter::getSupportedTransformation()
 	 */
-	function getSupportedTransformation() {
+	function getSupportedTransformation($fromSchema = \null, $toSchema = \null) {
 		// We transform NLM citation to all types of OpenURL schema
 		return parent::getSupportedTransformation('lib.pkp.classes.metadata.nlm.NlmCitationSchema',
 				'lib.pkp.classes.metadata.openurl.OpenUrlBaseSchema');

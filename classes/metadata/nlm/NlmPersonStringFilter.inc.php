@@ -71,7 +71,7 @@ class NlmPersonStringFilter extends Filter {
 	 * @param $multiMode array the transformation in multi mode
 	 * @return array the supported transformations depending on the filter mode
 	 */
-	function getSupportedTransformations($singleMode, $multiMode) {
+	function getSupportedTransformations($singleMode = null, $multiMode = null) {
 		switch($this->getFilterMode()) {
 			case PERSON_STRING_FILTER_SINGLE:
 				return array($singleMode);

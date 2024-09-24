@@ -326,7 +326,7 @@ class ADODB_mssql extends ADOConnection {
 	}
 
 
-	function &MetaIndexes($table,$primary=false)
+	function &MetaIndexes($table,$primary=false, $owner = \false)
 	{
 		$table = $this->qstr($table);
 
@@ -429,7 +429,7 @@ order by constraint_name, referenced_table_name, keyno";
 
 	// "Stein-Aksel Basma" <basma@accelero.no>
 	// tested with MSSQL 2000
-	function &MetaPrimaryKeys($table)
+	function &MetaPrimaryKeys($table, $owner = \false)
 	{
 	global $ADODB_FETCH_MODE;
 
@@ -539,7 +539,7 @@ order by constraint_name, referenced_table_name, keyno";
 		return array($sql,$this->qstr($sql2),$max);
 	}
 
-	function PrepareSP($sql)
+	function PrepareSP($sql, $param = \true)
 	{
 		if (!$this->_has_mssql_init) {
 			ADOConnection::outp( "PrepareSP: mssql_init only available since PHP 4.1.0");

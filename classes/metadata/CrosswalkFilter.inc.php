@@ -34,7 +34,7 @@ class CrosswalkFilter extends Filter {
 	/**
 	 * @see Filter::getSupportedTransformation()
 	 */
-	function getSupportedTransformation($fromSchema, $toSchema) {
+	function getSupportedTransformation($fromSchema = null, $toSchema = null) {
 		// We allow any type of described subject. See MetadataTypeDescription
 		// class doc for meta-data schema validation syntax used below.
 		return array('metadata::'.$fromSchema.'(*)', 'metadata::'.$toSchema.'(*)');

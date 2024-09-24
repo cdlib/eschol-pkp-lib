@@ -59,7 +59,7 @@ class PKPTemporaryFileManager extends FileManager {
 	 * Delete a file by ID.
 	 * @param $fileId int
 	 */
-	function deleteFile($fileId, $userId) {
+	function deleteFile($fileId, $userId = null) {
 		$temporaryFile =& $this->getFile($fileId, $userId);
 
 		parent::deleteFile($this->filesDir . $temporaryFile->getFileName());
@@ -88,7 +88,7 @@ class PKPTemporaryFileManager extends FileManager {
 	 * View a file inline (variant of downloadFile).
 	 * @see PKPTemporaryFileManager::downloadFile
 	 */
-	function viewFile($fileId) {
+	function viewFile($fileId, $type = \null) {
 		$this->downloadFile($fileId, true);
 	}
 

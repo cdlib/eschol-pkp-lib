@@ -34,7 +34,7 @@ class PKPNotificationSettingsForm extends Form {
 	/**
 	 * Display the form.
 	 */
-	function display() {
+	function display($request = \null, $template = \null) {
 		$user = Request::getUser();
 		$userId = $user->getId();
 

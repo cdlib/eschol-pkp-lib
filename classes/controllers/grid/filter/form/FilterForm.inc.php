@@ -121,7 +121,7 @@ class FilterForm extends Form {
 	* Initialize form data.
 	* @param $alreadyInstantiatedFilters array
 	*/
-	function initData(&$alreadyInstantiatedFilters) {
+	function initData(&$alreadyInstantiatedFilters = null) {
 		// Transport filter/template id.
 		$this->readUserVars(array('filterId', 'filterTemplateId'));
 
@@ -191,7 +191,7 @@ class FilterForm extends Form {
 	/**
 	 * @see Form::fetch()
 	 */
-	function fetch(&$request) {
+	function fetch(&$request, $template = \null, $display = \false) {
 		$templateMgr =& TemplateManager::getManager($request);
 
 		// The form description depends on the current state
@@ -233,7 +233,7 @@ class FilterForm extends Form {
 	 * Save filter
 	 * @param $request PKPRequest
 	 */
-	function execute(&$request) {
+	function execute(&$request = null) {
 		$filter =& $this->getFilter();
 		assert(is_a($filter, 'Filter'));
 

@@ -283,7 +283,7 @@ class ADODB_mysqli extends ADOConnection {
 	}
 
 
-	function &MetaIndexes ($table, $primary = FALSE)
+	function &MetaIndexes ($table, $primary = FALSE, $owner = \false)
 	{
 		// save old fetch mode
 		global $ADODB_FETCH_MODE;
@@ -494,7 +494,7 @@ class ADODB_mysqli extends ADOConnection {
 	    return  $foreign_keys;
 	}
 
- 	function &MetaColumns($table) 
+ 	function &MetaColumns($table, $normalize = \true) 
 	{
 		$false = false;
 		if (!$this->metaColumnsSQL)

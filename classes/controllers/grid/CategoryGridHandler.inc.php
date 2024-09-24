@@ -35,7 +35,7 @@ class CategoryGridHandler extends GridHandler {
 	 * @see PKPHandler::initialize()
 	 * @param $request PKPRequest
 	 */
-	function initialize(&$request) {
+	function initialize(&$request, $args = \null) {
 		parent::initialize($request);
 	}
 

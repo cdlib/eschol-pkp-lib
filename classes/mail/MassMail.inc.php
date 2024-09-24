@@ -52,7 +52,7 @@ class MassMail extends MailTemplate {
 	 * Send the email.
 	 * @return boolean
 	 */
-	function send() {
+	function send($clearAttachments = \true) {
 		@set_time_limit(0);
 
 		$realRecipients = $this->getRecipients();

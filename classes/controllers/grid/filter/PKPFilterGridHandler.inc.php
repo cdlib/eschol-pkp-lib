@@ -124,7 +124,7 @@ class PKPFilterGridHandler extends GridHandler {
 	 * Configure the grid
 	 * @see PKPHandler::initialize()
 	 */
-	function initialize(&$request) {
+	function initialize(&$request, $args = \null) {
 		parent::initialize($request);
 
 		// Load manager-specific translations

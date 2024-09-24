@@ -155,7 +155,7 @@ class MetadataDescriptionDAO extends DAO {
 	 * Get the ID of the last inserted Source Description.
 	 * @return int
 	 */
-	function getInsertId() {
+	function getInsertId($table = '', $id = '', $callHooks = \true) {
 		return parent::getInsertId('metadata_descriptions', 'metadata_description_id');
 	}
 

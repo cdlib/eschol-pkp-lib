@@ -53,7 +53,7 @@ class ADODB_SAPDB extends ADODB_odbc {
 		return $this->GetCol("SELECT columnname FROM COLUMNS WHERE tablename=$table AND mode='KEY' ORDER BY pos");
 	}
 
- 	function &MetaIndexes ($table, $primary = FALSE)
+ 	function &MetaIndexes ($table, $primary = FALSE, $owner = \false)
 	{
 		$table = $this->Quote(strtoupper($table));
 
@@ -140,7 +140,7 @@ class ADODB_SAPDB extends ADODB_odbc {
 		return $retarr;
 	}
 
-	function MetaColumnNames($table)
+	function MetaColumnNames($table, $numIndexes = \false, $useattnum = \false)
 	{
 		$table = $this->Quote(strtoupper($table));
 
