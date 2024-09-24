@@ -25,7 +25,7 @@ class VersionCheck {
 	 * Return information about the latest available version.
 	 * @return array
 	 */
-	function &getLatestVersion() {
+	static function &getLatestVersion() {
 		$application =& PKPApplication::getApplication();
 		$returner =& VersionCheck::parseVersionXML(
 			$application->getVersionDescriptorUrl()
@@ -37,7 +37,7 @@ class VersionCheck {
 	 * Return the currently installed database version.
 	 * @return Version
 	 */
-	function &getCurrentDBVersion() {
+	static function &getCurrentDBVersion() {
 		$versionDao =& DAORegistry::getDAO('VersionDAO');
 		$dbVersion =& $versionDao->getCurrentVersion();
 		return $dbVersion;
@@ -47,7 +47,7 @@ class VersionCheck {
 	 * Return the current code version.
 	 * @return Version
 	 */
-	function &getCurrentCodeVersion() {
+	static function &getCurrentCodeVersion() {
 		$versionInfo = VersionCheck::parseVersionXML(VERSION_CODE_PATH);
 		if ($versionInfo) {
 			$version = $versionInfo['version'];
@@ -61,7 +61,7 @@ class VersionCheck {
 	 * Parse information from a version XML file.
 	 * @return array
 	 */
-	function &parseVersionXML($url) {
+	static function &parseVersionXML($url) {
 		$xmlDao = new XMLDAO();
 		$data = $xmlDao->parseStruct($url, array());
 		if (!$data) {
@@ -118,7 +118,7 @@ class VersionCheck {
 	 * @param $codeVersion as returned by getCurrentCodeVersion()
 	 * @return string
 	 */
-	function getPatch(&$versionInfo, $codeVersion = null) {
+	static function getPatch(&$versionInfo, $codeVersion = null) {
 		if (!isset($codeVersion)) {
 			$codeVersion =& VersionCheck::getCurrentCodeVersion();
 		}
@@ -137,7 +137,7 @@ class VersionCheck {
 	 * @param $templateMgr TemplateManager
 	 * @return Version or null if invalid or missing version file
 	 */
-	function &getValidPluginVersionInfo($versionFile, &$templateMgr) {
+	static function &getValidPluginVersionInfo($versionFile, &$templateMgr) {
 		$nullVar = null;
 		if (FileManager::fileExists($versionFile)) {
 			$versionInfo =& VersionCheck::parseVersionXML($versionFile);

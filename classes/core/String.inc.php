@@ -168,7 +168,7 @@ class OjsString {
 	}
 
 	/**
-	 * @see http://ca.php.net/manual/en/function.substr.php
+	 * @see http://ca.php.net/manual/en/static function.substr.php
 	 */
 	static function substr($string, $start, $length = false) {
 		if (defined('ENABLE_MBSTRING')) {
@@ -185,7 +185,7 @@ class OjsString {
 
 	/**
 	 * @see http://ca.php.net/manual/en/function.substr_replace.php
-	 * Thanks to poster at http://ca.php.net/manual/en/function.substr-replace.php#90146
+	 * Thanks to poster at http://ca.php.net/manual/en/static function.substr-replace.php#90146
 	 */
 	static function substr_replace($string, $replacement, $start, $length = null) {
 		if (function_exists('mb_substr_replace') === false) {

@@ -59,7 +59,7 @@ class ArrayItemIterator extends ItemIterator {
 	 * @param $theArray array
 	 * @param $theRange object
 	 */
-	function &fromRangeInfo(&$theArray, &$theRange) {
+	static function &fromRangeInfo(&$theArray, &$theRange) {
 		if ($theRange && $theRange->isValid()) {
 			$theIterator = new ArrayItemIterator($theArray, $theRange->getPage(), $theRange->getCount());
 		} else {

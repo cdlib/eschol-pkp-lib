@@ -63,7 +63,7 @@ class FileManager {
 	 * @param $fileName string the name of the file used in the POST form
 	 * @return string (boolean false if no such file)
 	 */
-	function getUploadedFilePath($fileName) {
+	static function getUploadedFilePath($fileName) {
 		if (isset($_FILES[$fileName]['tmp_name']) && is_uploaded_file($_FILES[$fileName]['tmp_name'])) {
 			return $_FILES[$fileName]['tmp_name'];
 		}
@@ -120,7 +120,7 @@ class FileManager {
 	 * @param $contents string the contents to write to the file
 	 * @return boolean returns true if successful
 	 */
-	function writeFile($dest, &$contents) {
+	static function writeFile($dest, &$contents) {
 		$success = true;
 		$destDir = dirname($dest);
 		if (!FileManager::fileExists($destDir, 'dir')) {
@@ -142,7 +142,7 @@ class FileManager {
 	 * @param $dest string the path where the file is to be saved
 	 * @return boolean returns true if successful
 	 */
-	function copyFile($source, $dest) {
+	static function copyFile($source, $dest) {
 		$success = true;
 		$destDir = dirname($dest);
 		if (!FileManager::fileExists($destDir, 'dir')) {
@@ -161,7 +161,7 @@ class FileManager {
 	 * @param $dest string the path where the directory is to be saved
 	 * @return boolean returns true if successful
 	 */
-	function copyDir($source, $dest) {
+	static function copyDir($source, $dest) {
 		if (is_dir($source)) {
 			FileManager::mkdir($dest);
 			$destDir = dir($source);
@@ -196,7 +196,7 @@ class FileManager {
 	 * @param $output boolean output the file's contents instead of returning a string
 	 * @return boolean
 	 */
-	function &readFile($filePath, $output = false) {
+	static function &readFile($filePath, $output = false) {
 		if (is_readable($filePath)) {
 			$f = fopen($filePath, 'rb');
 			$data = '';
@@ -230,7 +230,7 @@ class FileManager {
 	 * @param $inline print file as inline instead of attachment, optional
 	 * @return boolean
 	 */
-	function downloadFile($filePath, $type = null, $inline = false) {
+	static function downloadFile($filePath, $type = null, $inline = false) {
 		$result = null;
 		if (HookRegistry::call('FileManager::downloadFile', array(&$filePath, &$type, &$inline, &$result))) return $result;
 		if (is_readable($filePath)) {
@@ -261,7 +261,7 @@ class FileManager {
 	 * View a file inline (variant of downloadFile).
 	 * @see FileManager::downloadFile
 	 */
-	function viewFile($filePath, $type = null) {
+	static function viewFile($filePath, $type = null) {
 		FileManager::downloadFile($filePath, $type, true);
 	}
 
@@ -270,7 +270,7 @@ class FileManager {
 	 * @param $filePath string the location of the file to be deleted
 	 * @return boolean returns true if successful
 	 */
-	function deleteFile($filePath) {
+	static function deleteFile($filePath) {
 		if (FileManager::fileExists($filePath)) {
 			return unlink($filePath);
 		} else {
@@ -284,7 +284,7 @@ class FileManager {
 	 * @param $perms string the permissions level of the directory (optional)
 	 * @return boolean returns true if successful
 	 */
-	function mkdir($dirPath, $perms = null) {
+	static function mkdir($dirPath, $perms = null) {
 		if ($perms !== null) {
 			return mkdir($dirPath, $perms);
 		} else {
@@ -307,7 +307,7 @@ class FileManager {
 	 * Delete all contents including directory (equivalent to "rm -r")
 	 * @param $file string the full path of the directory to be removed
 	 */
-	function rmtree($file) {
+	static function rmtree($file) {
 		if (file_exists($file)) {
 			if (is_dir($file)) {
 				$handle = opendir($file);
@@ -332,7 +332,7 @@ class FileManager {
 	 * @param $perms string the permissions level of the directory (optional)
 	 * @return boolean returns true if successful
 	 */
-	function mkdirtree($dirPath, $perms = null) {
+	static function mkdirtree($dirPath, $perms = null) {
 		if (!file_exists($dirPath)) {
 			if (FileManager::mkdirtree(dirname($dirPath), $perms)) {
 				return FileManager::mkdir($dirPath, $perms);
@@ -348,7 +348,7 @@ class FileManager {
 	 * @param $filePath string the file/directory to check
 	 * @param $type string (file|dir) the type of path
 	 */
-	function fileExists($filePath, $type = 'file') {
+	static function fileExists($filePath, $type = 'file') {
 		switch ($type) {
 			case 'file':
 				return file_exists($filePath);
@@ -459,7 +459,7 @@ class FileManager {
 	 * @param string a valid file name
 	 * @return string extension
 	 */
-	function getExtension($fileName) {
+	static function getExtension($fileName) {
 		$extension = '';
 		$fileParts = explode('.', $fileName);
 		if (is_array($fileParts)) {
@@ -483,7 +483,7 @@ class FileManager {
 	 * @param $size int file size in bytes
 	 * @return string
 	 */
-	function getNiceFileSize($size) {
+	static function getNiceFileSize($size) {
 		$niceFileSizeUnits = array('B', 'KB', 'MB', 'GB');
 		for($i = 0; $i < 4 && $size > 1024; $i++) {
 			$size >>= 10;
@@ -497,7 +497,7 @@ class FileManager {
 	 * @param $mask int
 	 * @return boolean
 	 */
-	function setMode($path, $mask) {
+	static function setMode($path, $mask) {
 		$umask = Config::getVar('files', 'umask');
 		if (!$umask)
 			return true;

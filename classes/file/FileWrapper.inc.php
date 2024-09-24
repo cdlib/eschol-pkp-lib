@@ -108,7 +108,7 @@ class FileWrapper {
 	 * @param $url string
 	 * @return FileWrapper
 	 */
-	function &wrapper($url) {
+	static function &wrapper($url) {
 		$info = parse_url($url);
 		if (ini_get('allow_url_fopen') && Config::getVar('general', 'allow_url_fopen')) {
 			$wrapper = new FileWrapper($url, $info);

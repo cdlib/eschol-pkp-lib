@@ -33,7 +33,7 @@ class AccessKeyManager {
 	 * @param $key string
 	 * @return string
 	 */
-	function generateKeyHash($key) {
+	static function generateKeyHash($key) {
 		return md5($key);
 	}
 

@@ -171,7 +171,7 @@ class ReviewFormElement extends DataObject {
 	 * (Includes default '' => "Choose One" string.)
 	 * @return array reviewFormElementType => localeString
 	 */
-	function &getReviewFormElementTypeOptions() {
+	static function &getReviewFormElementTypeOptions() {
 		static $reviewFormElementTypeOptions = array(
 			'' => 'manager.reviewFormElements.chooseType',
 			REVIEW_FORM_ELEMENT_TYPE_SMALL_TEXT_FIELD => 'manager.reviewFormElements.smalltextfield',
@@ -188,7 +188,7 @@ class ReviewFormElement extends DataObject {
 	 * Get an array of all multiple responses element types.
 	 * @return array reviewFormElementTypes
 	 */
-	function &getMultipleResponsesElementTypes() {
+	static function &getMultipleResponsesElementTypes() {
 		static $multipleResponsesElementTypes = array(REVIEW_FORM_ELEMENT_TYPE_CHECKBOXES, REVIEW_FORM_ELEMENT_TYPE_RADIO_BUTTONS, REVIEW_FORM_ELEMENT_TYPE_DROP_DOWN_BOX);
 		return $multipleResponsesElementTypes;
 	}

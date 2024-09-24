@@ -28,7 +28,7 @@ class OAIUtils {
 	 * @param $includeTime boolean include both the time and date
 	 * @return string UTC datestamp
 	 */
-	function UTCDate($timestamp = 0, $includeTime = true) {
+	static function UTCDate($timestamp = 0, $includeTime = true) {
 		$format = "Y-m-d";
 		if($includeTime) {
 			$format .= "\TH:i:s\Z";
@@ -50,7 +50,7 @@ class OAIUtils {
 	 * @param $checkGranularity boolean verify that granularity is correct
 	 * @return int timestamp
 	 */
-	function UTCtoTimestamp($date, $checkGranularity = true) {
+	static function UTCtoTimestamp($date, $checkGranularity = true) {
 		// FIXME Has limited range (see http://php.net/strtotime)
 		if (preg_match("/^\d\d\d\d\-\d\d\-\d\d$/", $date)) {
 			// Match date
@@ -80,7 +80,7 @@ class OAIUtils {
 	 * @param $data mixed request parameter(s)
 	 * @return mixed cleaned request parameter(s)
 	 */
-	function prepInput(&$data) {
+	static function prepInput(&$data) {
 		if (!is_array($data)) {
 			$data = urldecode($data);
 
@@ -102,7 +102,7 @@ class OAIUtils {
 	 * @param $data mixed output parameter(s)
 	 * @return mixed cleaned output parameter(s)
 	 */
-	function prepOutput(&$data) {
+	static function prepOutput(&$data) {
 		if (!is_array($data)) {
 			$data = htmlspecialchars($data);
 
@@ -126,7 +126,7 @@ class OAIUtils {
 	 * @param $duplicate string input data string
 	 * @param $array array of parsed parameters
 	 */
-	function parseStr($string, &$array) {
+	static function parseStr($string, &$array) {
 		$pairs = explode('&', $string);
 		foreach ($pairs as $p) {
 			$vars = explode('=', $p);

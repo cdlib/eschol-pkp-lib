@@ -428,7 +428,7 @@ class MetadataProperty {
 	 *
 	 * @return array supported meta-data property types
 	 */
-	function getSupportedTypes() {
+	static function getSupportedTypes() {
 		static $_supportedTypes = array(
 			METADATA_PROPERTY_TYPE_COMPOSITE,
 			METADATA_PROPERTY_TYPE_VOCABULARY,
@@ -445,7 +445,7 @@ class MetadataProperty {
 	 * NB: PHP4 work-around for a public static class member
 	 * @return array supported cardinalities
 	 */
-	function getSupportedCardinalities() {
+	static function getSupportedCardinalities() {
 		static $_supportedCardinalities = array(
 			METADATA_PROPERTY_CARDINALITY_ONE,
 			METADATA_PROPERTY_CARDINALITY_MANY

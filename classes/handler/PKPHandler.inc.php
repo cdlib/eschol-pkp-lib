@@ -384,7 +384,7 @@ class PKPHandler {
 	 *	To disable persistent page contexts, set this variable to null.
 	 * @return array ($pageNum, $dbResultRange)
 	 */
-	function &getRangeInfo($rangeName, $contextData = null) {
+	static function &getRangeInfo($rangeName, $contextData = null) {
 		//FIXME: is there any way to get around calling a Request (instead of a PKPRequest) here?
 		$context =& Request::getContext();
 		$pageNum = PKPRequest::getUserVar($rangeName . 'Page');
@@ -440,7 +440,7 @@ class PKPHandler {
 	 * @param $contextData array A set of information identifying the page
 	 * @return string hash
 	 */
-	function hashPageContext($contextData = array()) {
+	static function hashPageContext($contextData = array()) {
 		return md5(
 			implode(',', Request::getRequestedContextPath()) . ',' .
 			Request::getRequestedPage() . ',' .

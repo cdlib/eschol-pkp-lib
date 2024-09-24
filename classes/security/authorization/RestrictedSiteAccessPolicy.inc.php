@@ -69,7 +69,7 @@ class RestrictedSiteAccessPolicy extends AuthorizationPolicy {
 	 *
 	 * @return array
 	 */
-	function _getLoginExemptions() {
+	static function _getLoginExemptions() {
 		return array('user', 'login', 'help');
 	}
 }

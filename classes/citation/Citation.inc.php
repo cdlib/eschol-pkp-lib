@@ -219,7 +219,7 @@ class Citation extends DataObject {
 	 * NB: PHP4 work-around for a private static class member
 	 * @return array supported citation states
 	 */
-	function _getSupportedCitationStates() {
+	static function _getSupportedCitationStates() {
 		static $_supportedCitationStates = array(
 			CITATION_RAW,
 			CITATION_CHECKED,

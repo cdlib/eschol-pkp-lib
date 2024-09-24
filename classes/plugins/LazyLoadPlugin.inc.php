@@ -20,7 +20,7 @@ class LazyLoadPlugin extends Plugin {
 	 * Constructor
 	 */
 	function __construct() {
-		parent::Plugin();
+		parent::__construct();
 	}
 
 	/*

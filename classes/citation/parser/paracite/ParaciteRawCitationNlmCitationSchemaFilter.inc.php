@@ -280,7 +280,7 @@ class ParaciteRawCitationNlmCitationSchemaFilter extends NlmCitationSchemaFilter
 	 * NB: PHP4 work-around for a public static class member
 	 * @return array supported citation modules
 	 */
-	function getSupportedCitationModules() {
+	static function getSupportedCitationModules() {
 		static $_supportedCitationModules = array(
 			CITATION_PARSER_PARACITE_STANDARD,
 			CITATION_PARSER_PARACITE_CITEBASE,

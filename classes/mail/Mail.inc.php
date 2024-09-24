@@ -449,7 +449,7 @@ class Mail extends DataObject {
 		} else return true;
 	}
 
-	function encodeDisplayName($displayName) {
+	static function encodeDisplayName($displayName) {
 		if (OjsString::regexp_match('!^[-A-Za-z0-9\!#\$%&\'\*\+\/=\?\^_\`\{\|\}~]+$!', $displayName)) return $displayName;
 		return ('"' . str_replace(
 			array('"', '\\'),

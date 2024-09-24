@@ -24,7 +24,7 @@ class ModsDescriptionXmlFilter extends Filter {
 	/**
 	 * Constructor
 	 */
-	function ModsDescriptionXmlFilter() {
+	function __construct() {
 		$this->setDisplayName('MODS 3.4');
 		parent::__construct();
 	}

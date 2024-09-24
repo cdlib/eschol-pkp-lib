@@ -27,7 +27,7 @@ class PKPHelp {
 	/**
 	 * Get an instance of the Help object.
 	 */
-	function &getHelp() {
+	static function &getHelp() {
 		$instance =& Registry::get('help');
 		if ($instance == null) {
 			unset($instance);
@@ -58,7 +58,7 @@ class PKPHelp {
 	 * If help isn't available for the current locale,
 	 * defaults to en_US.
 	 */
-	function getLocale() {
+	static function getLocale() {
 		$locale = \OjsLocale::getLocale();
 		if (!file_exists("help/$locale/.")) {
 			return 'en_US';

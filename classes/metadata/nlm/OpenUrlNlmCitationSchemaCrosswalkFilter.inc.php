@@ -110,7 +110,7 @@ class OpenUrlNlmCitationSchemaCrosswalkFilter extends OpenUrlCrosswalkFilter {
 	 * filter.
 	 * @return array
 	 */
-	function _getOpenUrlGenreTranslationMapping() {
+	static function _getOpenUrlGenreTranslationMapping() {
 		static $openUrlGenreTranslationMapping = array(
 			OPENURL_GENRE_ARTICLE => NLM_PUBLICATION_TYPE_JOURNAL,
 			OPENURL_GENRE_ISSUE => NLM_PUBLICATION_TYPE_JOURNAL,

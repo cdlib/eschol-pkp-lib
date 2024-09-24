@@ -96,7 +96,7 @@ class SearchFileParser {
 	 * @param $file [Article|Paper]File
 	 * @return SearchFileParser
 	 */
-	function &fromFile(&$file) {
+	static function &fromFile(&$file) {
 		$returner =& SearchFileParser::fromFileType($file->getFileType(), $file->getFilePath());
 		return $returner;
 	}
@@ -106,7 +106,7 @@ class SearchFileParser {
 	 * @param $type string
 	 * @param $path string
 	 */
-	function &fromFileType($type, $path) {
+	static function &fromFileType($type, $path) {
 		switch ($type) {
 			case 'text/plain':
 				$returner = new SearchFileParser($path);

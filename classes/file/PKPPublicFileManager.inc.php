@@ -30,7 +30,7 @@ class PKPPublicFileManager extends FileManager {
 	 * Get the path to the site public files directory.
 	 * @return string
 	 */
-	function getSiteFilesPath() {
+	static function getSiteFilesPath() {
 		return Config::getVar('files', 'public_files_dir') . '/site';
 	}
 

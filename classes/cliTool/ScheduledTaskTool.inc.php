@@ -34,7 +34,7 @@ class ScheduledTaskTool extends CommandLineTool {
 	 * 		If specified, the first parameter should be the path to
 	 *		a tasks XML descriptor file (other than the default)
 	 */
-	function ScheduledTaskTool($argv = array()) {
+	function __construct($argv = array()) {
 		parent::__construct($argv);
 
 		if (isset($this->argv[0])) {

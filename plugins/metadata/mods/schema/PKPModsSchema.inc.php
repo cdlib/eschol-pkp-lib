@@ -49,7 +49,7 @@ class PKPModsSchema extends MetadataSchema {
 	 * @param $useAuthoritiesForSubject boolean whether the subject is
 	 *  free text or controlled by vocabularies.
 	 */
-	function PKPModsSchema($appSpecificAssocType = null, $useAuthoritiesForSubject = false) {
+	function __construct($appSpecificAssocType = null, $useAuthoritiesForSubject = false) {
 		// Configure the meta-data schema.
 		$assocTypes = array(ASSOC_TYPE_CITATION);
 		if (!is_null($appSpecificAssocType)) array_push($assocTypes, $appSpecificAssocType);

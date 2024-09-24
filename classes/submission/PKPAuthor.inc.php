@@ -203,8 +203,8 @@ class PKPAuthor extends DataObject {
 	 * Set eschol_suffix
 	 * @param $escholSuffix string
 	 */
-	function setEscholSuffix($escholSuffix) {
-		return $this->setData('eschol_suffix', $escholSuffix);
+	function setEscholSuffix($escholSuffix, $locale) {
+		return $this->setData('eschol_suffix', $escholSuffix, $locale);
 	}
 
 	function getEscholOrganization($locale) {

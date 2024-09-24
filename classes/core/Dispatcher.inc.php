@@ -235,7 +235,7 @@ class Dispatcher {
 	/**
 	 * Handle a 404 error (page not found).
 	 */
-	function handle404() {
+	static function handle404() {
 		PKPRequest::_checkThis();
 
 		header('HTTP/1.0 404 Not Found');

@@ -150,7 +150,7 @@ class HelpTopicDAO extends XMLDAO {
 	 * @param $dir string
 	 * @modifies $matchingTopics array by reference by making appropriate calls to functions
 	 */
-	function searchDirectory(&$mappingFile, &$matchingTopics,$keyword,$dir) {
+	static function searchDirectory(&$mappingFile, &$matchingTopics,$keyword,$dir) {
 		$currDir = opendir($dir);
 		while (($file = readdir($currDir)) !== false) {
 			$currFile = sprintf('%s/%s',$dir,$file);
@@ -172,7 +172,7 @@ class HelpTopicDAO extends XMLDAO {
 	 * @param $file string
 	 * @modifies $matchingTopics array by reference
 	 */
-	function scanTopic(&$mappingFile, &$matchingTopics,$keyword,$dir,$file) {
+	static function scanTopic(&$mappingFile, &$matchingTopics,$keyword,$dir,$file) {
 		if (preg_match('/^\d{6,6}\.xml$/', $file)) {
 			$topicId = $mappingFile->getTopicIdForFilename($dir . DIRECTORY_SEPARATOR . $file);
 			$topic =& $this->getTopic($topicId);

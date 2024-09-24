@@ -23,7 +23,7 @@ class ModsSchemaSubmissionAdapter extends MetadataDataObjectAdapter {
 	/**
 	 * Constructor
 	 */
-	function ModsSchemaSubmissionAdapter($assocType) {
+	function __construct($assocType) {
 		// Configure the adapter
 		parent::__construct('plugins.metadata.mods.schema.ModsSchema', 'lib.pkp.classes.submission.Submission', $assocType);
 	}

@@ -37,7 +37,7 @@ class ModsNameSchema extends MetadataSchema {
 	/**
 	 * Constructor
 	 */
-	function ModsNameSchema() {
+	function __construct() {
 		// Configure the meta-data schema.
 		parent::__construct(
 			'mods-3.4-name',
