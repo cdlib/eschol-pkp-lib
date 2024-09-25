@@ -42,8 +42,9 @@ class PKPXMLParser {
 	 */
 	function __construct() {
 		// magic_quotes_runtime must be disabled for XML parsing
-		$this->magicQuotes = get_magic_quotes_runtime();
-		if ($this->magicQuotes) set_magic_quotes_runtime(0);
+		// Mhaye CDL: PHP 8 no longer has magic quotes
+		// $this->magicQuotes = get_magic_quotes_runtime();
+		// if ($this->magicQuotes) set_magic_quotes_runtime(0);
 		$this->errors = array();
 	}
 
