@@ -26,7 +26,7 @@ class InterestDAO extends ControlledVocabDAO {
 	}
 
 	function getInterests($userId) {
-		$interests = $this->build($userId);
+		$interests = $this->build($userId, null, null);
 		$interestEntryDao =& DAORegistry::getDAO('InterestEntryDAO');
 	 	$userInterests = $interestEntryDao->getByControlledVocabId($interests->getId());
 
