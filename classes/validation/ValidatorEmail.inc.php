@@ -32,7 +32,7 @@ class ValidatorEmail extends ValidatorRegExp {
 	 * statically.
 	 * @return string
 	 */
-	function getRegexp() {
+	static function getRegexp() {
 		return '/^' . PCRE_EMAIL_ADDRESS . '$/i';
 	}
 }

@@ -44,7 +44,7 @@ class PKPTemporaryFileManager extends FileManager {
 	 * @param $output boolean output the file's contents instead of returning a string
 	 * @return boolean
 	 */
-	function readFile($fileId, $userId, $output = false) {
+	function temp_readFile($fileId, $userId, $output = false) {
 		$temporaryFile =& $this->getFile($fileId, $userId);
 
 		if (isset($temporaryFile)) {
@@ -74,7 +74,7 @@ class PKPTemporaryFileManager extends FileManager {
 	 * @param $inline print file as inline instead of attachment, optional
 	 * @return boolean
 	 */
-	function downloadFile($fileId, $userId, $inline = false) {
+	function downloadFile($fileId, $userId = null, $inline = false) {
 		$temporaryFile =& $this->getFile($fileId, $userId);
 		if (isset($temporaryFile)) {
 			$filePath = $this->filesDir . $temporaryFile->getFileName();

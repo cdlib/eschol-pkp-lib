@@ -256,7 +256,7 @@ class SubmissionFile extends DataObject {
 	 */
 
 	function getNiceFileSize() {
-		return FileManager::getNiceFileSize($this->getData('fileSize'));
+		return FileManager::static_getNiceFileSize($this->getData('fileSize'));
 	}
 
 	/**
