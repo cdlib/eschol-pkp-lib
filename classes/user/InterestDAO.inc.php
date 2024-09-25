@@ -98,7 +98,7 @@ class InterestDAO extends ControlledVocabDAO {
 	function insertInterests($interests, $userId, $deleteFirst = true) {
 		$interestDao =& DAORegistry::getDAO('InterestDAO');
 		$interestEntryDao =& DAORegistry::getDAO('InterestEntryDAO');
-		$currentInterests = $this->build($userId);
+		$currentInterests = $this->build($userId, null, null);
 
 		if ($deleteFirst) {
 			$existingEntries = $interestDao->enumerate($currentInterests->getId(), 'interest');
