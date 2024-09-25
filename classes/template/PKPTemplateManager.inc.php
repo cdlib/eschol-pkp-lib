@@ -113,7 +113,7 @@ class PKPTemplateManager extends Smarty {
 		$this->assign('pageTitle', $application->getNameKey());
 
 		// Register custom functions
-		$this->register_modifier('translate', array('Locale', 'translate'));
+		$this->register_modifier('translate', array('OjsLocale', 'translate'));
 		$this->register_modifier('get_value', array(&$this, 'smartyGetValue'));
 		$this->register_modifier('strip_unsafe_html', array('OjsString', 'stripUnsafeHtml'));
 		$this->register_modifier('String_substr', array('OjsString', 'substr'));
@@ -443,16 +443,16 @@ class PKPTemplateManager extends Smarty {
 				$params['options'] = $newOptions;
 			} else {
 				// Just translate output
-				$params['options'] = array_map(array('Locale', 'translate'), $params['options']);
+				$params['options'] = array_map(array('OjsLocale', 'translate'), $params['options']);
 			}
 		}
 
 		if (isset($params['output'])) {
-			$params['output'] = array_map(array('Locale', 'translate'), $params['output']);
+			$params['output'] = array_map(array('OjsLocale', 'translate'), $params['output']);
 		}
 
 		if (isset($params['values']) && isset($params['translateValues'])) {
-			$params['values'] = array_map(array('Locale', 'translate'), $params['values']);
+			$params['values'] = array_map(array('OjsLocale', 'translate'), $params['values']);
 		}
 
 		require_once($this->_get_plugin_filepath('function','html_options'));
