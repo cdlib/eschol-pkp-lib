@@ -30,7 +30,7 @@
 */
 function utf8_is_ascii($str) {
     // Search for any bytes which are outside the ASCII range...
-    return (preg_match('/(?:[^\x00-\x7F])/',$str) !== 1);
+    return (safe_preg_match('/(?:[^\x00-\x7F])/',$str) !== 1);
 }
 
 //--------------------------------------------------------------------
@@ -49,7 +49,7 @@ function utf8_is_ascii_ctrl($str) {
     if ( strlen($str) > 0 ) {
         // Search for any bytes which are outside the ASCII range,
         // or are device control codes
-        return (preg_match('/[^\x09\x0A\x0D\x20-\x7E]/',$str) !== 1);
+        return (safe_preg_match('/[^\x09\x0A\x0D\x20-\x7E]/',$str) !== 1);
     }
     return FALSE;
 }
@@ -67,7 +67,7 @@ function utf8_is_ascii_ctrl($str) {
 */
 function utf8_strip_non_ascii($str) {
     ob_start();
-    while ( preg_match(
+    while ( safe_preg_match(
         '/^([\x00-\x7F]+)|([^\x00-\x7F]+)/S',
             $str, $matches) ) {
         if ( !isset($matches[2]) ) {
@@ -78,6 +78,18 @@ function utf8_strip_non_ascii($str) {
     $result = ob_get_contents();
     ob_end_clean();
     return $result;
+}
+
+// MH CDL: preg_match no longer can handle an array. This replacement suggested by ChatGPT
+function safe_preg_match($pattern, $subject, &$matches = []) {
+    // Check if the subject is an array
+    if (is_array($subject)) {
+        // Return 0 or false to mimic the old behavior
+        return 0;  // or false, depending on what you prefer
+    }
+
+    // If it's a string, proceed with preg_match as usual
+    return preg_match($pattern, $subject, $matches);
 }
 
 //--------------------------------------------------------------------
@@ -92,7 +104,7 @@ function utf8_strip_non_ascii($str) {
 */
 function utf8_strip_ascii_ctrl($str) {
     ob_start();
-    while ( preg_match(
+    while ( safe_preg_match(
         '/^([^\x00-\x08\x0B\x0C\x0E-\x1F\x7F]+)|([\x00-\x08\x0B\x0C\x0E-\x1F\x7F]+)/S',
             $str, $matches) ) {
         if ( !isset($matches[2]) ) {
@@ -118,7 +130,7 @@ function utf8_strip_ascii_ctrl($str) {
 */
 function utf8_strip_non_ascii_ctrl($str) {
     ob_start();
-    while ( preg_match(
+    while ( safe_preg_match(
         '/^([\x09\x0A\x0D\x20-\x7E]+)|([^\x09\x0A\x0D\x20-\x7E]+)/S',
             $str, $matches) ) {
         if ( !isset($matches[2]) ) {
