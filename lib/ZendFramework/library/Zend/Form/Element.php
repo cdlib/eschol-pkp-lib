@@ -315,9 +315,9 @@ class Zend_Form_Element implements Zend_Validate_Interface
 
         $decorators = $this->getDecorators();
         if (empty($decorators)) {
-            $getId = create_function('$decorator',
-                                     'return $decorator->getElement()->getId()
-                                             . "-element";');
+            $getId = function ($decorator) {
+                return $decorator->getElement()->getId() . "-element";
+            };
             $this->addDecorator('ViewHelper')
                  ->addDecorator('Errors')
                  ->addDecorator('Description', array('tag' => 'p', 'class' => 'description'))

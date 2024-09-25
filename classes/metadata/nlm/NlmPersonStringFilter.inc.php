@@ -103,7 +103,9 @@ class NlmPersonStringFilter extends Filter {
 		assert($this->getFilterMode() == PERSON_STRING_FILTER_MULTIPLE && is_array($personDescriptions));
 
 		// Remove et-al strings
-		$resultArray = array_filter($personDescriptions, create_function('$pd', 'return is_a($pd, "MetadataDescription");'));
+		$resultArray = array_filter($personDescriptions, function ($pd) {
+      return is_a($pd, "MetadataDescription");
+  });
 
 		// There can be exactly one et-al string
 		if (count($resultArray) < count($personDescriptions)-1) return false;

@@ -309,6 +309,8 @@ function &instantiate($fullyQualifiedClassName, $expectedTypes = null, $expected
  */
 function arrayClean(&$array) {
 	if (!is_array($array)) return null;
-	return array_filter($array, create_function('$o', 'return !empty($o);'));
+	return array_filter($array, function ($o) {
+     return !empty($o);
+ });
 }
 ?>

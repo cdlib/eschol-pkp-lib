@@ -401,7 +401,9 @@ class Installer {
 				$condition = isset($action['attr']['condition'])?$action['attr']['condition']:null;
 				$includeAction = true;
 				if ($condition) {
-					$funcName = create_function('$installer,$action', $condition);
+					$funcName = function ($installer, $action) use ($condition) {
+         eval($condition);
+     };
 					$includeAction = $funcName($this, $action);
 				}
 				$this->log('data: ' . $action['file'] . ($includeAction?'':' (skipped)'));

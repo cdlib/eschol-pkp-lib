@@ -411,7 +411,9 @@ class PKPRequest {
 			$userAgent = $_this->getUserAgent();
 			$isBot = false;
 			$userAgentsFile = Config::getVar('general', 'registry_dir') . DIRECTORY_SEPARATOR . 'botAgents.txt';
-			$regexps = array_filter(file($userAgentsFile), create_function('&$a', 'return ($a = trim($a)) && !empty($a) && $a[0] != \'#\';'));
+			$regexps = array_filter(file($userAgentsFile), function (&$a) {
+       return ($a = trim($a)) && !empty($a) && $a[0] != '#';
+   });
 			foreach ($regexps as $regexp) {
 				if (OjsString::regexp_match($regexp, $userAgent)) {
 					$isBot = true;

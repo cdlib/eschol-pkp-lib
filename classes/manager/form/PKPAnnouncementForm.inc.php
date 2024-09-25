@@ -39,17 +39,37 @@ class PKPAnnouncementForm extends Form {
 		$this->addCheck(new FormValidatorLocale($this, 'description', 'optional', 'manager.announcements.form.descriptionRequired'));
 
 		// If provided, expiry date is valid
-		$this->addCheck(new FormValidatorCustom($this, 'dateExpireYear', 'optional', 'manager.announcements.form.dateExpireValid', create_function('$dateExpireYear', '$minYear = date(\'Y\'); $maxYear = date(\'Y\') + ANNOUNCEMENT_EXPIRE_YEAR_OFFSET_FUTURE; return ($dateExpireYear >= $minYear && $dateExpireYear <= $maxYear) ? true : false;')));
+		$this->addCheck(new FormValidatorCustom($this, 'dateExpireYear', 'optional', 'manager.announcements.form.dateExpireValid', function ($dateExpireYear) {
+      $minYear = date('Y');
+      $maxYear = date('Y') + ANNOUNCEMENT_EXPIRE_YEAR_OFFSET_FUTURE;
+      return $dateExpireYear >= $minYear && $dateExpireYear <= $maxYear ? true : false;
+  }));
 
-		$this->addCheck(new FormValidatorCustom($this, 'dateExpireYear', 'optional', 'manager.announcements.form.dateExpireYearIncompleteDate', create_function('$dateExpireYear, $form', '$dateExpireMonth = $form->getData(\'dateExpireMonth\'); $dateExpireDay = $form->getData(\'dateExpireDay\'); return ($dateExpireMonth != null && $dateExpireDay != null) ? true : false;'), array(&$this)));
+		$this->addCheck(new FormValidatorCustom($this, 'dateExpireYear', 'optional', 'manager.announcements.form.dateExpireYearIncompleteDate', function ($dateExpireYear, $form) {
+      $dateExpireMonth = $form->getData('dateExpireMonth');
+      $dateExpireDay = $form->getData('dateExpireDay');
+      return $dateExpireMonth != null && $dateExpireDay != null ? true : false;
+  }, array(&$this)));
 
-		$this->addCheck(new FormValidatorCustom($this, 'dateExpireMonth', 'optional', 'manager.announcements.form.dateExpireValid', create_function('$dateExpireMonth', 'return ($dateExpireMonth >= 1 && $dateExpireMonth <= 12) ? true : false;')));
+		$this->addCheck(new FormValidatorCustom($this, 'dateExpireMonth', 'optional', 'manager.announcements.form.dateExpireValid', function ($dateExpireMonth) {
+      return $dateExpireMonth >= 1 && $dateExpireMonth <= 12 ? true : false;
+  }));
 
-		$this->addCheck(new FormValidatorCustom($this, 'dateExpireMonth', 'optional', 'manager.announcements.form.dateExpireMonthIncompleteDate', create_function('$dateExpireMonth, $form', '$dateExpireYear = $form->getData(\'dateExpireYear\'); $dateExpireDay = $form->getData(\'dateExpireDay\'); return ($dateExpireYear != null && $dateExpireDay != null) ? true : false;'), array(&$this)));
+		$this->addCheck(new FormValidatorCustom($this, 'dateExpireMonth', 'optional', 'manager.announcements.form.dateExpireMonthIncompleteDate', function ($dateExpireMonth, $form) {
+      $dateExpireYear = $form->getData('dateExpireYear');
+      $dateExpireDay = $form->getData('dateExpireDay');
+      return $dateExpireYear != null && $dateExpireDay != null ? true : false;
+  }, array(&$this)));
 
-		$this->addCheck(new FormValidatorCustom($this, 'dateExpireDay', 'optional', 'manager.announcements.form.dateExpireValid', create_function('$dateExpireDay', 'return ($dateExpireDay >= 1 && $dateExpireDay <= 31) ? true : false;')));
+		$this->addCheck(new FormValidatorCustom($this, 'dateExpireDay', 'optional', 'manager.announcements.form.dateExpireValid', function ($dateExpireDay) {
+      return $dateExpireDay >= 1 && $dateExpireDay <= 31 ? true : false;
+  }));
 
-		$this->addCheck(new FormValidatorCustom($this, 'dateExpireDay', 'optional', 'manager.announcements.form.dateExpireDayIncompleteDate', create_function('$dateExpireDay, $form', '$dateExpireYear = $form->getData(\'dateExpireYear\'); $dateExpireMonth = $form->getData(\'dateExpireMonth\'); return ($dateExpireYear != null && $dateExpireMonth != null) ? true : false;'), array(&$this)));
+		$this->addCheck(new FormValidatorCustom($this, 'dateExpireDay', 'optional', 'manager.announcements.form.dateExpireDayIncompleteDate', function ($dateExpireDay, $form) {
+      $dateExpireYear = $form->getData('dateExpireYear');
+      $dateExpireMonth = $form->getData('dateExpireMonth');
+      return $dateExpireYear != null && $dateExpireMonth != null ? true : false;
+  }, array(&$this)));
 
 		$this->addCheck(new FormValidatorPost($this));
 	}

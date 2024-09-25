@@ -512,7 +512,9 @@ class PKPEmailTemplateDAO extends DAO {
 		unset($result);
 
 		// Sort all templates by email key.
-		$compare = create_function('$t1, $t2', 'return strcmp($t1->getEmailKey(), $t2->getEmailKey());');
+		$compare = function ($t1, $t2) {
+      return strcmp($t1->getEmailKey(), $t2->getEmailKey());
+  };
 		usort ($emailTemplates, $compare);
 
 		return $emailTemplates;

@@ -556,7 +556,9 @@ class CitationForm extends Form {
 	 * @return array the ordered field.
 	 */
 	function _orderByDisplayName($fieldList) {
-		uasort($fieldList, create_function('$a, $b', 'return strcmp($a["displayName"], $b["displayName"]);'));
+		uasort($fieldList, function ($a, $b) {
+      return strcmp($a["displayName"], $b["displayName"]);
+  });
 		return $fieldList;
 	}
 }

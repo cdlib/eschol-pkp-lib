@@ -178,8 +178,9 @@ class MetadataDataObjectAdapter extends Filter {
 			// Find the ASSOC_TYPE_* constant with the correct value.
 			$definedConstants = array_keys(get_defined_constants());
 			$assocTypeConstants = array_filter($definedConstants,
-					create_function('$o', 'return (strpos($o, "ASSOC_TYPE_") === 0) && '
-					.'(constant($o) === '.(string)$this->getAssocType().');'));
+					function ($o) {
+         return strpos($o, "ASSOC_TYPE_") === 0 && constant($o) === (string) $this->getAssocType();
+     });
 			assert(count($assocTypeConstants) == 1);
 
 			// Extract the assoc type name.

@@ -356,7 +356,9 @@ class OjsString {
 						str_replace("\\3", "\$matches[3]", $replacement))));
 			$fixedPattern = $patPieces[1] . $patPieces[2] . $patPieces[3];
 			return preg_replace_callback($fixedPattern . PCRE_UTF8,
-				create_function('$matches', "return " . $fixedReplacement . ";"),
+				function ($matches) use ($fixedReplacement) {
+        return $fixedReplacement;
+    },
 				$subject, $limit);
 		}
 		else
