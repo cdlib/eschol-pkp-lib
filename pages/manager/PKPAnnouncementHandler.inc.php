@@ -17,7 +17,7 @@ import('pages.manager.ManagerHandler');
 
 class PKPAnnouncementHandler extends ManagerHandler {
 	function __construct() {
-		parent::ManagerHandler();
+		parent::__construct();
 		$this->addRoleAssignment(ROLE_ID_JOURNAL_MANAGER,
 				array('announcements', 'announcementTypes', 'createAnnouncement', 'createAnnouncementType',
 				'deleteAnnouncement', 'deleteAnnouncementType', 'editAnnouncement', 'editAnnouncementType',

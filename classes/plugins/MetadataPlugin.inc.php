@@ -17,7 +17,7 @@ import('classes.plugins.Plugin');
 
 class MetadataPlugin extends Plugin {
 	function __construct() {
-		parent::Plugin();
+		parent::__construct();
 	}
 
 	/**
