@@ -76,7 +76,7 @@ class NlmCitationSchemaCitationOutputFormatFilter extends TemplateBasedFilter {
 	 *  to be transformed
 	 * @return string the rendered citation output
 	 */
-	function process(&$input) {
+	function &process(&$input) {
 		// Check whether the incoming publication type is supported by this
 		// output filter.
 		$supportedPublicationTypes = $this->getSupportedPublicationTypes();
