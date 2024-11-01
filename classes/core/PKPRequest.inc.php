@@ -292,7 +292,9 @@ class PKPRequest {
 	 * Get the protocol used for the request (HTTP or HTTPS).
 	 * @return string
 	 */
-	static function getProtocol() {
+        static function getProtocol() {
+		// MH CDL eschol: Since we're behind a load balancer, force https
+		return "https";
 		$_this =& PKPRequest::_checkThis();
 
 		if (!isset($_this->_protocol)) {
