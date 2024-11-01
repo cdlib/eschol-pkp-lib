@@ -430,7 +430,7 @@ class PKPLocale {
 			$cacheManager =& CacheManager::getManager();
 			$cache = $cacheManager->getFileCache(
 				'locale', 'list',
-				array('Locale', '_allLocalesCacheMiss')
+				array('PKPLocale', '_allLocalesCacheMiss')
 			);
 
 			// Check to see if the data is outdated
