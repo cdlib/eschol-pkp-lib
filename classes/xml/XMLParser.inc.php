@@ -49,7 +49,7 @@ class PKPXMLParser {
 	}
 
 	function &parseText($text) {
-		$parser =& $this->createParser();
+		$parser = $this->createParser();
 
 		if (!isset($this->handler)) {
 			// Use default handler for parsing
@@ -96,7 +96,7 @@ class PKPXMLParser {
 	 * @return object actual return type depends on the handler
 	 */
 	function &parse($file) {
-		$parser =& $this->createParser();
+		$parser = $this->createParser();
 
 		if (!isset($this->handler)) {
 			// Use default handler for parsing
@@ -265,7 +265,7 @@ class PKPXMLParser {
 	 * Initialize a new XML parser.
 	 * @return resource
 	 */
-	function &createParser() {
+	function createParser() {
 		$parser = xml_parser_create(XML_PARSER_SOURCE_ENCODING);
 		xml_parser_set_option($parser, XML_OPTION_TARGET_ENCODING, XML_PARSER_TARGET_ENCODING);
 		xml_parser_set_option($parser, XML_OPTION_CASE_FOLDING, false);
@@ -301,19 +301,19 @@ class XMLParserHandler {
 	/**
 	 * Callback function to act as the start element handler.
 	 */
-	function startElement(&$parser, $tag, $attributes) {
+	function startElement($parser, $tag, $attributes) {
 	}
 
 	/**
 	 * Callback function to act as the end element handler.
 	 */
-	function endElement(&$parser, $tag) {
+	function endElement($parser, $tag) {
 	}
 
 	/**
 	 * Callback function to act as the character data handler.
 	 */
-	function characterData(&$parser, $data) {
+	function characterData($parser, $data) {
 	}
 
 	/**
@@ -321,7 +321,7 @@ class XMLParserHandler {
 	 * The format of this object is specific to the handler.
 	 * @return mixed
 	 */
-	function &getResult() {
+	function getResult() {
 		// Default: Return null (must be by ref).
 		$nullVar = null;
 		return $nullVar;

@@ -665,7 +665,9 @@ function adodb_get_gmt_diff()
 static $TZ;
 	if (isset($TZ)) return $TZ;
 	
-	$TZ = mktime(0,0,0,1,2,1970,0) - gmmktime(0,0,0,1,2,1970,0);
+	$tz = new DateTimeZone(date_default_timezone_get());
+	$dt = new DateTime('1970-01-02 00:00:00', $tz);
+	$TZ = $dt->getOffset();
 	return $TZ;
 }
 
